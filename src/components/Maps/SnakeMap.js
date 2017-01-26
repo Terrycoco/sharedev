@@ -72,7 +72,7 @@ class SnakeMap extends Component {
 function mapStateToProps(state) {
   return {
     walkId: state.search.selectedWalk.id,
-    route: state.search.selectedWalk.route
+    route: state.search.selectedWalk.route.coordinates
   };
 }
 

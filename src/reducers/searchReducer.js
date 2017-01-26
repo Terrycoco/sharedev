@@ -34,7 +34,8 @@ const INITIAL_STATE = {
   selectedWalk: {
     id: null,
     geoJson: {},
-    route: []
+    route: [],
+    attributes: []
   }
 };
 
@@ -66,7 +67,7 @@ export default function(state=INITIAL_STATE, action) {
 
      break;
     case s.SAVE_WALK:
-     newobj = Object.assign({}, state.selectedWalk, {geoJson: action.payload.walk, id: action.payload.id, route: action.payload.route});
+     newobj = Object.assign({}, state.selectedWalk, {geoJson: action.payload.geojson, id: action.payload.id, route: action.payload.route, attributes: action.payload.attributes});
      newstate = Object.assign({}, state, {selectedWalk: newobj});
      break;
     default:

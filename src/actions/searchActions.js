@@ -123,9 +123,10 @@ export function getWalkDetails(walkId, router) {
     const requestURL = API_URL + `/walk/${walkId}`;
     axios.get(requestURL)
     .then(response => {
-      const walk = response.data.features[0];
-      const route = response.data.features[1].geometry.coordinates;
-      dispatch(saveWalk({id: walkId, route: route, walk: walk}));
+      //change route from geoJson to normal object
+      let route = JSON.parse(response.data.route);
+      let walk = Object.assign({}, response.data, {route: route});
+      dispatch(saveWalk(walk));
       router.push('/detailsR');
     })
     .catch((err) => {
