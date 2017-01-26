@@ -1,0 +1,45 @@
+//page bar
+@import '../../styles/_colors';
+@import '../../styles/_spacing';
+
+.PageBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  // display: inline-block;
+  background-color: $primary;
+  height: $pagebar_height_sm; //2em
+  width: 100%;
+  box-shadow: 1px 1px 1px #888;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 3px;
+  z-index: 9000;
+  color: $light;
+}
+
+.PageBar a, .PageBar span {
+  flex: 1 0 33%;
+}
+
+.right {
+  font-size: .85em;
+  padding-right: 3px;
+  text-align: right;
+}
+
+.PageBar img {
+  max-height: 1.6em;
+}
+
+
+
+@media all and (min-width: 668px) {
+  .PageBar {
+    height: $pagebar_height_md; //3em
+    line-height: $pagebar_height_md; 
+  }
+}

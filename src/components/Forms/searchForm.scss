@@ -1,0 +1,14 @@
+@import '../../styles/_colors';
+
+.form {
+  max-width: 500px;
+}
+
+.descr {
+  font-size: .8em;
+  color: gray;
+}
+
+.descr em {
+  color: $accent;
+}

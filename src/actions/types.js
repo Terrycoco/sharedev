@@ -1,0 +1,21 @@
+//app state types
+export const app = {
+  ADD_ROUTE_TO_HISTORY: 'ADD_ROUTE_TO_HISTORY',
+  DELETE_LAST_ROUTE: 'DELETE_LAST_ROUTE'
+};
+
+export const geo = {
+  SET_AVAIL: 'SET_AVAIL',
+  SET_HERE: 'SET_HERE',
+  SET_HERE: 'SET_HERE_FROM_IP',
+  UPDATE_MSG: 'UPDATE_MSG'
+};
+
+export const search = {
+  LOAD_SEARCH_FORM: 'LOAD_SEARCH_FORM',
+  SET_BOX: 'SET_BOX',
+  SAVE_PARAMS: 'SAVE_PARAMS',
+  SAVE_WALKS: 'SAVE_WALKS',
+  SAVE_WALK: 'SAVE_WALK',
+  SAVE_ROUTE: 'SAVE_ROUTE'
+};

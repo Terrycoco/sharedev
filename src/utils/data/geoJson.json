@@ -1,0 +1,14 @@
+{ "type": "FeatureCollection",
+    "features": [
+      { "type": "Feature",
+        "geometry": {"type": "Point", "coordinates": [-117.85320, 33.78834]},
+        "properties": {"title": "Walk Title",
+                       "descr": "I am a walk found here"}
+      },
+      { "type": "Feature",
+        "geometry": {"type": "Point", "coordinates": [-117.85310, 33.78833]},
+        "properties": {"title": "Another Walk Title",
+                       "descr": "I am another walk found here"}
+      }
+    ]
+}

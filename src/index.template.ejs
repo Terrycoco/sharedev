@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShareWalks</title>
+    <link rel="prefetch" href="/images/moccasins.jpg">
+   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--     <script src="//use.edgefonts.net/lato.js"></script>  -->
+<!-- <script src="https://use.fontawesome.com/c6c003a715.js"></script> -->
+<!-- GOOGLE FONTICONS -->
+<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet" /> -->
+
+
+
+
+<!-- GOOGLE FOR AUTOCOMPLETE - TODO FIND ALTERNATE?-->
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDmE6MtwHWYwR1C-ketRL9vZcbrMlK0ps0&libraries=places'></script>
+
+
+<!--LEAFLET -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script> -->
+<!--MAPQUEST -->
+<script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=GVTzKzwMDTCKBu1S2Vx0RaN0XaWUYTlj"></script>
+<script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=GVTzKzwMDTCKBu1S2Vx0RaN0XaWUYTlj"></script>
+
+<!-- d3 -->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<!--SERVICE WORKER -->     
+<script>
+// Check for browser support of service worker
+if ('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js',{scope:'.'})
+.then(function(sw){console.log("SW registered!");},function(x){console.log("SW failed to register: " + x.message);});}
+</script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+  </body>
+
+
+  <script>
+
+
+</html>
