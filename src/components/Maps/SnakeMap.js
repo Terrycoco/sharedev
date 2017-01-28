@@ -3,6 +3,7 @@ require ('utils/map/polyline.snakeanim');
 require('./maps.scss');
 import {connect} from 'react-redux';
 
+
 let map;
 
 class SnakeMap extends Component {

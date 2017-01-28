@@ -1,10 +1,21 @@
-#walk-title {
-   line-height: 2rem;
-   margin-left: .8rem;
-   margin-top: 1rem;
+@import '../../styles/_colors';
+
+.DETAILS {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
 }
 
-.flexbox-center {
-  display: flex;
-  justify-content: center;
+#walk-title {
+   padding-top: 1rem;
+   margin-bottom: 1rem;
+}
+
+
+.hr {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid $primary;
+  overflow: hidden;
 }

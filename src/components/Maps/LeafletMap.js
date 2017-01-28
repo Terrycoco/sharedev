@@ -6,6 +6,7 @@ import {box2Bounds} from 'utils/geo';
 import * as actions from 'actions';
 import {browserHistory} from 'react-router';
 import data from 'utils/data/geoJson.json';
+
 require('./maps.scss');
 
 let map, myLayer;

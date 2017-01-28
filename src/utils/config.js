@@ -4,7 +4,7 @@ const config = {
    },
 
   production: {
-    api: 'http://api-tmarr/rhcloud.com'
+    api: 'https://api-tmarr.rhcloud.com'
   },
   googleApiKey: 'AIzaSyDmE6MtwHWYwR1C-ketRL9vZcbrMlK0ps0',
   mapzenApiKey: 'mapzen-sAkpydF',

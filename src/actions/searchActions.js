@@ -6,8 +6,8 @@ import {geom2Box, latLng2Box} from 'utils/geo';
 import{getApi} from 'utils/environment';
 import { walksToGeoJson } from 'utils/geojson';
 
-const API_URL = getApi();
-// const API_URL = 'https://api-tmarr.rhcloud.com';
+// const API_URL = getApi();
+const API_URL = 'https://api-tmarr.rhcloud.com';
 
 export function getSearchForm() {
  return function(dispatch, getState) {

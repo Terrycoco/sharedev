@@ -7,6 +7,7 @@ import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
 
 require('./details.scss');
 
@@ -29,21 +30,17 @@ class Details extends Component {
       <div className="PAGE" key="details">
         <PageBar title="Walk Details" leftIcon="goLeft" backTo="/resultsL" />
         <div className="CONTENT">
-     
           <SnakeMap  />
+          <div className="DETAILS">
           <h4 id="walk-title">{this.props.walk.title}</h4>
-          <Card >
+          <div className="hr" />
+          <p className="walkdescr">{this.props.walk.descr}</p>
+          <div className="hr" />
 
-             <CardText className="listdescr">
-                 {this.props.walk.descr}
-            </CardText>
-            <CardActions className="flexbox-center">
-              <RaisedButton label="Save To MyWalks" secondary={true} />
-            </CardActions>
-       
-          
-            <CardText>{this.renderAttributes()}</CardText>
-               </Card>
+    
+          <CardText>{this.renderAttributes()}</CardText>
+           <RaisedButton id="details_savebtn" label="Save To MyWalks" secondary={true} />
+         </div>
         </div>
       </div>
     );
@@ -63,6 +60,7 @@ save to my walks - checkbox linked to user's list
 add interests section?
 why is it jumpy?
 if title is longer how will it look?
+snake map - have start green and stop red
 
 --other sizes tablet & full
 
