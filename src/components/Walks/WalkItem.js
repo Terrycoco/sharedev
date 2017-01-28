@@ -25,17 +25,10 @@ class WalkItem extends Component {
        <CardHeader
          title={this.props.walk.title}
          subtitle={`Starts at ${this.props.walk.start_pt_text}`}
-         actAsExpander={true}
-         showExpandableButton={true}
+         actAsExpander={false}
+         showExpandableButton={false}
+         onClick={this.goToWalk} 
          />
-         <CardText expandable={true} className="listdescr">
-        {this.props.walk.descr}
-          <CardActions>
-            <FlatButton label="Save" />
-            <FlatButton label="Details" onClick={this.goToWalk} />
-          </CardActions>
-        </CardText>
-
      </Card>
     );
   }

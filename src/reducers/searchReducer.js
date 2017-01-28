@@ -67,7 +67,7 @@ export default function(state=INITIAL_STATE, action) {
 
      break;
     case s.SAVE_WALK:
-     newobj = Object.assign({}, state.selectedWalk, {geoJson: action.payload.geojson, id: action.payload.id, route: action.payload.route, attributes: action.payload.attributes});
+     newobj = Object.assign({}, state.selectedWalk, action.payload);
      newstate = Object.assign({}, state, {selectedWalk: newobj});
      break;
     default:

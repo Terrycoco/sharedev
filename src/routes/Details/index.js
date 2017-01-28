@@ -5,6 +5,8 @@ import * as actions from 'actions/searchActions';
 import SnakeMap from 'components/Maps/SnakeMap';
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
 require('./details.scss');
 
@@ -12,20 +14,36 @@ require('./details.scss');
 class Details extends Component {
   constructor(props){
     super(props);
+    this.renderAttributes = this.renderAttributes.bind(this);
   }
 
-
+  renderAttributes() {
+    return this.props.walk.attributes.map(attr => {
+      return <p className="attr-item" key={"attr" + attr.id}>
+         {attr.attribute}</p>
+    });
+  }
   render() {
 
     return (
       <div className="PAGE" key="details">
         <PageBar title="Walk Details" leftIcon="goLeft" backTo="/resultsL" />
         <div className="CONTENT">
-          <h2></h2>
+     
           <SnakeMap  />
-          <List>
-            <Subheader>Walk Details</Subheader>
-          </List>
+          <h4 id="walk-title">{this.props.walk.title}</h4>
+          <Card >
+
+             <CardText className="listdescr">
+                 {this.props.walk.descr}
+            </CardText>
+            <CardActions className="flexbox-center">
+              <RaisedButton label="Save To MyWalks" secondary={true} />
+            </CardActions>
+       
+          
+            <CardText>{this.renderAttributes()}</CardText>
+               </Card>
         </div>
       </div>
     );
@@ -39,3 +57,14 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, actions)(Details);
+
+/*TODO:
+save to my walks - checkbox linked to user's list
+add interests section?
+why is it jumpy?
+if title is longer how will it look?
+
+--other sizes tablet & full
+
+
+*/

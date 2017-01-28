@@ -27,6 +27,10 @@ class SnakeMap extends Component {
       this.updateRoute();
      }
 
+    componentWillUnmount() {
+      map = null;
+    }
+
      updateRoute() {
        if (this.props.route.length > 0) {
          const route = this.props.route;
