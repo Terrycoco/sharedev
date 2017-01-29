@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import SearchForm from 'components/Forms/SearchForm';
 import * as actions from 'actions';
-
-const style ={
-  display: 'flex',
-  justifyContent: 'center'
-};
-
+import PageBar from 'components/PageBar';
 
 
 class Search extends Component {
@@ -23,8 +18,9 @@ class Search extends Component {
   render() {
     return (
       <div className="PAGE SEARCH" key="search">
+        <PageBar title="Find A Walk" leftIcon="hamburger" backTo="/" />
         <div className="CONTENT">
-           <SearchForm style={style} />
+           <SearchForm />
         </div>
       </div>
     );

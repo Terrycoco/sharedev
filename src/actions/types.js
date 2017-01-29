@@ -19,3 +19,11 @@ export const search = {
   SAVE_WALK: 'SAVE_WALK',
   SAVE_ROUTE: 'SAVE_ROUTE'
 };
+
+export const auth = {
+  AUTH_USER: 'AUTH_USER',
+  UNAUTH_USER: 'UNAUTH_USER',
+  AUTH_ERROR: 'AUTH_ERROR',
+  CLEAR_SUBMIT: 'CLEAR_SUBMIT',
+  CLEAR_ERROR: 'CLEAR_ERROR'
+};

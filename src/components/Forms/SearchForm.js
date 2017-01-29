@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PageBar from 'components/PageBar';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -15,19 +14,8 @@ import {isProd} from 'utils/environment';
 require('./searchForm.scss');
 
 // const PLACE_API = `https://maps.googleapis.com/maps/api/js?key=${config.googleApiKey}&libraries=places`;
-const style ={
-  form: {
-    margin: 12,
-    width: '90%'
-  },
 
-};
 
-// const defaultCat = {
-//   id: 0, 
-//   category: "Any", 
-//   descr: "Search for <em>any</em> type of walk"
-// };
 
 class SearchForm extends Component {
   constructor(props) {
@@ -48,6 +36,11 @@ class SearchForm extends Component {
     this.getDevVars = this.getDevVars.bind(this);
   }
 
+   //grab router from context
+    static contextTypes = {
+      router: React.PropTypes.object
+   } 
+
     componentWillMount() {
       this.props.getSearchForm(); //load lookups into store if needed
     }
@@ -55,7 +48,7 @@ class SearchForm extends Component {
    componentDidMount() {
     const cityField = document.getElementById('citySearch');
     const options = {
-      types: ['(cities)'] //want neighborhoods?
+      types: ['(cities)'] //TODO: want neighborhoods?
     };
     const geoAutocomplete = new window.google.maps.places.Autocomplete((cityField), options);
     
@@ -109,10 +102,10 @@ class SearchForm extends Component {
     const params = {city: this.state.city, 
                     cat_id: this.state.cat_id,
                     cat_idx: this.state.cat_idx};
-    this.props.searchWalks(params, this.context);
+    this.props.searchWalks(params, this.context.router);
 
-     //this will prob move to actions??
-    browserHistory.push('/resultsR');
+    //  //this will prob move to actions??
+    // browserHistory.push('/results');
   }
 
   renderItems() {
@@ -147,9 +140,7 @@ class SearchForm extends Component {
     // const devVars = this.getDevVars();
     //outer placement style is passed in from parent
     return(
-      <div style={this.props.style} >
-        <PageBar title="Find A Walk" leftIcon="hamburger" backTo="/L" />
-        <div id="search-form" style={style.form}>
+        <div className="FORM" id="search-form">
           <TextField
               id="citySearch"
               value={this.state.city}
@@ -176,10 +167,9 @@ class SearchForm extends Component {
           <div className="descr" dangerouslySetInnerHTML={this.getDescr()} />
         <br />
 
-        <RaisedButton label="Search" secondary={true} style={style} onClick={this.handleSearch} />
-
+        <RaisedButton label="Search" secondary={true} onClick={this.handleSearch} />
       </div>
-    </div>
+
     );
   }
 } //end component

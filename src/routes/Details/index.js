@@ -31,15 +31,15 @@ class Details extends Component {
         <PageBar title="Walk Details" leftIcon="goLeft" backTo="/resultsL" />
         <div className="CONTENT">
           <SnakeMap  />
-          <div className="DETAILS">
-          <h4 id="walk-title">{this.props.walk.title}</h4>
-          <div className="hr" />
-          <p className="walkdescr">{this.props.walk.descr}</p>
-          <div className="hr" />
+          <div className="details-content">
+            <h4 id="walk-title">{this.props.walk.title}</h4>
+            <hr className="primary"/> 
+            <p className="walkdescr">{this.props.walk.descr}</p>
+            <hr className="primary"/> 
 
-    
-          <CardText>{this.renderAttributes()}</CardText>
-           <RaisedButton id="details_savebtn" label="Save To MyWalks" secondary={true} />
+      
+            <CardText>{this.renderAttributes()}</CardText>
+             <RaisedButton id="details_savebtn" label="Save To MyWalks" secondary={true} />
          </div>
         </div>
       </div>

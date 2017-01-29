@@ -11,9 +11,8 @@ import About from 'routes/About';
 import Details from 'routes/Details';
 import Results from 'routes/Results';
 import Test from 'routes/Test';
-
-
-
+System.import Signup from 'components/Auth/signup';
+System.import Signin from 'components/Auth/signin';
 
 //pass in the store to this function
 const makeRoutes = function (store) {
@@ -48,7 +47,8 @@ const makeRoutes = function (store) {
          <Route path="/detailsR" component={SlideIn(Details, { fromDir: "right" })} />
          <Route path="/detailsL" component={SlideIn(Details, { fromDir: "left" })} />
       
-
+         <Route path="/signup" component={Signup} />
+         <Route path="/signin" component={Signin} />
 
          <Route path="/testR" component={SlideIn(Test, { fromDir: "right"})} />
          <Route path="/testL" component={SlideIn(Test, { fromDir: "left"})} />

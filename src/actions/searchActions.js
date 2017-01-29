@@ -6,8 +6,8 @@ import {geom2Box, latLng2Box} from 'utils/geo';
 import{getApi} from 'utils/environment';
 import { walksToGeoJson } from 'utils/geojson';
 
-// const API_URL = getApi();
-const API_URL = 'https://api-tmarr.rhcloud.com';
+const API_URL = getApi();
+// const API_URL = 'https://api-tmarr.rhcloud.com';
 
 export function getSearchForm() {
  return function(dispatch, getState) {
@@ -74,7 +74,7 @@ function setBox(box) {
   };
 }
 
-export function searchWalks(params, context) {
+export function searchWalks(params, router) {
   return function(dispatch, getState) {
     dispatch(setParams(params));  //sets city & cat params
 
@@ -99,6 +99,7 @@ export function searchWalks(params, context) {
      .then((response) => {
         let payload = response.data;
         dispatch(saveWalks(payload));
+        router.push('/results');
      })
      .catch((err) => {
         console.log(err);
@@ -127,14 +128,14 @@ export function getWalkDetails(walkId, router) {
       let route = JSON.parse(response.data.route);
       let walk = Object.assign({}, response.data, {route: route});
       dispatch(saveWalk(walk));
-      router.push('/detailsR');
+      router.push('/details');
     })
     .catch((err) => {
         console.log(err);
     })
   } else {
     //already in store just go show
-    router.push('/detailsR');
+    router.push('/details');
   }
  }
 }

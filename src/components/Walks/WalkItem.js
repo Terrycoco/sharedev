@@ -3,6 +3,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import * as actions from 'actions/searchActions';
 import {connect} from 'react-redux';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 require('./walklist.scss');
 

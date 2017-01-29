@@ -1,9 +1,9 @@
 @import '../../styles/_colors';
 
-.DETAILS {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 2rem;
+.details-content {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: 2rem !important;
 }
 
 #walk-title {
@@ -12,10 +12,15 @@
 }
 
 
-.hr {
-  width: 100%;
+hr.accent {
+  border-top: 2px solid $accent;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 2px solid $primary;
-  overflow: hidden;
+}
+
+hr.primary {
+  border-top: 2px solid $primary;
+  border-color: $primary;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

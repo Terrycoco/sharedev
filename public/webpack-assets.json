@@ -1,9 +1,0 @@
-{
-  "app": {
-    "js": "/app_dev.js",
-    "css": "/app.css"
-  },
-  "common": {
-    "js": "/common_dev.js"
-  }
-}
