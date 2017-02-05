@@ -2,10 +2,10 @@ import config from 'utils/config';
 
 
 export function isProd() {
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-    return false;
+  if (process.env.NPM_CONFIG_PRODUCTION) {
+    return true;
   }
-  return true;
+  return false;
 }
 
 export function getApi() {

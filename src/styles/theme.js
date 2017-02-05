@@ -1,41 +1,62 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 export const myColors = {
-  prussianBlue: '#083C5D',
-  skyBlue: '#328CC1',
-  goldLeaf: '#D9B310',
-  black: '#1D2731',
 
-  yellow: '#F7EF6A',
-  vermillion: '#93C178',
-  blue: '#465C8B',
-  sky: '#DFDCE3',
-
-  thunder: "#505160",
-  waterfall: "#68829E",
-  moss: "#AEBD38",
-  meadow: "#598234",
 
   deep: '#0F1B07',
   light: '#ffffff',
   green: '#5C821A',
   brightgreen: '#C6D166',
   orange: '#fd8258'
+
+    // prussianBlue: '#083C5D',
+  // skyBlue: '#328CC1',
+  // goldLeaf: '#D9B310',
+  // black: '#1D2731',
+
+  // yellow: '#F7EF6A',
+  // vermillion: '#93C178',
+  // blue: '#465C8B',
+  // sky: '#DFDCE3',
+
+  // thunder: "#505160",
+  // waterfall: "#68829E",
+  // moss: "#AEBD38",
+  // meadow: "#598234",
 };
 
-
+export const theme = {
+ primary1Color: myColors.green,
+ accent1Color: myColors.orange,
+ textColor: myColors.deep,
+ secondaryColor: myColors.brightgreen,
+ errorText: myColors.orange
+};
 
 export default getMuiTheme({
   fontFamily: 'Lato, Verdana, sans-serif',
   palette: {
      primary1Color: myColors.green,
      accent1Color: myColors.orange,
-     textColor: myColors.deep
+     textColor: myColors.deep,
+     secondaryColor: myColors.brightgreen
   },
   menuItem: {
-    hoverColor: myColors.yellow
+    hoverColor: myColors.brightgreen
   },
-  iconColor: myColors.light
+  icon: {
+    color: myColors.light
+  },
+  textField: {
+    //   textColor: palette.textColor,
+    //   hintColor: palette.disabledColor,
+    //   floatingLabelColor: palette.disabledColor,
+    //   disabledTextColor: palette.disabledColor,
+    errorColor: myColors.orange
+    //   focusColor: palette.primary1Color,
+    //   backgroundColor: 'transparent',
+    //   borderColor: palette.borderColor,
+   }
 });
 
  // theme as applied to components:

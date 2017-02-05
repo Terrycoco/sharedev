@@ -1,0 +1,54 @@
+@import '../../styles/_colors';
+
+
+
+.linkDiv {
+  margin-top: 2rem;
+  font-size: .7em;
+}
+
+.linkDiv a {
+  text-decoration: none;
+  color: #fd8258;
+}
+
+.form-error {
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  background: $secondary;
+  color: $light;
+  line-height: 2em;
+  height: 2em;
+  border-radius: .5em;
+  margin-top: 3em;
+
+}
+
+.msg {
+  margin-top: 1em;
+}
+
+
+
+
+//fade in other components
+
+.fader-enter {
+  opacity: 0;
+}
+
+.fader-enter.fader-enter-active {
+   opacity: 1;
+   transition: all 400ms ease-in-out;
+  }
+
+
+.fader-leave  {
+  opacity: 1;
+}
+
+.fader-leave.fader-leave-active  {
+    opacity: 0;
+    transition: all 650ms ease-in-out;
+} 

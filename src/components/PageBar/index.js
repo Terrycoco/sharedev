@@ -18,7 +18,7 @@ class PageBar extends Component {
     const onRight = (this.props.fwdTo) ? this.props.fwdTo : " ";
     return (
       <div className="PageBar">
-        <Link className="fade" to={this.props.backTo}>{onLeft}</Link>     
+        <Link className="fade left" to={this.props.backTo}>{onLeft}</Link>     
         <span className="title fade">{this.props.title}</span>
         <span onClick={this.props.onFlip} className="fade right">{onRight}</span>     
       </div>

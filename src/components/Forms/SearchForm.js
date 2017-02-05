@@ -141,6 +141,7 @@ class SearchForm extends Component {
     //outer placement style is passed in from parent
     return(
         <div className="FORM" id="search-form">
+        <form >
           <TextField
               id="citySearch"
               value={this.state.city}
@@ -168,6 +169,7 @@ class SearchForm extends Component {
         <br />
 
         <RaisedButton label="Search" secondary={true} onClick={this.handleSearch} />
+       </form>
       </div>
 
     );

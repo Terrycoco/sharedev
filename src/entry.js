@@ -8,6 +8,7 @@ import browserHistory from 'react-router/lib/browserHistory';
 import Router from 'react-router/lib/Router';
 import routes from 'routes/routes';
 
+
 //needed for onTouchTap (material-ui)
 require('react-tap-event-plugin')();
 
@@ -16,7 +17,9 @@ require('react-tap-event-plugin')();
 const store = createStore(
   reducers,
   compose( 
-    applyMiddleware(reduxThunk),
+    applyMiddleware(
+      reduxThunk
+    ),
     window.devToolsExtension ? 
         window.devToolsExtension() : f => f
   )

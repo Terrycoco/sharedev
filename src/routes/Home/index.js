@@ -15,7 +15,7 @@ class Home extends Component {
     return (
      <div className="HOME" >
          <PageBar title="ShareWalks" />
-         <nav className="CONTENT">
+         <nav className="CONTENT center-children">
           <ul className="main-menu">
              <li key={'search'}><Link to="/search"><span>Find A Walk</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
              <li key={'create'}><Link to="/create"><span>Create A Walk</span><img className="fade" src="/images/right_arrow.png"/></Link></li>

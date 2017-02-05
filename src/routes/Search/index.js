@@ -19,7 +19,7 @@ class Search extends Component {
     return (
       <div className="PAGE SEARCH" key="search">
         <PageBar title="Find A Walk" leftIcon="hamburger" backTo="/" />
-        <div className="CONTENT">
+        <div className="CONTENT center-children">
            <SearchForm />
         </div>
       </div>

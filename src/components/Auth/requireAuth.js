@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import SlideIn from 'components/Transitions/SlideIn';
+import * as actions from 'actions/authActions';
 
-
-export default function(InputComponent) {
+export default function(InputComponent, objProps) {
   class Authenticated extends Component {
+    constructor(props) {
+      super(props);
+      console.log('requireAuth called props:', objProps, props);
+      this.state = {
+        fromDir: objProps.fromDir,
+        toRoute: objProps.toRoute
+      };
+    }
+
     //grab router from context
     static contextTypes = {
       router: React.PropTypes.object
@@ -12,23 +22,34 @@ export default function(InputComponent) {
     //check before first render
     componentWillMount() {
       if(!this.props.authenticated) {
-        this.context.router.push('/signin'); //redirect
+        //send where we want to go to the store
+        this.props.authRoute(this.state.toRoute);
+
+        this.context.router.push({ 
+          pathname: `/signin`
+        });
       }
     }
 
     //and when the props change
     componentWillUpdate(nextProps) {
       if(!nextProps.authenticated) {
-        this.context.router.push('/signin'); //redirect
+        //pass along where we're going
+        const toRoute = this.state.toRoute;
+        this.context.router.push({ 
+          pathname: `/signin${toRoute}`
+        });
       }
     }
 
     render() {
+      let GoThere = SlideIn(InputComponent, {fromDir: this.state.fromDir});
       return (
-        <InputComponent {...this.props} />
+        <GoThere {...this.props} />
       );
     }
   }
+
 
   function mapStateToProps(state) {
     return {
@@ -36,4 +57,5 @@ export default function(InputComponent) {
     };
   }
 
-  return connect(mapStateToProps)(Authenticated);
+  return connect(mapStateToProps, actions)(Authenticated);
+}

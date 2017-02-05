@@ -18,7 +18,7 @@ class About extends Component {
     let style = {zIndex: this.props.zindex};
     return (
       <div style={style} className="PAGE ABOUT" key="about">
-        <PageBar title="About" leftIcon="hamburger" backTo="/home" />
+        <PageBar title="About" leftIcon="hamburger" backTo="/" />
         <div className="CONTENT">
          <p>Author: Terry Marr</p>
           <p>Built Using: </p>

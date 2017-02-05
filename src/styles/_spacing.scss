@@ -2,3 +2,12 @@ $pagebar_height_sm: 2em;
 $pagebar_height_md: 3em;
 
 
+.center-children {
+  display: flex;
+  justify-content: center;
+}
+
+.left-children {
+  display: flex;
+  justify-content: flex-start;
+}

@@ -6,8 +6,18 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import PageBar from 'components/PageBar';
 import {Link} from 'react-router';
+import ErrorBox from 'components/Auth/ErrorBox';
+import Loader from 'components/Loader';
+import {theme} from 'styles/theme';
 
 require('./auth.scss');
+
+const style = {
+  color: theme.errorText,
+  backgroundColor: theme.errorBackground,
+  display: 'table'
+};
+
 
 class Signin extends Component {
   constructor(props) {
@@ -49,35 +59,56 @@ class Signin extends Component {
     this.setState(change);
   }
 
+  handleFocus(name, e){
+    //clear out what's in there
+    let field = {};
+    field[name] = '';
+    this.setState(field);
+    this.props.clearError();
+  }
+
   render() {
-    let formerr = this.props.error || null;
     return (
       <div >
-         <PageBar title="Signin" />
+         <PageBar title="Signin" leftIcon="hamburger" backTo="/" />
 
          <div className="CONTENT center-children">
-
-            <form className="FORM" onSubmit={this.doSubmit}>
-                <p>Sign in to ShareWalks to continue</p>
+          <div className="FORM">
+            <form >
+                <div className="msg">
+                  <p>Sign in to ShareWalks to continue</p>
+                   <span className="linkDiv">New User? <Link to={{ pathname: "/signup"}}>Sign Up Here</Link></span>
+                  </div>
+            
                 <TextField
-                    hintText="Username or Email"
-                    onChange={this.handleChange.bind(this, 'usernameOrEmail')}
+                    hintText='Username or Email'
                     floatingLabelText="Username or Email"
-                    value={this.state.usernameEmail}
+                    onFocus={this.handleFocus.bind(this, 'usernameOrEmail')}
+                    onChange={this.handleChange.bind(this, 'usernameOrEmail')}
+                    value={this.state.usernameOrEmail}
                   /><br />
                 <TextField
                     hintText="Password"
                     floatingLabelText="Password"
                     type="password"
+                    onFocus={this.handleFocus.bind(this, 'password')}
                     onChange={this.handleChange.bind(this, 'password')}
                     value={this.state.password}
                   /><br />
-                  <div className="form-error">{formerr}</div>
-            <RaisedButton label="Sign In" secondary={true} onClick={this.doSubmit} />
-            <FlatButton label="Cancel" secondary={true} onClick={this.doCancel} />
-            <br />
-            <div className="linkDiv">New User? <Link to={{ pathname: "/signup"}}>Sign Up Here</Link></div>
+                             <br /> <br />
+
+                  <div className="left-children">
+                    <RaisedButton label="Sign In" secondary={true} onClick={this.doSubmit} />
+                    <FlatButton label="Cancel" secondary={true} onClick={this.doCancel} />
+                  </div>
+                    {this.props.loader ? <Loader /> : <div></div>}
+                    <ErrorBox error={this.props.error} />
+             
+                        <br />
+                    
+
             </form>
+          </div>
 
          </div>
      </div>
@@ -88,7 +119,8 @@ class Signin extends Component {
 
 function mapStateToProps(state) {
   return {
-    error: state.auth.error
+    error: state.auth.error,
+    loader: state.auth.loader
   };
 }
 
