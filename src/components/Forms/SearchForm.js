@@ -5,13 +5,13 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Subheader from 'material-ui/Subheader';
 import {connect } from 'react-redux';
-import * as actions from 'actions/searchActions';
+import * as actions from 'actions';
 import config from 'utils/config';
-import {browserHistory} from 'react-router';
 import {isProd} from 'utils/environment';
 
 
-require('./searchForm.scss');
+
+require('./forms.scss');
 
 // const PLACE_API = `https://maps.googleapis.com/maps/api/js?key=${config.googleApiKey}&libraries=places`;
 
@@ -20,6 +20,7 @@ require('./searchForm.scss');
 class SearchForm extends Component {
   constructor(props) {
     super(props);
+    console.log('actions;', actions);
     this.state = { 
         city: props.city,
         cat_idx: props.cat_idx, //idx
@@ -33,7 +34,6 @@ class SearchForm extends Component {
     this.handleCatChange = this.handleCatChange.bind(this);
     this.renderItems = this.renderItems.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.getDevVars = this.getDevVars.bind(this);
   }
 
    //grab router from context
@@ -124,20 +124,9 @@ class SearchForm extends Component {
     return {__html: this.state.descr};
   }
 
-  getDevVars() {
-    if (!isProd()) {
-      return (
-        <p>{this.props.geo.here.lat + ',' + this.props.geo.here.lng + ' ' + this.props.geo.here.used}</p>
-      );
-    } else {
-      return null;
-    };
-  }
 
-   
   render() {
     const items = this.renderItems();
-    // const devVars = this.getDevVars();
     //outer placement style is passed in from parent
     return(
         <div className="FORM" id="search-form">
@@ -179,7 +168,7 @@ class SearchForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    cats: state.search.form.categories,
+    cats: state.form.common.categories,
     cat_idx: state.search.params.cat_idx,
     city: state.search.params.city,
     geo: state.geo

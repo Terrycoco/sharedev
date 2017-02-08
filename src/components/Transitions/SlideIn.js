@@ -1,5 +1,7 @@
 import React, {Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {connect } from 'react-redux';
+import { checkConn } from 'actions/appActions';
 
 require('./transitions.scss');
 
@@ -9,9 +11,9 @@ export default function(InputComponent, props) {
     constructor(props) {
       super(props);
     }
-    //grab router from context
-    static contextTypes = {
-      router: React.PropTypes.object
+
+    componentWillMount() {
+      this.props.checkConn();
     }
 
     render() {
@@ -31,5 +33,5 @@ export default function(InputComponent, props) {
     }
   }
 
-  return SlideIn;
+  return connect(null, { checkConn })(SlideIn);
 }

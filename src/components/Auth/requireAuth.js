@@ -7,7 +7,7 @@ export default function(InputComponent, objProps) {
   class Authenticated extends Component {
     constructor(props) {
       super(props);
-      console.log('requireAuth called props:', objProps, props);
+
       this.state = {
         fromDir: objProps.fromDir,
         toRoute: objProps.toRoute
@@ -35,9 +35,8 @@ export default function(InputComponent, objProps) {
     componentWillUpdate(nextProps) {
       if(!nextProps.authenticated) {
         //pass along where we're going
-        const toRoute = this.state.toRoute;
         this.context.router.push({ 
-          pathname: `/signin${toRoute}`
+          pathname: `/signin/`
         });
       }
     }

@@ -52,11 +52,23 @@ export default getMuiTheme({
     //   hintColor: palette.disabledColor,
     //   floatingLabelColor: palette.disabledColor,
     //   disabledTextColor: palette.disabledColor,
-    errorColor: myColors.orange
+    errorColor: myColors.orange,
     //   focusColor: palette.primary1Color,
     //   backgroundColor: 'transparent',
     //   borderColor: palette.borderColor,
-   }
+   },
+   raisedButton: {
+    color: myColors.orange,
+    //   textColor: palette.textColor,
+    //   primaryColor: palette.primary1Color,
+    //   primaryTextColor: palette.alternateTextColor,
+    //   secondaryColor: palette.accent1Color,
+    //   secondaryTextColor: palette.alternateTextColor,
+    //   disabledColor: darken(palette.alternateTextColor, 0.1),
+    //   disabledTextColor: fade(palette.textColor, 0.3),
+    //   fontSize: typography.fontStyleButtonFontSize,
+    //   fontWeight: typography.fontWeightMedium,
+    },
 });
 
  // theme as applied to components:

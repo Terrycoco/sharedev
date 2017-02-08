@@ -4,7 +4,8 @@ import {round} from 'utils/math';
 import axios from 'axios';
 import config from 'utils/config';
 import {latLng2Box} from 'utils/geo';
-
+import {updateConn} from 'actions/appActions';
+const isOnline = require('is-online');
 const SECS = 1000;
 const PRECISION = 6;  //5 is within a yard or so
 
@@ -13,55 +14,61 @@ const PRECISION = 6;  //5 is within a yard or so
 
 export function initLoc() {
   return ((dispatch, getState) => {
-    if (getState().geo.here.lat != null) {
-      //already fetched
-      return null;
-    }
-    if ("geolocation" in navigator || navigator.geolocation) {
+    isOnline()
+    .then(online => {
+    if (online) {
+        if (getState().geo.here.lat != null) {
+          //already fetched
+          return null;
+        }
+        if ("geolocation" in navigator || navigator.geolocation) {
 
-      const positionOptions = {
-        maximumAge: 30 * SECS, 
-        timeout: 27 * SECS, 
-        enableHighAccuracy: true  //this needed for walking scale?
-      };
+          const positionOptions = {
+            maximumAge: 30 * SECS, 
+            timeout: 27 * SECS, 
+            enableHighAccuracy: true  //this needed for walking scale?
+          };
 
-      const success = function(position) {
-        console.log('location succeeded:');
-        const loc = {
-          lat: round(position.coords.latitude, PRECISION),
-          lng: round(position.coords.longitude, PRECISION),
-          ts: position.timestamp,
-          used: 'navigator'
-        };
-        const box = latLng2Box(loc.lat, loc.lng);
-        const payload = {loc, box};
-        console.log('payload:', payload);
-        dispatch(setHere(payload)); 
-      };
+          const success = function(position) {
+            console.log('location succeeded:');
+            const loc = {
+              lat: round(position.coords.latitude, PRECISION),
+              lng: round(position.coords.longitude, PRECISION),
+              ts: position.timestamp,
+              used: 'navigator'
+            };
+            const box = latLng2Box(loc.lat, loc.lng);
+            const payload = {loc, box};
+            dispatch(setHere(payload)); 
+          };
 
-      const error = function(err) {
-         console.log('geolocator error');
-         useGoogleLocator(dispatch); 
-      };
+          const error = function(err) {
+             // console.log('error1:', err);
+             useGoogleLocator(dispatch); 
+          };
 
-      pingLocation(success, error, positionOptions);
- 
-    } else {
-      // dispatch(setAvail(false));
-      dispatch(setMsg("Geolocation API is not supported in your browser."));
-    }
- }) //end func
-} // end initLoc
-
-
+          pingLocation(success, error, positionOptions);
+     
+        } else {
+          // dispatch(setAvail(false));
+          dispatch(geoError("Geolocation API is not supported in your browser."));
+        }
+      }
+  else {
+    //not online
+    dispatch(updateConn(online));
+   }
+  }) 
+}) //end func
+} //end initLoc
 
 function useGoogleLocator(dispatch) {
-  console.log('google locator called');
+  // console.log('google locator called');
   const key = config.googleApiKey;
   const API = `https://www.googleapis.com/geolocation/v1/geolocate?key=${key}`;
   axios.post(API)
   .then((response) => {
-    console.log('response from google:', response);
+    // console.log('response from google:', response);
     const loc = {
         lat: round(response.data.location.lat, PRECISION),
         lng: round(response.data.location.lng, PRECISION),
@@ -72,8 +79,8 @@ function useGoogleLocator(dispatch) {
       const payload = {loc, box};
       dispatch(setHere(payload)); 
   })
-  .catch((error) => {
-     console.log('google error:', error);
+  .catch((err) => {
+     // console.log('error2:', err);
      initIpLocation(dispatch);
   });
 }
@@ -82,9 +89,7 @@ function useGoogleLocator(dispatch) {
 function initIpLocation(dispatch) {
   axios.get(IP_API)
   .then((response) => {
-    console.log('ip:', response.data);
     let locarr = response.data.loc.split(",");
-    console.log(locarr);
     const lat = parseFloat(locarr[0]);
     const lng = parseFloat(locarr[1]);
     let loc = {
@@ -96,9 +101,9 @@ function initIpLocation(dispatch) {
     };
     dispatch(setHere(loc));
     })
-  .catch(function(response) {
-      console.log('ERROR:', response);
-      dispatch(updateMsg(response));
+  .catch(function(err) {
+      // console.log('error3:', err);
+      dispatch(geoError(err));
    });
 }
 
@@ -119,10 +124,10 @@ export function setHere(payload) {
 
 
 
-function setMsg(msg) {
+function geoError(error) {
   return {
-    type: a.UPDATE_MSG, 
-    payload: {msg: msg}
+    type: a.GEO_ERROR,
+    payload: error
   };
 }
 

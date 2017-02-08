@@ -11,12 +11,12 @@ const INITIAL_STATE = {
 
 
 export default function(state=INITIAL_STATE, action) {
-  console.log('reducer: action:', action);
+
   switch(action.type) {
     case a.AUTH_USER:
       return { ...state, authenticated: true, username: action.username, aCheck: action.aCheck, error: null, loader: false};
     case a.UNAUTH_USER:
-      return state; //back to initial state
+      return INITIAL_STATE; //back to initial state
     case a.AUTH_ERROR:
       return { ...state, error: action.payload, aCheck: false, loader: false};
     case a.CLEAR_ERROR:

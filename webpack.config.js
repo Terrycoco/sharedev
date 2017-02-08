@@ -5,12 +5,28 @@ const sourcePath = path.join(__dirname, './src');
 const publicPath = path.join(__dirname, './public');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+//for the code shared amongst modules
+const extractCommons = new webpack.optimize.CommonsChunkPlugin({
+  name: 'shared',
+  filename: 'shared.js'
+});
+
+const routes = {
+  home: sourcePath + '/routes/Home',
+  search: sourcePath + '/routes/Search',
+  create: sourcePath + '/routes/Create',
+  results: sourcePath + '/routes/Results',
+  details: sourcePath + '/routes/Details',
+  myWalks: sourcePath + '/routes/MyWalks',
+  about: sourcePath + '/routes/About'
+};
+
 // Okay, this may be confusing at first glance but go through it step-by-step
 module.exports = env => {
   const ifProd = plugin =>  env.prod ? plugin : undefined;
   const removeEmpty = array => array.filter(p => !!p);
   const isProd = env.prod ? true : false;
-
+  const IS_PRODUCTION = env.prod ? true : false;
   return {
     /**
      * entry tells webpack where to start looking.
@@ -18,7 +34,13 @@ module.exports = env => {
      */
     entry: {
       app: 'entry.js',
-      vendor: ['react', 'react-dom', 'react-router'],
+      home: routes.home,
+      search: routes.search,
+      create: routes.create,
+      results: routes.results,
+      details: routes.details,
+      myWalks: routes.myWalks,
+      about: routes.about
     },
     /**
      * output tells webpack where to put the files he creates
@@ -30,7 +52,7 @@ module.exports = env => {
      */
     output: {
       filename: '[name].[hash].js',
-      path: publicPath,
+      path: publicPath
     },
 
      module: {
@@ -38,7 +60,7 @@ module.exports = env => {
       {
         test: /\.html$/,
         exclude: /node_modules/,
-        use: 'file-loader',
+        loader: 'file-loader',
         query: {
           name: '[name].[ext]'
         }
@@ -46,7 +68,7 @@ module.exports = env => {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: [
+        loader: [
           'style-loader',
           'css-loader'
         ]
@@ -54,7 +76,7 @@ module.exports = env => {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
+        loader: [
           'babel-loader'
         ],
       },
@@ -72,7 +94,18 @@ module.exports = env => {
       actions:     path.resolve(__dirname, 'src', 'actions'),
       routes:      path.resolve(__dirname, 'src', 'routes'),
       utils:       path.resolve(__dirname, 'src', 'utils'),
-      styles:      path.resolve(__dirname, 'src', 'styles')
+      styles:      path.resolve(__dirname, 'src', 'styles'),
+
+
+      //production versions of react and redux
+      // 'react$': path.join(__dirname, 'node_modules', 'react','dist',
+      //   (IS_PRODUCTION ? 'react.min.js' : 'react.js')),
+      // 'react-dom$': path.join(__dirname, 'node_modules', 'react-dom','dist',
+      //   (IS_PRODUCTION ? 'react-dom.min.js' : 'react-dom.js')),
+      // 'redux$': path.join(__dirname, 'node_modules', 'redux','dist',
+      //   (IS_PRODUCTION ? 'redux.min.js' : 'redux.js')),
+      // 'react-redux$': path.join(__dirname, 'node_modules', 'react-redux','dist',
+      //   (IS_PRODUCTION ? 'react-redux.min.js' : 'react-redux.js'))
     },
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
     modules: [
@@ -83,6 +116,7 @@ module.exports = env => {
   devServer: {
       contentBase: './public/',
       historyApiFallback: true,
+      headers: {"Access-Control-Allow-Origin": "*"},
       port: 3000,
       compress: isProd,
       inline: !isProd,
@@ -103,19 +137,16 @@ module.exports = env => {
       },
   },
 
-    plugins: removeEmpty([
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity,
-        filename: '[name].[hash].js',
-      }),
+    plugins: removeEmpty([ //array of plugins
+      
+      extractCommons,
 
-
+      //css files
       new ExtractTextPlugin('[name].css'),
 
 
       /**
-      * HtmlWebpackPlugin will make sure out JavaScriot files are being called
+      * HtmlWebpackPlugin will make sure out JavaScript files are being called
       * from within our index.html
       */
       new HtmlWebpackPlugin({
@@ -127,19 +158,11 @@ module.exports = env => {
     
 
       // Only running DedupePlugin() and UglifyJsPlugin() in production
-      ifProd(new webpack.optimize.DedupePlugin()),
-      ifProd(new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          'screw_ie8': true,
-          'warnings': false,
-          'unused': true,
-          'dead_code': true,
-        },
-        output: {
-          comments: false,
-        },
-        sourceMap: false,
-      })),
-    ]),
-  };
-};
+      ifProd(new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify("production")
+        }
+      }))
+  ]) //end array of plugins
+}
+}

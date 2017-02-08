@@ -1,8 +1,9 @@
 import config from 'utils/config';
-
+  
+// var envVar = process.env.OPENSHIFT_ENV_VAR;
 
 export function isProd() {
-  if (process.env.NPM_CONFIG_PRODUCTION) {
+  if (process.env.NODE_ENV == "production") {
     return true;
   }
   return false;

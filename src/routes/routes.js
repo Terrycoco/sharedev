@@ -8,6 +8,13 @@
 import App from 'routes/App';
 import SlideIn from 'components/Transitions/SlideIn'; //slider HOC
 import requireAuth from 'components/Auth/requireAuth';  //auth HOC
+import Home from 'routes/Home';
+
+
+// import Create from 'routes/Create';
+
+// import Search from 'routes/Search';
+// import Results from 'routes/Results';
 
 // throws an error in the console if the page wasn't able to load
 function errorLoading(error) {
@@ -33,11 +40,7 @@ function loadRoute(cb) {
   path: '/', // at index '/', the <App /> component will be loaded
   component: App,
   indexRoute: { // but we also want our indexRoute to load <Home />
-    getComponent(location, cb) {
-      System.import('routes/Home')
-        .then(module => cb(null, SlideIn(module.default, {fromDir: "left"})))
-        .catch(errorLoading);
-    }
+    component: SlideIn(Home, {fromDir: "left"})
   },
   childRoutes: [
     {
@@ -57,7 +60,7 @@ function loadRoute(cb) {
           .catch(errorLoading);
       }
     },
-        {
+    {
       path: '/searchL', // loads <App /> with <Search /> passed as a child
       getComponent(location, cb) {
         System.import('routes/Search')
@@ -83,7 +86,7 @@ function loadRoute(cb) {
       }
     },
 
-            {
+    {
       path: '/details', // loads <App /> with <Search /> passed as a child
       getComponent(location, cb) {
         System.import('routes/Details')
@@ -104,18 +107,20 @@ function loadRoute(cb) {
       path: '/create', 
       getComponent(location, cb) {
         System.import('routes/Create')
-          .then(module => cb(null, requireAuth(module.default, {fromDir: "right", toRoute: '/create'})))
+          .then(module => cb(null, SlideIn(module.default, {fromDir: "right"})))
           .catch(errorLoading);
       }
+
     },
-    {
-      path: '/createL', 
-      getComponent(location, cb) {
-        System.import('routes/Create')
-          .then(module => cb(null, SlideIn(module.default, {fromDir: "left"})))
-          .catch(errorLoading);
-      }
-    },    
+
+    // {
+    //   path: '/create', 
+    //   getComponent(location, cb) {
+    //     System.import('routes/Create')
+    //       .then(module => cb(null, requireAuth(module.default, {fromDir: "right", toRoute: "/create"})))
+    //       .catch(errorLoading);
+    //   }
+    // },   
 
     {
       path: '/mywalks', 
@@ -152,11 +157,7 @@ function loadRoute(cb) {
 
     {
       path: '*', // fallback to <App /> if the route isn't found
-      getComponent(location, cb) {
-        System.import('routes/Home')
-          .then(module => cb(null, SlideIn(module.default, {fromDir: "left"})))
-          .catch(errorLoading);
-      }
+      component: SlideIn(Home, {fromDir: "left"})
     },
   ],
 };

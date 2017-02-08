@@ -1,41 +1,13 @@
 const s = require('actions/types').search;
+const f = require('actions/types').form;
 import {setHere} from 'actions/geoActions';
 import axios from 'axios';
-import data from 'utils/data/geoJson.json';
 import {geom2Box, latLng2Box} from 'utils/geo';
 import{getApi} from 'utils/environment';
 import { walksToGeoJson } from 'utils/geojson';
 
 const API_URL = getApi();
 // const API_URL = 'https://api-tmarr.rhcloud.com';
-
-export function getSearchForm() {
- return function(dispatch, getState) {
-    let cats = getState().search.form.categories.slice();
-    if (cats.length == 1) {
-     const requestURL = API_URL + '/searchform';
-     axios.get(requestURL)
-     .then((response) => {
-        let payload = response.data;
-        //add default cat to beginning
-        payload.unshift(cats[0]);
-        dispatch(loadSearchForm(payload));
-     })
-     .catch((err) => {
-        console.log(err);
-     })
-   }
-   return; //already fetched
-  }
-}
-
-function loadSearchForm(payload) {
-  return {
-    type: s.LOAD_SEARCH_FORM,
-    payload: payload
-  };
-}
-
 
 export function saveParams(payload) {
   return function(dispatch, getState) {
