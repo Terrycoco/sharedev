@@ -1,0 +1,79 @@
+hr.accent {
+  border-top: 2px solid #fd8258; }
+
+hr.primary {
+  border-top: 2px solid #5C821A; }
+
+.center-children {
+  display: flex;
+  justify-content: center; }
+
+.left-children {
+  display: flex;
+  justify-content: flex-start; }
+
+.HOME {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100%  - 0.1px);
+  z-index: 0;
+  overflow-y: hidden;
+  cursor: pointer;
+  background: url("/images/moccasins.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom center;
+  background-size: cover;
+  overflow: hidden; }
+
+.main-menu {
+  max-height: 50vh;
+  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
+  z-index: 20;
+  max-width: 500px;
+  overflow-x: hidden; }
+
+.main-menu li {
+  list-style: none;
+  line-height: 2.5em;
+  height: 2.5em;
+  min-width: 500px;
+  margin: 0 3px 3px 3px;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.3); }
+
+.main-menu li:hover {
+  background: rgba(255, 255, 255, 0.4); }
+
+nav li a {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #0F1B07;
+  padding-left: 10px; }
+
+nav li a:link, a:visited {
+  color: #0F1B07;
+  text-decoration: none;
+  cursor: auto; }
+
+nav li a img {
+  height: 1.2em;
+  transform: translate3d(-2px, 0, 0); }
+
+@media all and (min-width: 668px) {
+  .CONTENT {
+    margin-top: 3.5em; }
+  .main-menu li {
+    font-size: 1.3em;
+    list-style: none;
+    line-height: 3.5em;
+    height: 3.5em;
+    margin: 0 3px 3px 3px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.3); } }

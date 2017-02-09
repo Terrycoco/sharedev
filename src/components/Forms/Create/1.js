@@ -1,28 +1,22 @@
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
-import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
 import {connect } from 'react-redux';
-import * as actions from 'actions';
-import config from 'utils/config';
+import * as actions from 'actions/formActions';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
+require('../forms.scss');
 
-require('./forms.scss');
-
-// const PLACE_API = `https://maps.googleapis.com/maps/api/js?key=${config.googleApiKey}&libraries=places`;
-
-
-
-class SearchForm extends Component {
+class Create1 extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-        city: props.city,
-        cat_idx: props.cat_idx, //idx
-        cat_id: props.cats[props.cat_idx].id, //id
-        descr: props.cats[props.cat_idx].descr
+
+    this.state = {
+      city: 'Current Location',
+      cat_idx: null, //idx
+      cat_id: null, //id
+      descr: null
     };
     this.getDescr = this.getDescr.bind(this);
     this.handleCityChange = this.handleCityChange.bind(this);
@@ -30,20 +24,18 @@ class SearchForm extends Component {
     this.handleCityLostFocus = this.handleCityLostFocus.bind(this);
     this.handleCatChange = this.handleCatChange.bind(this);
     this.renderItems = this.renderItems.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
+    this.goNext = this.goNext.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
-   //grab router from context
-    static contextTypes = {
-      router: React.PropTypes.object
-   } 
+  componentWillMount() {
+    //get cats if not already done
+    this.props.getCommon();
+  }
 
-    componentWillMount() {
-      this.props.getCommon(); //load lookups into store if needed
-    }
-
-   componentDidMount() {
-    const cityField = document.getElementById('citySearch');
+  componentDidMount() {
+    this.props.createGoNext(1);
+    const cityField = document.getElementById('cityCreate');
     const options = {
       types: ['(cities)'] //TODO: want neighborhoods?
     };
@@ -70,10 +62,27 @@ class SearchForm extends Component {
      //change state to update field
      let newcity = selectedPlace.formatted_address;
      this.setState({city: newcity});
-     this.props.resetBoxFromGeom(selectedPlace.geometry); //put into store
-   }); //end addListener
+   }); //end addListen
   }
-   
+
+  renderItems() {
+    let items;
+      items = this.props.cats.map(function(cat, idx) {
+        if (idx > 0) {
+         return <MenuItem
+                      key={"cat" + idx}
+                      value={idx}
+                      primaryText={cat.category}
+                   />; 
+        }
+      });
+    return items;
+  }
+
+  getDescr() {
+    return {__html: this.state.descr};
+  }
+
   handleCityChange(event, value) {
     this.setState({city: value});
   }
@@ -94,43 +103,24 @@ class SearchForm extends Component {
     this.setState({cat_idx: value, cat_id: cat.id, descr: cat.descr});
   }
 
-  handleSearch() {
-    //save the params into store so when we come back
-    const params = {city: this.state.city, 
-                    cat_id: this.state.cat_id,
-                    cat_idx: this.state.cat_idx};
-    this.props.searchWalks(params, this.context.router);
 
+  goNext() {
+    //save what's here?
+    this.props.createGoNext(2, "right");
   }
-
-  renderItems() {
-    let items;
-      items = this.props.cats.map(function(cat, idx) {
-
-
-         return <MenuItem
-                      key={"cat" + idx}
-                      value={idx}
-                      primaryText={cat.category}
-                   />; 
-
-      });
-    return items;
+  goBack() {
+    this.props.createGoNext(0, "left");
   }
-
-  getDescr() {
-    return {__html: this.state.descr};
-  }
-
 
   render() {
     const items = this.renderItems();
-    //outer placement style is passed in from parent
-    return(
-        <div className="FORM" id="search-form">
-        <form >
+    return (
+       <div className="FORM" key="create1">
+        <form className="form-text">
+        <span className="header center-children"><h4>City and Category</h4></span>
+        <p>First, tell us where your walk is and it's main category.  This is how others will find your walk.</p>
           <TextField
-              id="citySearch"
+              id="cityCreate"
               value={this.state.city}
               placeholder="Current Location"
               floatingLabelText="City"
@@ -145,33 +135,32 @@ class SearchForm extends Component {
             value={this.state.cat_idx}
             onChange={this.handleCatChange}
             maxHeight={400}
-            floatingLabelText="Walk Category"
+            floatingLabelText="Main Walk Category"
             floatingLabelFixed={true}
             fullWidth={true}
             >
             {items}
         </SelectField>
+         <div className="descr" dangerouslySetInnerHTML={this.getDescr()} />
           <br />
-          <div className="descr" dangerouslySetInnerHTML={this.getDescr()} />
+
         <br />
-
-        <RaisedButton label="Search" secondary={true} onClick={this.handleSearch} />
-       </form>
-      </div>
-
+        </form>
+        <div className="button-group even-children">
+          <RaisedButton label="Back" secondary={true} onClick={this.goBack} />
+          <RaisedButton label="Next" secondary={true} onClick={this.goNext} />
+        </div>
+ 
+     </div>
     );
   }
-} //end component
-
+}
 
 function mapStateToProps(state) {
   return {
     cats: state.forms.shared.categories,
-    cat_idx: state.search.params.cat_idx,
-    city: state.search.params.city,
-    geo: state.geo
+    params: state.forms.create.params
   };
 }
 
-
-export default connect(mapStateToProps, actions)(SearchForm);
+export default connect(mapStateToProps, actions)(Create1);

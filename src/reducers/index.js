@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   geo: geoReducer,
   auth: authReducer,
-  form: formReducer
+  forms: formReducer
 });
 
 export default rootReducer;

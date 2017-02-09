@@ -3,7 +3,7 @@ const f = require('actions/types').form;
 
 
 const INITIAL_STATE = {
-  common: {
+  shared: {
     categories: [
         {  
            id: 0,
@@ -15,20 +15,25 @@ const INITIAL_STATE = {
   },
 
   create: {
-    intro: `<p>Creating a ShareWalk is fun and easy.  Just answer a few questions about your walk and you're on your way.</p>
-          <p>Don't worry about being perfect, you can always come back and edit your walk at any time.</p>
-          <p>You can add sites to your walk right from your phone, or, if you prefer, away from the walk using our map.</p>
-          <span class="center-children"><h4 class="form-center">Ready?</h4></span>`
+    pageIdx: 0,
+    fromDir: "right",
+    params: {
+      city: "Current Location",
+      cat_id: null,
+      cat_idx: null
+    }
   }
 }
 
 export default function(state=INITIAL_STATE, action) {
   let newstate, newobj;
   switch(action.type) {
-    case f.LOAD_SEARCH_FORM:
-      newobj = Object.assign({}, state.common, action.payload);
-      return Object.assign({}, state, {common: newobj});
-  default:
-    return state;
+    case f.LOAD_COMMON:
+      newobj = Object.assign({}, state.shared, {categories: action.payload});
+      return Object.assign({}, state, {shared: newobj});
+    case f.CREATE_GO_NEXT:
+      newobj = Object.assign({}, state.create, {pageIdx: action.payload.pageIdx, fromDir: action.payload.fromDir});
+      return Object.assign({}, state, {create: newobj})
   }
+  return state;
 }

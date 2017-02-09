@@ -2,16 +2,6 @@ var s = require('actions/types').search;
 var g = require('actions/types').geo;
 
 const INITIAL_STATE = {
-  form: {
-    categories: [
-        {  
-           id: 0,
-           category: 'Any',
-           descr: 'Search for <em>any</em> type of walk',
-           sort: 0 
-        }
-    ]
-  },
   //pass these onto search
   params: {
     city: "Current Location",
@@ -42,8 +32,6 @@ const INITIAL_STATE = {
 
 export default function(state=INITIAL_STATE, action) {
   let newstate, newobj;
-  console.log('action received:', action);
-      console.log('oldstate:', state);
   switch(action.type) {
 
     case g.SET_HERE:

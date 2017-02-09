@@ -7,10 +7,10 @@ export default function(InputComponent, objProps) {
   class Authenticated extends Component {
     constructor(props) {
       super(props);
-
+      console.log('got to requireAuth');
       this.state = {
         fromDir: objProps.fromDir,
-        toRoute: objProps.toRoute
+        toRoute: objProps.toRoute 
       };
     }
 

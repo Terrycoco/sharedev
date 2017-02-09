@@ -83,7 +83,7 @@ module.exports = env => {
       
       { 
         test: /(\.scss|\.css)$/,
-        loader: ExtractTextPlugin.extract({fallbackLoader:'style-loader', loader: 'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?sourceMap'})
+        loader: ExtractTextPlugin.extract({fallback:'style-loader', loader: 'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?sourceMap'})
        }
     ]
   },

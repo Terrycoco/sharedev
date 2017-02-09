@@ -29,5 +29,6 @@ export const auth = {
 };
 
 export const form = {
-  LOAD_SEARCH_FORM: 'LOAD_SEARCH_FORM'
+  LOAD_COMMON: 'LOAD_COMMON',
+  CREATE_GO_NEXT: 'CREATE_GO_NEXT'
 };

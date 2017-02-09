@@ -2,15 +2,16 @@
 
 .FORM {
   max-width: 350px;
-  min-height: 70%;
+  height: 70%;
   margin-left: 1rem;
   margin-right: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-    // border: 1px solid red;
+  justify-content: space-between;
+  overflow-y: hidden;
+  // border: 1px solid red;
 }
 
 //search
@@ -26,14 +27,25 @@
 
 //create
 .form-text {
-
+  width: 350px;
 }
 
 .form-text p {
   line-height: 1.5;
-  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
-.form-center {
-  line-height: 3em;
+.header {
+  margin-bottom: 1em;
 }
+
+.button-group {
+  flex: .5;
+  // border: 1px solid green;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
