@@ -100,7 +100,6 @@ class SearchForm extends Component {
                     cat_id: this.state.cat_id,
                     cat_idx: this.state.cat_idx};
     this.props.searchWalks(params, this.context.router);
-
   }
 
   renderItems() {

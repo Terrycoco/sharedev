@@ -33,9 +33,39 @@ function loadCommon(payload) {
   };
 }
 
-export function createGoNext(nextNum, fromDir) {
+export function createGoNext(pageIdx, fromDir, params) {
+  console.log('got to createGoNext :', pageIdx, fromDir, params);
+  let payload = {pageIdx: pageIdx};
+  if (fromDir) {
+    payload.fromDir = fromDir;
+  }
+  if (params) {
+    payload.params = params;
+  }
   return {
     type: f.CREATE_GO_NEXT,
-    payload: {pageIdx: nextNum, fromDir: fromDir}
+    payload: payload
+  };
+}
+
+export function goWithAuth(pageIdx, fromDir, params) {
+  //check to see if user is authenticated
+  //if not go to signin first
+  return function(dispatch, getState) {
+    //is user authenticated?
+    if (!getState().auth.authenticated) {
+      router.push('/signin');
+      return null;
+    } else {
+      router.push(this.getState().toRoute);
+      return null;
+    }
+  }
+}
+
+function savePageIdx(pageIdx) {
+  return {
+    type: f.SAVE_PAGE_IDX,
+    payload: pageIdx
   };
 }

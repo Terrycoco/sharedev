@@ -70,7 +70,7 @@ body {
   top: 0;
   left: 0; 
   width: 100%;
-  height: calc(100%  - 0.1px); //elimates iOS bounce
+  height: calc(100%  - 0.1px); //elimates iOS bounce?
   overflow: hidden;
   cursor: pointer;
   background-color: $light;
@@ -82,10 +82,11 @@ body {
   position: absolute;
   top: $pagebar_height_sm;
   height: calc(100%  - #{$pagebar_height_sm}); //elimates iOS bounce
-  width: 100%;
+  width: 100vw;
   overflow-y: auto;
   color: $dark;
 }
+
 
 @media all and (min-width: 668px) {
   .CONTENT {

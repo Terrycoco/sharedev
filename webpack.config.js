@@ -18,7 +18,9 @@ const routes = {
   results: sourcePath + '/routes/Results',
   details: sourcePath + '/routes/Details',
   myWalks: sourcePath + '/routes/MyWalks',
-  about: sourcePath + '/routes/About'
+  about: sourcePath + '/routes/About',
+  signin: sourcePath + '/components/Auth/Signin',
+  signup: sourcePath + '/components/Auth/Signup'
 };
 
 // Okay, this may be confusing at first glance but go through it step-by-step
@@ -40,7 +42,9 @@ module.exports = env => {
       results: routes.results,
       details: routes.details,
       myWalks: routes.myWalks,
-      about: routes.about
+      about: routes.about,
+      signin: routes.signin,
+      signup: routes.signup
     },
     /**
      * output tells webpack where to put the files he creates

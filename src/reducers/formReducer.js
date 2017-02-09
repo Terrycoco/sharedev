@@ -26,14 +26,15 @@ const INITIAL_STATE = {
 }
 
 export default function(state=INITIAL_STATE, action) {
-  let newstate, newobj;
+  let newstate, newobj, withParams;
+  console.log('action: ', action.type, 'payload: ', action.payload);
   switch(action.type) {
     case f.LOAD_COMMON:
       newobj = Object.assign({}, state.shared, {categories: action.payload});
       return Object.assign({}, state, {shared: newobj});
     case f.CREATE_GO_NEXT:
-      newobj = Object.assign({}, state.create, {pageIdx: action.payload.pageIdx, fromDir: action.payload.fromDir});
-      return Object.assign({}, state, {create: newobj})
-  }
+      newobj = Object.assign({}, state.create, action.payload);
+      return Object.assign({}, state, {create: newobj});
+   }
   return state;
 }

@@ -126,6 +126,7 @@ export function authError(error) {
 }
 
 export function authRoute(route) {
+  console.log('got to authRoute');
   return {
     type: a.AUTH_ROUTE,
     payload: route
@@ -149,3 +150,4 @@ export function showLoader() {
     type: a.SHOW_LOADER
   };
 }
+

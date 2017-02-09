@@ -6,14 +6,23 @@ hr.primary {
 
 .FORM {
   max-width: 350px;
-  min-height: 70%;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  max-height: 95%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 2em;
+  margin-right: 2em;
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
   display: flex;
+  /* NEW, Spec - Firefox, Chrome, Opera */
   flex-direction: column;
-  justify-content: flex-start; }
+  justify-content: space-between;
+  overflow-y: auto;
+  align-items: center; }
 
 .descr {
   font-size: .8em;
@@ -22,9 +31,35 @@ hr.primary {
 .descr em {
   color: #fd8258; }
 
+.form-text {
+  -webkit-flex: 6;
+  /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 6;
+  /* IE 10 */
+  flex: 6; }
+
 .form-text p {
   line-height: 1.5;
-  margin-top: 1em; }
+  margin-bottom: 1em; }
 
-.form-center {
-  line-height: 3em; }
+.header {
+  margin-bottom: 2em; }
+
+.button-group {
+  -webkit-flex: .5;
+  /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: .5;
+  /* IE 10 */
+  flex: .5;
+  width: 100%;
+  align-items: center;
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;
+  /* NEW, Spec - Firefox, Chrome, Opera */
+  flex-direction: row;
+  justify-content: space-around; }

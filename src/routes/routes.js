@@ -40,7 +40,7 @@ function loadRoute(cb) {
   path: '/', // at index '/', the <App /> component will be loaded
   component: App,
   indexRoute: { // but we also want our indexRoute to load <Home />
-    component: SlideIn(Home, {fromDir: "left"})
+    component: SlideIn(Home, {fromDir: "left"}) //home always left
   },
   childRoutes: [
     {

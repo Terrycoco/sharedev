@@ -10,6 +10,9 @@ export default function(InputComponent, props) {
 
     constructor(props) {
       super(props);
+      this.state = {
+        fromDir: this.props.fromDir || "right"
+      };
     }
 
     componentWillMount() {
@@ -17,9 +20,10 @@ export default function(InputComponent, props) {
     }
 
     render() {
-      let name = `pageSlider-${props.fromDir.toLowerCase() || 'right'}`;
+      let name = `pageSlider-${this.state.fromDir}`;
       return (
        <ReactCSSTransitionGroup 
+          className="center-children"
           component="div"
           transitionName={name}
           transitionEnter={true}
@@ -33,5 +37,11 @@ export default function(InputComponent, props) {
     }
   }
 
-  return connect(null, { checkConn })(SlideIn);
+  function mapStateToProps(state) {
+    return {
+      fromDir: state.forms.create.fromDir
+    };
+  }
+
+  return connect(mapStateToProps, { checkConn })(SlideIn);
 }

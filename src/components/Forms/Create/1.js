@@ -13,9 +13,9 @@ class Create1 extends Component {
     super(props);
 
     this.state = {
-      city: 'Current Location',
-      cat_idx: null, //idx
-      cat_id: null, //id
+      city: props.params.city,
+      cat_idx: props.params.cat_idx || null, //idx
+      cat_id: props.params.cat_id || null,
       descr: null
     };
     this.getDescr = this.getDescr.bind(this);
@@ -35,6 +35,11 @@ class Create1 extends Component {
 
   componentDidMount() {
     this.props.createGoNext(1);
+    if(this.props.params.cat_idx) {
+      this.setState({descr: this.props.cats[this.props.params.cat_idx].descr});
+    } else {
+      this.setState({descr: 'Select a Main Category for your walk'});
+    }
     const cityField = document.getElementById('cityCreate');
     const options = {
       types: ['(cities)'] //TODO: want neighborhoods?
@@ -70,7 +75,7 @@ class Create1 extends Component {
       items = this.props.cats.map(function(cat, idx) {
         if (idx > 0) {
          return <MenuItem
-                      key={"cat" + idx}
+                      key={"cat" + (idx)}
                       value={idx}
                       primaryText={cat.category}
                    />; 
@@ -99,53 +104,62 @@ class Create1 extends Component {
   }
 
   handleCatChange(event, value) {
-    let cat = this.props.cats[value];
-    this.setState({cat_idx: value, cat_id: cat.id, descr: cat.descr});
+    let cat = this.props.cats[value + 1];
+    this.setState({cat_idx: value + 1, cat_id: cat.id, descr: cat.descr});
   }
 
 
   goNext() {
-    //save what's here?
-    this.props.createGoNext(2, "right");
+    let params = {
+      city: this.state.city,
+      cat_idx: this.state.cat_idx, //idx
+      cat_id: this.state.cat_id};
+    this.props.createGoNext(2, "right", params);
   }
   goBack() {
-    this.props.createGoNext(0, "left");
+    let params = {
+      city: this.state.city,
+      cat_idx: this.state.cat_idx, //idx
+      cat_id: this.state.cat_id};
+    this.props.createGoNext(0, "left", params);
   }
 
   render() {
     const items = this.renderItems();
     return (
        <div className="FORM" key="create1">
+       
         <form className="form-text">
-        <span className="header center-children"><h4>City and Category</h4></span>
-        <p>First, tell us where your walk is and it's main category.  This is how others will find your walk.</p>
-          <TextField
-              id="cityCreate"
-              value={this.state.city}
-              placeholder="Current Location"
-              floatingLabelText="City"
+          <span className="header center-children"><h4>City and Category</h4></span>
+          <p>First, tell us where your walk is located and it's main category.  This is how others will find your walk.</p>
+            <TextField
+                id="cityCreate"
+                value={this.state.city}
+                placeholder="Current Location"
+                floatingLabelText="City"
+                floatingLabelFixed={true}
+                onChange={this.handleCityChange}
+                onFocus={this.handleCityFocus}
+                onBlur={this.handleCityLostFocus}
+             />
+            <br />
+
+          <SelectField
+              value={this.state.cat_idx}
+              onChange={this.handleCatChange}
+              maxHeight={400}
+              floatingLabelText="Main Walk Category"
               floatingLabelFixed={true}
-              onChange={this.handleCityChange}
-              onFocus={this.handleCityFocus}
-              onBlur={this.handleCityLostFocus}
-           />
-          <br />
+              fullWidth={true}
+              >
+              {items}
+          </SelectField>
+           <div className="descr" dangerouslySetInnerHTML={this.getDescr()} />
+            <br />
 
-        <SelectField
-            value={this.state.cat_idx}
-            onChange={this.handleCatChange}
-            maxHeight={400}
-            floatingLabelText="Main Walk Category"
-            floatingLabelFixed={true}
-            fullWidth={true}
-            >
-            {items}
-        </SelectField>
-         <div className="descr" dangerouslySetInnerHTML={this.getDescr()} />
           <br />
-
-        <br />
         </form>
+
         <div className="button-group even-children">
           <RaisedButton label="Back" secondary={true} onClick={this.goBack} />
           <RaisedButton label="Next" secondary={true} onClick={this.goNext} />

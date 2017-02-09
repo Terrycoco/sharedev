@@ -36,7 +36,7 @@ export default function(InputComponent, objProps) {
       if(!nextProps.authenticated) {
         //pass along where we're going
         this.context.router.push({ 
-          pathname: `/signin/`
+          pathname: `/signin`
         });
       }
     }

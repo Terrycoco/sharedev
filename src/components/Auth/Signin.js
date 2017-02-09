@@ -46,7 +46,7 @@ class Signin extends Component {
       usernameOrEmail: this.state.usernameOrEmail,
       password: this.state.password
     };
-    this.props.signinUser(values, this.context.router);
+    this.props.signinUser(values, this.context.router); //will go to authRoute on success
   }
 
   doCancel() {
