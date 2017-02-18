@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import PageBar from 'components/PageBar';
-import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/chevron-left';
 import * as actions from 'actions';
 import {connect} from 'react-redux';
+import MyWalkList from 'components/Walks/MyWalkList';
+import {browserHistory} from 'react-router';
 
 class MyWalks extends Component {
   constructor(props){
     super(props);
+  }
+
+  componentDidMount() {
+    //fetch mywalks 
+    this.props.getMyWalks(browserHistory); 
   }
 
   handleTouchTap(e) {
@@ -16,13 +21,14 @@ class MyWalks extends Component {
   render() {
     return (
       <div className="PAGE MYWALKS" key="mywalks">
-        <PageBar title="My Walks" leftIcon="hamburger" backTo="/homeL" />
-        <div className="CONTENT">
-           List of Walks
+        <PageBar title="My Walks" leftIcon="hamburger" backTo="/home" />
+        <div className="CONTENT center-children">
+           <MyWalkList />
         </div>
       </div>
     );
   }
 }
+
 
 export default connect(null, actions)(MyWalks);

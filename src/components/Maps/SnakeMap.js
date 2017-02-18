@@ -35,7 +35,7 @@ class SnakeMap extends Component {
      updateRoute() {
        if (this.props.route.length > 0) {
          const route = this.props.route;
-          //convert route data to Leaflet objects (in data lng is first)
+          //convert route data to Leaflet objects (in geojson data lng is first)
          for (var i = 0, latlngs = [], len = route.length; i < len; i++) {
            latlngs.push(new L.LatLng(route[i][1], route[i][0]));
          }

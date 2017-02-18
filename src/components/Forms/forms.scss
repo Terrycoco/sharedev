@@ -1,13 +1,14 @@
 @import '../../styles/_colors';
+@import '../../styles/_spacing';
 
 .FORM {
-  max-width: 350px;
+  max-width: 500px;
   max-height: 95%;
   min-height: 90%;
   margin-top: 1em;
   margin-bottom: 1em;
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 1em;
+  margin-right: 1em;
   display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
   display: -ms-flexbox;  /* TWEENER - IE 10 */
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
@@ -33,16 +34,23 @@
 .form-text {
   -webkit-flex: 6;       /* Safari 6.1+. iOS 7.1+, BB10 */
   -ms-flex: 6;           /* IE 10 */
-  flex: 6; 
+  flex: 6;
 }
 
 .form-text p {
   line-height: 1.5;
   margin-bottom: 1em;
+  padding-left: 2px;
 }
 
 .header {
-  margin-bottom: 2em;
+  flex: 2;
+  align-items: center;
+  height: 2em;
+}
+
+.header >  h4 {
+  line-height: 2em;
 }
 
 .button-group {
@@ -50,7 +58,7 @@
   -ms-flex: .5;           /* IE 10 */
   flex: .5;
   width: 100%;
-  max-width: 350px;
+  max-width: 500px;
   display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
   display: -ms-flexbox;  /* TWEENER - IE 10 */
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */

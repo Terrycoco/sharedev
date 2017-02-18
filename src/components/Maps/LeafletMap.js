@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import PageBar from 'components/PageBar';
-import Loader from 'components/Loader';
 import {connect} from 'react-redux';
-import {box2Bounds} from 'utils/geo';
 import * as actions from 'actions';
-import {browserHistory} from 'react-router';
-import data from 'utils/data/geoJson.json';
+
 
 require('./maps.scss');
 
@@ -24,22 +20,27 @@ class LeafletMap extends Component {
 
   componentDidMount() {
 
-     //init map //TODO change default center
-     map = L.map('map').setView([42.3575, -71.0635], 15);
+     //init map 
+     map = L.map('map').fitWorld();
 
      //add tile layer
      var KartoLayer = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
 
-    map.on('popupopen', function(e) {
-      var source = e.popup._source;
-      console.log('source: ', source);
-      var feature = e.popup._source.feature;
-      console.log('feature: ', feature);
-    });
+     //geolocate
+     // map.locate({setView: true, maxZoom: 16});
+
+
 
     this.updateLayers();
+
+    map.setView(myLayer.getBounds().getCenter(), 13);
+
+    map.on('popupopen', function(e) {
+      var source = e.popup._source;
+      var feature = e.popup._source.feature;
+    });
   }
 
   componentDidUpdate() {
@@ -81,12 +82,11 @@ class LeafletMap extends Component {
               domElem.onclick = function() {
                 var target = document.getElementById('walkId');
                 target.value = feature.properties.id;
-                var btn = document.getElementById('goToDetails').click();
+                var btn = document.getElementById('goToSummary').click();
               }
 
             //create layer
             layer.bindPopup(domElem);
-
         }
 
 

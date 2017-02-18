@@ -76,7 +76,7 @@ export function checkTokenAndLogin() {
     }
     axios.post(`${API_URL}/login`)
     .then(response => {
-      dispatch({type: a.AUTH_USER, username: response.data.username, aCheck: response.data.aCheck});
+      dispatch({type: a.AUTH_USER, payload: {username: response.data.username, aCheck: response.data.aCheck, walkIds: response.data.walkIds}});
     })
     .catch((err) => {
       //req is bad...
@@ -126,7 +126,6 @@ export function authError(error) {
 }
 
 export function authRoute(route) {
-  console.log('got to authRoute');
   return {
     type: a.AUTH_ROUTE,
     payload: route

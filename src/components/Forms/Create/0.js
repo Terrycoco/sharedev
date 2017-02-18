@@ -24,8 +24,9 @@ class Create0 extends Component {
             <p>Don't worry about being perfect, you can always come back and edit your walk at any time.</p>
             <p>You can add sites to your walk right from your phone, or, if you prefer, away from the walk using our map.</p>
 
-           <span className="center-children header"><h4>Ready?</h4></span>
+          
           </div>
+           <span className="center-children header"><h4>Ready?</h4></span>
            <div className="button-group">
              <RaisedButton label="Let's Get Started" secondary={true} onClick={this.goNext} />
            </div>

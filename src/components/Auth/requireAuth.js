@@ -7,7 +7,7 @@ export default function(InputComponent, objProps) {
   class Authenticated extends Component {
     constructor(props) {
       super(props);
-      console.log('got to requireAuth');
+      console.log('requireAuth objProps:', objProps);
       this.state = {
         fromDir: objProps.fromDir,
         toRoute: objProps.toRoute 
@@ -42,7 +42,7 @@ export default function(InputComponent, objProps) {
     }
 
     render() {
-      let GoThere = SlideIn(InputComponent, {fromDir: this.state.fromDir});
+      let GoThere = SlideIn(InputComponent, objProps);
       return (
         <GoThere {...this.props} />
       );

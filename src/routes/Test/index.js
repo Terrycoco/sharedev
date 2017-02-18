@@ -7,17 +7,19 @@ import {connect} from 'react-redux';
 class Test extends Component {
   constructor(props){
     super(props);
-    console.log('test props: ', props);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleTouchTap(e) {
+  handleClick(e) {
     e.preventDefault();
+    this.props.getRoute(2);
   }
   render() {
     return (
       <div className="PAGE CREATE" >
         <PageBar title="Testing" leftIcon="hamburger" backTo="/L" />
         <div className="CONTENT">
+        <button onClick={this.handleClick}>Route</button>
         </div>
       </div>
     );

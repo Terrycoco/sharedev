@@ -5,3 +5,13 @@ export function objectToArray(obj) {
   return arr;
 }
 
+export function sortObjectArrayByProp(arr, propName) {
+  arr.sort(function(a,b) {
+    if (a[propName] < b[propName])
+       return -1;
+    if (a[propName] > b[propName])
+      return 1;
+    return 0;
+  });
+  return arr;
+}

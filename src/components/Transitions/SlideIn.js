@@ -10,8 +10,10 @@ export default function(InputComponent, props) {
 
     constructor(props) {
       super(props);
+      console.log('got to slidein: ', props);
+      //priority given to direction passed in, then store
       this.state = {
-        fromDir: this.props.fromDir || "right"
+        fromDir: props.fromDir || this.props.fromDir || "right"
       };
     }
 

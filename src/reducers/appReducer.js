@@ -11,14 +11,14 @@ export default function(state=INITIAL_STATE, action) {
   let newstate;
   switch(action.type) {
     case a.UPDATE_CONN:
-      return Object.assign({}, ...state, {offline: action.payload});
+      return Object.assign({}, state, {offline: action.payload});
     case auth.AUTH_ERROR:
       if (action.payload.error == 'Error: Network Error') {
-        return Object.assign({}, ...state, {offline: true});
+        return Object.assign({}, state, {offline: true});
       }
     case geo.GEO_ERROR:
       if (action.payload.error == 'Error: Network Error') {
-        return Object.assign({}, ...state, {offline: true});
+        return Object.assign({}, state, {offline: true});
       }
    }
   return state;

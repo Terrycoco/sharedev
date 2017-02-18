@@ -16,11 +16,13 @@ const routes = {
   search: sourcePath + '/routes/Search',
   create: sourcePath + '/routes/Create',
   results: sourcePath + '/routes/Results',
-  details: sourcePath + '/routes/Details',
-  myWalks: sourcePath + '/routes/MyWalks',
+  summary: sourcePath + '/routes/Summary',
+  mywalks: sourcePath + '/routes/MyWalks',
   about: sourcePath + '/routes/About',
   signin: sourcePath + '/components/Auth/Signin',
-  signup: sourcePath + '/components/Auth/Signup'
+  signup: sourcePath + '/components/Auth/Signup',
+  stops: sourcePath + '/routes/Stops',
+  test: sourcePath + '/routes/Test'
 };
 
 // Okay, this may be confusing at first glance but go through it step-by-step
@@ -40,11 +42,13 @@ module.exports = env => {
       search: routes.search,
       create: routes.create,
       results: routes.results,
-      details: routes.details,
-      myWalks: routes.myWalks,
+      summary: routes.summary,
+      mywalks: routes.mywalks,
       about: routes.about,
       signin: routes.signin,
-      signup: routes.signup
+      signup: routes.signup,
+      stops: routes.stops,
+      test: routes.test
     },
     /**
      * output tells webpack where to put the files he creates

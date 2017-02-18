@@ -1,0 +1,39 @@
+@import '../../styles/_colors';
+@import '../../styles/_spacing';
+
+.stop-content {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: 2rem !important;
+  white-space: pre-wrap;
+}
+
+.byline {
+  font-size: .8em;
+  color: $disabled;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.byline .username {
+  color: $accent;
+  font-weight: bold;
+}
+
+#stop-title {
+  margin-top: 1rem;
+}
+
+
+hr.accent {
+  border-top: 2px solid $accent;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+hr.primary {
+  border-top: 2px solid $primary;
+  border-color: $primary;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

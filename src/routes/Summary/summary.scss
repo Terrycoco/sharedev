@@ -1,0 +1,63 @@
+@import '../../styles/_colors';
+@import '../../styles/_spacing';
+
+.summary-content {
+  white-space: pre-wrap;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: 2rem !important;
+}
+
+.byline {
+  font-size: .8em;
+  color: $disabled;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.byline .username {
+  color: $accent;
+  font-weight: bold;
+}
+
+#walk-title {
+  margin-top: 1.5rem;
+  color: $primary;
+  line-height: 1.45;
+}
+
+#stops-title {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+hr.accent {
+  border-top: 2px solid $accent;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+hr.primary {
+  border-top: 2px solid $primary;
+  border-color: $primary;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-group {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.checkbox-label-link {
+  color: $primary;
+  font-size: .9em;
+  text-decoration: none;
+}
+
+.checkbox-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

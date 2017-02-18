@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import WalkItem from 'components/Walks/WalkItem';
 
-require('./walklist.scss');
+require('./walks.scss');
 
 class WalkList extends Component {
   constructor(props) {
@@ -11,7 +11,6 @@ class WalkList extends Component {
   }
 
   renderItems() {
-    console.log('props;', this.props);
     let items;
     if (this.props.walks.length == 0 ) {
         return <div className="noresults"><p>No Results Found</p></div>;
@@ -19,6 +18,7 @@ class WalkList extends Component {
     else {
       items = this.props.walks.map(walk => {
         if (walk.geometry.type != "LineString") {
+
           return <WalkItem key={'walksum' + walk.properties.id}
                        walk={walk.properties}
              />
@@ -30,7 +30,8 @@ class WalkList extends Component {
 
   render() {
     return (
-      <div className="walklist"> 
+      <div className="walklist">
+      
        {this.renderItems()}       
       </div>
 

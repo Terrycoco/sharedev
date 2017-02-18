@@ -14,7 +14,7 @@ export default function(state=INITIAL_STATE, action) {
 
   switch(action.type) {
     case a.AUTH_USER:
-      return { ...state, authenticated: true, username: action.username, aCheck: action.aCheck, error: null, loader: false};
+      return { ...state, authenticated: true, username: action.payload.username, aCheck: action.payload.aCheck, error: null, loader: false};
     case a.UNAUTH_USER:
       return INITIAL_STATE; //back to initial state
     case a.AUTH_ERROR:

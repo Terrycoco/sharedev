@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import * as actions from 'actions/searchActions';
+import Divider from 'material-ui/Divider';
+import * as actions from 'actions/walkActions';
 import {connect} from 'react-redux';
-import muiThemeable from 'material-ui/styles/muiThemeable';
 
-require('./walklist.scss');
+
+require('./walks.scss');
 
 
 class WalkItem extends Component {
@@ -18,19 +17,18 @@ class WalkItem extends Component {
     router: React.PropTypes.object
   }
   goToWalk(walkId) {
-    this.props.getWalkDetails(this.props.walk.id, this.context.router);
+    this.props.getWalkSummary(this.props.walk.id, this.context.router);
   }
   render() {
     return (
-     <Card >
-       <CardHeader
-         title={this.props.walk.title}
-         subtitle={`Starts at ${this.props.walk.start_pt_text}`}
-         actAsExpander={false}
-         showExpandableButton={false}
-         onClick={this.goToWalk} 
-         />
-     </Card>
+    <div>
+       <div className="walk-card" onClick={this.goToWalk} >
+         <p className="walk-title">{this.props.walk.title}</p>
+         <p className="walk-city">{this.props.walk.city}</p>
+         <p className="walk-start">{`Starts at ${this.props.walk.start_pt_text}`}</p>
+       </div>
+       <Divider />
+     </div>
     );
   }
 }

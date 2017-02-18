@@ -1,5 +1,6 @@
 var s = require('actions/types').search;
 var g = require('actions/types').geo;
+var a = require('actions/types').auth;
 
 const INITIAL_STATE = {
   //pass these onto search
@@ -15,17 +16,28 @@ const INITIAL_STATE = {
     }
   },
 
+  //mywalks
+  myWalkIds: [],
+
+  myWalks: {
+    features: []
+  },
+
   //search results
   walks: {
     features: []
   },
 
 
+
+  //current Walk
   selectedWalk: {
     id: null,
     geoJson: {},
-    route: [],
-    attributes: []
+    route: [],  
+    attributes: [], 
+    stops: [],
+    currentStopIdx: 0
   }
 };
 
@@ -33,7 +45,6 @@ const INITIAL_STATE = {
 export default function(state=INITIAL_STATE, action) {
   let newstate, newobj;
   switch(action.type) {
-
     case g.SET_HERE:
       newobj = Object.assign({}, state.params, {box: action.payload.box});
       newstate = Object.assign({}, state, {params: newobj});
@@ -47,17 +58,33 @@ export default function(state=INITIAL_STATE, action) {
      newstate = Object.assign({}, state, {params: newobj});
      break;
     case s.SAVE_WALKS:
-
      newstate = Object.assign({}, state, {walks: action.payload});
-
+     break;
+    case s.SAVE_MY_WALKS:
+     newstate = Object.assign({}, state, {myWalks: action.payload.myWalks, myWalkIds: action.payload.myWalkIds});
      break;
     case s.SAVE_WALK:
      newobj = Object.assign({}, state.selectedWalk, action.payload);
      newstate = Object.assign({}, state, {selectedWalk: newobj});
      break;
+    case s.SAVE_STOPS:
+     newobj = Object.assign({}, state.selectedWalk, {stops: action.payload});
+     newstate = Object.assign({}, state, {selectedWalk: newobj });
+     break;
+    case s.SAVE_ROUTE:
+     newobj = Object.assign({}, state.selectedWalk, {route: action.payload});
+     newstate = Object.assign({}, state, {selectedWalk: newobj});
+     break;
+    case s.SAVE_STOP_IDX:
+      newobj = Object.assign({}, state.selectedWalk, {currentStopIdx: action.payload});
+      newstate = Object.assign({}, state, {selectedWalk: newobj });
+      break;
+    //also listen when user logs in to parse out mywalks
+    case a.AUTH_USER:
+      newstate = Object.assign({}, state, {myWalkIds: action.payload.walkIds});
+      break;
     default:
       return state;
   }
-  console.log('newstate:', newstate);
   return newstate;
 }

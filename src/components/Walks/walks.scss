@@ -1,0 +1,46 @@
+@import '../../styles/_spacing';
+@import '../../styles/_colors';
+
+.walklist {
+  background: white;
+  min-height: 90vh;
+}
+
+.walk-card {
+  padding: 1.5rem;
+  max-width: 500px;
+}
+
+.walk-title {
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1.5;
+  color: $primary;
+}
+.walk-city {
+  font-size: .8em;
+  line-height: 1.4;
+  font-style: italic;
+  color: $disabled;
+  margin: 2px 0;
+}
+
+.walk-start {
+  font-size: .8em;
+  color: $deep;
+  line-height: 1.35;
+}
+
+.listdescr {
+  white-space: pre-line;
+  white-space: pre-wrap;
+  font-size: 1.2em;
+}
+
+
+.noresults {
+  min-height: 90vh;
+  padding: 3em;
+}
+
+

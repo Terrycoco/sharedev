@@ -87,18 +87,26 @@ function loadRoute(cb) {
     },
 
     {
-      path: '/details', // loads <App /> with <Search /> passed as a child
+      path: '/summary', // loads <App /> with <Search /> passed as a child
       getComponent(location, cb) {
-        System.import('routes/Details')
+        System.import('routes/Summary')
           .then(module => cb(null, SlideIn(module.default, {fromDir: "right"})))
           .catch(errorLoading);
       }
     },
-        {
-      path: '/detailsL', // loads <App /> with <Search /> passed as a child
+    {
+      path: '/summaryL', // loads <App /> with <Search /> passed as a child
       getComponent(location, cb) {
-        System.import('routes/Details')
+        System.import('routes/Summary')
           .then(module => cb(null, SlideIn(module.default, {fromDir: "left"})))
+          .catch(errorLoading);
+      }
+    },
+    {
+      path: '/stops', // loads <App /> with <Search /> passed as a child
+      getComponent(location, cb) {
+        System.import('routes/Stops')
+          .then(module => cb(null, SlideIn(module.default, {fromDir: "right"})))
           .catch(errorLoading);
       }
     },
@@ -113,20 +121,13 @@ function loadRoute(cb) {
 
     },
 
-    // {
-    //   path: '/create', 
-    //   getComponent(location, cb) {
-    //     System.import('routes/Create')
-    //       .then(module => cb(null, requireAuth(module.default, {fromDir: "right", toRoute: "/create"})))
-    //       .catch(errorLoading);
-    //   }
-    // },   
 
+    //requireAuth has built-in SlideIn as return just pass props
     {
       path: '/mywalks', 
       getComponent(location, cb) {
         System.import('routes/MyWalks')
-          .then(module => cb(null, SlideIn(module.default, {fromDir: "right"})))
+          .then(module => cb(null, requireAuth(module.default, {fromDir: "right", toRoute: "/mywalks"})))
           .catch(errorLoading);
       }
     },
@@ -150,7 +151,14 @@ function loadRoute(cb) {
       }
     },
 
-
+    {
+      path: '/test', 
+      getComponent(location, cb) {
+        System.import('routes/Test')
+          .then(module => cb(null, SlideIn(module.default, {fromDir: "left"})))
+          .catch(errorLoading);
+      }
+    },
 
 
 
