@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SlideIn from 'components/Transitions/SlideIn';
 import * as actions from 'actions/authActions';
+import {browserHistory} from 'react-router';
 
 export default function(InputComponent, objProps) {
   class Authenticated extends Component {
@@ -14,18 +15,14 @@ export default function(InputComponent, objProps) {
       };
     }
 
-    //grab router from context
-    static contextTypes = {
-      router: React.PropTypes.object
-    }
     
     //check before first render
     componentWillMount() {
       if(!this.props.authenticated) {
-        //send where we want to go to the store
+        //store where we want to go afterwards
         this.props.authRoute(this.state.toRoute);
 
-        this.context.router.push({ 
+        browserHistory.push({ 
           pathname: `/signin`
         });
       }
@@ -34,8 +31,10 @@ export default function(InputComponent, objProps) {
     //and when the props change
     componentWillUpdate(nextProps) {
       if(!nextProps.authenticated) {
-        //pass along where we're going
-        this.context.router.push({ 
+        //send where we want to go to the store
+        this.props.authRoute(this.state.toRoute);
+
+        browserHistory.push({ 
           pathname: `/signin`
         });
       }
@@ -44,7 +43,7 @@ export default function(InputComponent, objProps) {
     render() {
       let GoThere = SlideIn(InputComponent, objProps);
       return (
-        <GoThere {...this.props} />
+        <GoThere />
       );
     }
   }

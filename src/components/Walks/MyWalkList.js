@@ -19,7 +19,7 @@ class WalkList extends Component {
       items = this.props.mywalks.map(walk => {
         if (walk.geometry.type != "LineString") {
           return <WalkItem key={'walksum' + walk.properties.id}
-                       walk={walk.properties}
+                       walk={walk.properties} backTo="mywalks"
              />
           }
       });
@@ -30,7 +30,6 @@ class WalkList extends Component {
   render() {
     return (
       <div className="walklist">
-      
        {this.renderItems()}       
       </div>
 

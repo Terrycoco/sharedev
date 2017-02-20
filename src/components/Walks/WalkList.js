@@ -20,7 +20,7 @@ class WalkList extends Component {
         if (walk.geometry.type != "LineString") {
 
           return <WalkItem key={'walksum' + walk.properties.id}
-                       walk={walk.properties}
+                       walk={walk.properties} backTo="results"
              />
           }
       });

@@ -4,13 +4,111 @@ hr.accent {
 hr.primary {
   border-top: 2px solid #5C821A; }
 
+.center-children {
+  display: flex;
+  justify-content: center; }
+
+.left-children {
+  display: flex;
+  justify-content: flex-start; }
+
+.even-children {
+  display: flex;
+  justify-content: space-around; }
+
+.space-between-children {
+  display: flex;
+  justify-content: space-between; }
+
+.vertical-center {
+  align-items: center; }
+
+.INNERPAGE {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column; }
+
+.FORM {
+  max-width: 500px;
+  max-height: 95%;
+  min-height: 90%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;
+  /* NEW, Spec - Firefox, Chrome, Opera */
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  align-items: center; }
+
+.descr {
+  font-size: .8em;
+  color: gray; }
+
+.descr em {
+  color: #fd8258; }
+
+.form-text {
+  -webkit-flex: 6;
+  /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 6;
+  /* IE 10 */
+  flex: 6; }
+
+.form-text p {
+  line-height: 1.5;
+  margin-bottom: 1em;
+  padding-left: 2px; }
+
+.header {
+  flex: 2;
+  align-items: center;
+  height: 2em; }
+
+.header > h4 {
+  line-height: 2em; }
+
+.button-group {
+  -webkit-flex: .5;
+  /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: .5;
+  /* IE 10 */
+  flex: .5;
+  width: 100%;
+  max-width: 500px;
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;
+  /* NEW, Spec - Firefox, Chrome, Opera */
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 3em; }
+hr.accent {
+  border-top: 2px solid #fd8258; }
+
+hr.primary {
+  border-top: 2px solid #5C821A; }
+
 .linkDiv {
   margin-top: 2rem;
   font-size: .7em; }
 
-.linkDiv a {
+.linkDiv a:link, .linkDiv a:visited {
   text-decoration: none;
-  color: #fd8258; }
+  color: #fd8258;
+  font-weight: bold; }
 
 .form-error {
   display: flex;

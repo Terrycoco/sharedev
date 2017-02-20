@@ -1,6 +1,8 @@
 //app state types
 export const app = {
-  UPDATE_CONN: 'UPDATE_CONN'
+  UPDATE_CONN: 'UPDATE_CONN',
+  WELCOMED: 'WELCOMED',
+  PREV_PATH: 'PREV_PATH'
 };
 
 export const geo = {

@@ -3,7 +3,7 @@ import Snackbar from 'material-ui/Snackbar';
 import {connect} from 'react-redux';
 import {checkConn} from 'actions/appActions';
 
-class Indicator extends Component {
+class ConnIndicator extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,4 +50,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, {checkConn})(Indicator);
+export default connect(mapStateToProps, {checkConn})(ConnIndicator);

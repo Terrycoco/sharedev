@@ -12,6 +12,22 @@ hr.primary {
   display: flex;
   justify-content: flex-start; }
 
+.even-children {
+  display: flex;
+  justify-content: space-around; }
+
+.space-between-children {
+  display: flex;
+  justify-content: space-between; }
+
+.vertical-center {
+  align-items: center; }
+
+.INNERPAGE {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column; }
+
 .HOME {
   position: absolute;
   top: 0;
@@ -90,6 +106,22 @@ hr.primary {
 .left-children {
   display: flex;
   justify-content: flex-start; }
+
+.even-children {
+  display: flex;
+  justify-content: space-around; }
+
+.space-between-children {
+  display: flex;
+  justify-content: space-between; }
+
+.vertical-center {
+  align-items: center; }
+
+.INNERPAGE {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column; }
 
 body {
   font-size: 100%; }

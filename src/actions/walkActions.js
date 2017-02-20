@@ -166,7 +166,7 @@ export function removeFromMyWalks(walkId, router) {
   }
 }
 
-export function getWalkSummary(walkId, router) {
+export function getWalkSummary(walkId, router, backTo) {
  return function(dispatch, getState) {
   //check if there?
   //TODO: may want to store this for offline?
@@ -179,14 +179,14 @@ export function getWalkSummary(walkId, router) {
     
       let walk = Object.assign({}, response.data);
       dispatch(saveWalk(walk));
-      router.push('/summary');
+      router.push(`/summary`);
     })
     .catch((err) => {
         console.log(err);
     })
   } else {
     //already in store just go show
-    router.push('/summary');
+    router.push(`/summary`);
   }
  }
 }

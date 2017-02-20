@@ -11,6 +11,7 @@ import Loader from 'components/Loader';
 import {theme} from 'styles/theme';
 
 require('./auth.scss');
+require('../Forms/forms.scss');
 
 const style = {
   color: theme.errorText,
@@ -69,16 +70,16 @@ class Signin extends Component {
 
   render() {
     return (
-      <div >
+      <div className="PAGE SEARCH" key="signin">
          <PageBar title="Signin" leftIcon="hamburger" backTo="/" />
 
          <div className="CONTENT center-children">
-          <div className="FORM">
+           <div className="FORM" id="signin-form">
             <form >
                 <div className="msg">
                   <p>Sign in to ShareWalks to continue</p>
                    <span className="linkDiv">New User? <Link to={{ pathname: "/signup"}}>Sign Up Here</Link></span>
-                  </div>
+                </div>
             
                 <TextField
                     hintText='Username or Email'
@@ -108,8 +109,8 @@ class Signin extends Component {
                     
 
             </form>
-          </div>
 
+         </div>
          </div>
      </div>
     );

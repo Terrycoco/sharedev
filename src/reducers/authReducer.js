@@ -2,6 +2,7 @@ var a = require('actions/types').auth;
 
 const INITIAL_STATE = {
   authenticated: false,
+  new: false,
   error: null,
   username: null,
   aCheck: false,
@@ -14,7 +15,8 @@ export default function(state=INITIAL_STATE, action) {
 
   switch(action.type) {
     case a.AUTH_USER:
-      return { ...state, authenticated: true, username: action.payload.username, aCheck: action.payload.aCheck, error: null, loader: false};
+      let isnew = action.payload.new ? true : false;
+      return { ...state, authenticated: true, username: action.payload.username, aCheck: action.payload.aCheck, error: null, loader: false, new: isnew};
     case a.UNAUTH_USER:
       return INITIAL_STATE; //back to initial state
     case a.AUTH_ERROR:

@@ -75,8 +75,32 @@ hr.accent {
 hr.primary {
   border-top: 2px solid #5C821A; }
 
+.center-children {
+  display: flex;
+  justify-content: center; }
+
+.left-children {
+  display: flex;
+  justify-content: flex-start; }
+
+.even-children {
+  display: flex;
+  justify-content: space-around; }
+
+.space-between-children {
+  display: flex;
+  justify-content: space-between; }
+
+.vertical-center {
+  align-items: center; }
+
+.INNERPAGE {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column; }
+
 .FORM {
-  max-width: 350px;
+  max-width: 500px;
   max-height: 95%;
   min-height: 90%;
   margin-top: 1em;
@@ -130,7 +154,7 @@ hr.primary {
   /* IE 10 */
   flex: .5;
   width: 100%;
-  max-width: 350px;
+  max-width: 500px;
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
   display: -ms-flexbox;

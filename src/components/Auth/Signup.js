@@ -9,6 +9,10 @@ import ErrorBox from 'components/Auth/ErrorBox';
 import {Link} from 'react-router';
 import {theme} from 'styles/theme';
 
+
+require('./auth.scss');
+require('../Forms/forms.scss');
+
 const style = {
   errors: {
      color: theme.errorText
@@ -65,7 +69,7 @@ class Signup extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    this.props.signupUser(values, this.context.router);
+    this.props.signupUser(values, this.context.router, this.props.toRoute);
   }
   
   validate(name) {
@@ -101,12 +105,12 @@ class Signup extends Component {
 
   render() {
     return (
-      <div >
+     <div className="PAGE SEARCH" key="signup">
          <PageBar title="Signup" leftIcon="hamburger" backTo="/"/>
         
          <div className="CONTENT center-children">
-          <div className="FORM">
-            <form onSubmit={this.doSubmit}>
+           <div className="FORM" id="signup-form">
+            <form >
                 <div className="msg">
                   <p>Sign up to ShareWalks to continue</p>
                    <span className="linkDiv">Already a User? <Link to={{ pathname: "/signin"}}>Sign In Here</Link></span>

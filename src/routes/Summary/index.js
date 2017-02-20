@@ -46,6 +46,7 @@ class Summary extends Component {
   //run this as soon as mount to go ahead and get stops
   componentDidMount() {
     this.props.getWalkStops(this.props.walk.id);
+    console.log('summary props:', this.props);
   }
 
   renderAttributes() {
@@ -55,9 +56,6 @@ class Summary extends Component {
     });
   }
 
-  goMyWalks() {
-    browserHistory.push('/mywalks');
-  }
 
   isSaved() {
     console.log('walkid:', this.props.walk.id);
@@ -79,10 +77,10 @@ class Summary extends Component {
   }
 
   render() {
-
+    
     return (
       <div className="PAGE" key="summary">
-        <PageBar title="Walk Summary" leftIcon="goLeft" backTo="/resultsL" />
+        <PageBar title="Walk Summary" leftIcon="goLeft" />
         <div className="CONTENT center-children">
 
           <div className="INNERPAGE summary-content">

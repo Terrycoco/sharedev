@@ -17,7 +17,7 @@ class WalkItem extends Component {
     router: React.PropTypes.object
   }
   goToWalk(walkId) {
-    this.props.getWalkSummary(this.props.walk.id, this.context.router);
+    this.props.getWalkSummary(this.props.walk.id, this.context.router, this.props.backTo);
   }
   render() {
     return (

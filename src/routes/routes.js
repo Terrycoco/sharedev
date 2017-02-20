@@ -51,12 +51,22 @@ function loadRoute(cb) {
           .catch(errorLoading);
       }
     },
+    {
+      path: '/aboutL', // '/about' loads <App /> with <About /> passed as a child
+      getComponent(location, cb) {
+        System.import('routes/About')
+          .then(module => cb(null, SlideIn(module.default, {fromDir: "left"})))
+          .catch(errorLoading);
+      }
+    },
 
     {
-      path: '/search', // loads <App /> with <Search /> passed as a child
+      path: '/search', 
       getComponent(location, cb) {
         System.import('routes/Search')
-          .then(module => cb(null, SlideIn(module.default, {fromDir: "right"})))
+          .then(module => {
+            cb(null, SlideIn(module.default, {fromDir: "right"}))
+           })
           .catch(errorLoading);
       }
     },
@@ -110,7 +120,7 @@ function loadRoute(cb) {
           .catch(errorLoading);
       }
     },
-
+    //first page of create is not requiredAuth -- second page is
     {
       path: '/create', 
       getComponent(location, cb) {
@@ -120,14 +130,32 @@ function loadRoute(cb) {
       }
 
     },
+    {
+      path: '/createL', 
+      getComponent(location, cb) {
+        System.import('routes/Create')
+          .then(module => cb(null, SlideIn(module.default, {fromDir: "left"})))
+          .catch(errorLoading);
+      }
+
+    },
 
 
-    //requireAuth has built-in SlideIn as return just pass props
+    //requireAuth has built-in SlideIn as return -- just pass props
+    //must pass in toRoute which will be saved in store
     {
       path: '/mywalks', 
       getComponent(location, cb) {
         System.import('routes/MyWalks')
           .then(module => cb(null, requireAuth(module.default, {fromDir: "right", toRoute: "/mywalks"})))
+          .catch(errorLoading);
+      }
+    },
+    {
+      path: '/mywalksL', 
+      getComponent(location, cb) {
+        System.import('routes/MyWalks')
+          .then(module => cb(null, requireAuth(module.default, {fromDir: "left", toRoute: "/mywalks"})))
           .catch(errorLoading);
       }
     },
@@ -155,7 +183,7 @@ function loadRoute(cb) {
       path: '/test', 
       getComponent(location, cb) {
         System.import('routes/Test')
-          .then(module => cb(null, SlideIn(module.default, {fromDir: "left"})))
+          .then(module => cb(null, SlideIn(module.default, {fromDir: "right"})))
           .catch(errorLoading);
       }
     },
@@ -172,4 +200,9 @@ function loadRoute(cb) {
 
 function getToRoute(path) {
   return path.split("/")[2];
+}
+
+function getFromDir(path) {
+  console.log('path:', path);
+  return val = path.split("/")[1] || "right";
 }

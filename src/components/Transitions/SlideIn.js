@@ -5,15 +5,14 @@ import { checkConn } from 'actions/appActions';
 
 require('./transitions.scss');
 
-export default function(InputComponent, props) {
+export default function(InputComponent, objProps) {
   class SlideIn extends Component {
 
     constructor(props) {
       super(props);
-      console.log('got to slidein: ', props);
       //priority given to direction passed in, then store
       this.state = {
-        fromDir: props.fromDir || this.props.fromDir || "right"
+        fromDir: objProps.fromDir
       };
     }
 
@@ -33,7 +32,7 @@ export default function(InputComponent, props) {
           transitionAppear={true}
           transitionAppearTimeout={650}
           transitionLeaveTimeout={1000}>
-          <InputComponent {...props} />
+          <InputComponent  />
        </ReactCSSTransitionGroup>
       );
     }

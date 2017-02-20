@@ -7,9 +7,10 @@
   font-size: .7em;
 }
 
-.linkDiv a {
+.linkDiv a:link, .linkDiv a:visited {
   text-decoration: none;
-  color: #fd8258;
+  color: $accent;
+  font-weight: bold;
 }
 
 .form-error {
@@ -51,4 +52,5 @@
 .fader-leave.fader-leave-active  {
     opacity: 0;
     transition: all 650ms ease-in-out;
-} 
+}
+

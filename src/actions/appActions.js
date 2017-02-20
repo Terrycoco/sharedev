@@ -16,3 +16,17 @@ export function checkConn() {
     });
   }
 }
+
+
+export function welcomed() {
+  return {
+    type: a.WELCOMED
+  };
+}
+
+export function setPrevPath(prevPath) {
+  return {
+    type: a.PREV_PATH,
+    payload: {prevPath: prevPath}
+  };
+}

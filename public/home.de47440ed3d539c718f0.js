@@ -1,6 +1,6 @@
-webpackJsonp([16],{
+webpackJsonp([19],{
 
-/***/ 309:
+/***/ 311:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12,21 +12,21 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _PageBar = __webpack_require__(88);
+var _PageBar = __webpack_require__(60);
 
 var _PageBar2 = _interopRequireDefault(_PageBar);
 
-var _actions = __webpack_require__(103);
+var _actions = __webpack_require__(62);
 
 var actions = _interopRequireWildcard(_actions);
 
-var _reactRedux = __webpack_require__(40);
+var _reactRedux = __webpack_require__(27);
 
-var _reactRouter = __webpack_require__(215);
+var _reactRouter = __webpack_require__(107);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -38,7 +38,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(310);
+__webpack_require__(312);
 
 var Home = function (_Component) {
   _inherits(Home, _Component);
@@ -50,11 +50,6 @@ var Home = function (_Component) {
   }
 
   _createClass(Home, [{
-    key: 'testDetail',
-    value: function testDetail() {
-      this.props.getWalkDetails(4);
-    }
-  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -66,7 +61,7 @@ var Home = function (_Component) {
           { className: 'CONTENT center-children' },
           _react2.default.createElement(
             'ul',
-            { className: 'main-menu' },
+            { className: 'INNERPAGE main-menu' },
             _react2.default.createElement(
               'li',
               { key: 'search' },
@@ -150,11 +145,11 @@ exports.default = (0, _reactRedux.connect)(null, actions)(Home);
 
 /***/ }),
 
-/***/ 310:
+/***/ 312:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
 
-},[309]);
+},[311]);

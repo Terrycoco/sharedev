@@ -15,10 +15,11 @@ export function signupUser({username, email, password}, router) {
       } else {
         axios.post(`${API_URL}/signup`, { username, email, password})
         .then(response => {
-              console.log('signup response:',response);
-          dispatch({type: a.AUTH_USER, username: response.data.username, aCheck: response.data.aCheck});
+          let payload = {new: true, username: response.data.username, aCheck: response.data.aCheck};
+          dispatch(authUser(payload));
           localStorage.setItem('token', response.data.token);
-          const toRoute = getState().auth.authRoute || '/';
+
+          let toRoute = getState().auth.authRoute;
           router.push(toRoute);
         })
         .catch((error) => {
@@ -45,9 +46,13 @@ export function signinUser({usernameOrEmail, password}, router) {
       .then(response => {
       // req is good...
          // update state to indicate user is authenticated
-         dispatch({type: a.AUTH_USER, username: response.data.username, aCheck: response.data.aCheck});
+        let payload = {username: response.data.username, aCheck: response.data.aCheck, walkIds: response.data.walkIds};
+        dispatch(authUser(payload));
+
         // save jwt token to local storage
          localStorage.setItem('token', response.data.token);
+
+         //get where we need to go back to from store
          const toRoute = getState().auth.authRoute || '/';
          router.push(toRoute);
       })
@@ -76,7 +81,8 @@ export function checkTokenAndLogin() {
     }
     axios.post(`${API_URL}/login`)
     .then(response => {
-      dispatch({type: a.AUTH_USER, payload: {username: response.data.username, aCheck: response.data.aCheck, walkIds: response.data.walkIds}});
+      let payload = {username: response.data.username, aCheck: response.data.aCheck, walkIds: response.data.walkIds};
+      dispatch(authUser(payload));
     })
     .catch((err) => {
       //req is bad...
@@ -115,6 +121,14 @@ export function logout(router) {
       } //end if
     })
   }
+}
+
+
+export function authUser(payload) {
+  return {
+    type: a.AUTH_USER,
+    payload: payload
+  };
 }
 
 
