@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import * as actions from 'actions/authActions';
+import * as actions from 'actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import PageBar from 'components/PageBar';
-import {Link} from 'react-router';
+import Link from 'navigation/Link';
 import ErrorBox from 'components/Auth/ErrorBox';
 import Loader from 'components/Loader';
 import {theme} from 'styles/theme';
@@ -33,10 +33,6 @@ class Signin extends Component {
     this.doCancel = this.doCancel.bind(this);
   }
 
-  //grab router from context
-  static contextTypes = {
-    router: React.PropTypes.object
-  }
 
   componentWillMount() {
     this.props.clearError();
@@ -47,11 +43,11 @@ class Signin extends Component {
       usernameOrEmail: this.state.usernameOrEmail,
       password: this.state.password
     };
-    this.props.signinUser(values, this.context.router); //will go to authRoute on success
+    this.props.signinUser(values); //will go to authRoute on success
   }
 
   doCancel() {
-    this.context.router.push('/');
+    this.props.requestRoute('home');
   }
 
   handleChange(name, e) {
@@ -78,7 +74,7 @@ class Signin extends Component {
             <form >
                 <div className="msg">
                   <p>Sign in to ShareWalks to continue</p>
-                   <span className="linkDiv">New User? <Link to={{ pathname: "/signup"}}>Sign Up Here</Link></span>
+                   <span className="linkDiv">New User? <Link to="signup" key="signupLink" fromDir="left">Sign Up Here</Link></span>
                 </div>
             
                 <TextField
@@ -125,4 +121,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(Signin);
+export default connect(mapStateToProps, {actions})(Signin);

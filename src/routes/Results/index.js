@@ -17,10 +17,7 @@ class Results extends Component {
     this.flip = this.flip.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-  //grab router from context
-  static contextTypes = {
-    router: React.PropTypes.object
-  }
+
 
   flip() {
      this.setState({isFlipped: !this.state.isFlipped});
@@ -29,13 +26,13 @@ class Results extends Component {
   handleClick(e) {
     e.preventDefault();
     let walkId = this._name.value;
-    this.props.getWalkSummary(walkId, this.context.router);
+    this.props.getWalkSummary(walkId);
   }
   
   render() {
     return (
       <div className="PAGE" key="results">
-        <PageBar title="Find A Walk" leftIcon="goLeft" backTo="/search" fwdTo={(this.state.isFlipped) ? "List" : "Map"} onFlip={this.flip} />
+        <PageBar title="Find A Walk" leftIcon="goLeft" backTo="search" fwdTo={(this.state.isFlipped) ? "List" : "Map"} onFlip={this.flip} />
         <div className="CONTENT center-children">
 
           <input ref={input => this._name = input} id="walkId" className="hidden"></input>

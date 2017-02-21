@@ -43,7 +43,7 @@
 }
 
 // text in link
-nav li a {
+nav li span {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -51,14 +51,14 @@ nav li a {
   color: $dark;
   padding-left: 10px;
 }
-nav li a:link, a:visited {
+nav li span {
     color: $dark;
     text-decoration: none;
     cursor: auto;
 }
 
 // > icon in link
-nav li a img {
+nav li span img {
   height: 1.2em;
   // opacity: .4;
   transform: translate3d(-2px,0,0);  //move left

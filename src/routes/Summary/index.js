@@ -8,11 +8,10 @@ import Subheader from 'material-ui/Subheader';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
-import {browserHistory} from 'react-router';
 import StopList from 'components/Walks/StopList';
 import Checkbox from 'material-ui/Checkbox';
 import {theme} from 'styles/theme';
-import {Link} from 'react-router';
+import Link from 'navigation/Link';
 
 require('./summary.scss');
 
@@ -46,7 +45,6 @@ class Summary extends Component {
   //run this as soon as mount to go ahead and get stops
   componentDidMount() {
     this.props.getWalkStops(this.props.walk.id);
-    console.log('summary props:', this.props);
   }
 
   renderAttributes() {
@@ -58,9 +56,6 @@ class Summary extends Component {
 
 
   isSaved() {
-    console.log('walkid:', this.props.walk.id);
-    console.log('myWalkIds:', this.props.myWalkIds);
-    console.log('index:', this.props.myWalkIds.indexOf(this.props.walk.id));
     if (this.props.myWalkIds.indexOf(this.props.walk.id) > -1 ) return true;
   }
 
@@ -70,9 +65,9 @@ class Summary extends Component {
 
   handleCheck(e, checked) {
     if (checked) {
-     this.props.addToMyWalks(this.props.walk.id, browserHistory);
+     this.props.addToMyWalks(this.props.walk.id);
     } else {
-    this.props.removeFromMyWalks(this.props.walk.id, browserHistory);
+    this.props.removeFromMyWalks(this.props.walk.id);
     }
   }
 

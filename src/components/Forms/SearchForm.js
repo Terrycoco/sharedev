@@ -33,10 +33,6 @@ class SearchForm extends Component {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-   //grab router from context
-    static contextTypes = {
-      router: React.PropTypes.object
-   } 
 
     componentWillMount() {
       this.props.getCommon(); //load lookups into store if needed
@@ -99,7 +95,7 @@ class SearchForm extends Component {
     const params = {city: this.state.city, 
                     cat_id: this.state.cat_id,
                     cat_idx: this.state.cat_idx};
-    this.props.searchWalks(params, this.context.router);
+    this.props.searchWalks(params);
   }
 
   renderItems() {

@@ -1,11 +1,12 @@
 const a = require('actions/types').auth;
 import {updateConn} from 'actions/appActions';
+import {requestRoute} from 'actions/navActions';
 import axios from 'utils/auth/axios_headers';
 import{getApi} from 'utils/environment';
 const isOnline = require('is-online');
 const API_URL = getApi();
 
-export function signupUser({username, email, password}, router) {
+export function signupUser({username, email, password}, toRoute) {
   return function(dispatch, getState) {
     dispatch(showLoader());
     isOnline().then(online => {
@@ -20,7 +21,7 @@ export function signupUser({username, email, password}, router) {
           localStorage.setItem('token', response.data.token);
 
           let toRoute = getState().auth.authRoute;
-          router.push(toRoute);
+          dispatch(requestRoute(toRoute, 'right'));
         })
         .catch((error) => {
           dispatch({
@@ -33,7 +34,7 @@ export function signupUser({username, email, password}, router) {
   }
 }
 
-export function signinUser({usernameOrEmail, password}, router) {
+export function signinUser({usernameOrEmail, password}) {
   return function( dispatch, getState ) {
     dispatch(showLoader());
     isOnline().then(online => {
@@ -53,8 +54,8 @@ export function signinUser({usernameOrEmail, password}, router) {
          localStorage.setItem('token', response.data.token);
 
          //get where we need to go back to from store
-         const toRoute = getState().auth.authRoute || '/';
-         router.push(toRoute);
+         const toRoute = getState().auth.authRoute || 'home';
+         dispatch(requestRoute(toRoute, 'right'));
       })
       .catch((error) => {
       //req is bad...
@@ -95,7 +96,7 @@ export function checkTokenAndLogin() {
 }  //end func
 } //end login
 
-export function logout(router) {
+export function logout() {
   return function(dispatch, getState) {
     isOnline().then(online => {
       dispatch(updateConn(online));
@@ -107,7 +108,7 @@ export function logout(router) {
         .then(response => {
           dispatch({type: a.UNAUTH_USER});
           localStorage.removeItem('token');
-          router.push('/');
+          dispatch(requestRoute('home', 'left'));
         })
         .catch((error) => {
           dispatch({
@@ -116,7 +117,7 @@ export function logout(router) {
           });
           dispatch({type: a.UNAUTH_USER});
           localStorage.removeItem('token');
-          router.push('/');
+          dispatch(requestRoute('home', 'left'));
         })
       } //end if
     })

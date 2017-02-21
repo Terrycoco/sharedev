@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import {myColors} from 'styles/theme';
 import {connect} from 'react-redux';
-import * as actions from 'actions';
-import {Link} from 'react-router';
-import {browserHistory} from 'react-router';
+import {requestRoute} from 'actions/navActions';
 
 require('./pagebar.scss');
 
@@ -15,18 +12,6 @@ const icons = {
 
 
 
-function back(prevPath) {
-  //add the L if not there
-  if (prevPath == '' ) return "/";
-  if (prevPath.charAt(0) !== "/") {
-    prevPath = "/" + prevPath;
-  }
-  if (prevPath.slice(-1) !== "L") {
-    return prevPath + "L";
-  }
-  return prevPath;
-}
-
 class PageBar extends Component {
   constructor(props) {
     super(props);
@@ -35,9 +20,9 @@ class PageBar extends Component {
   goBack() {
     //if passed in use it
     if (this.props.backTo) {
-      browserHistory.push(back(this.props.backTo));
+      this.props.requestRoute(this.props.backTo, "left")
     } else {
-     browserHistory.push(back(this.props.prevPath));
+      this.props.requestRoute(this.props.prevRoute, "left");
     } 
   }
   
@@ -56,18 +41,9 @@ class PageBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    prevPath: state.app.prevPath  //put there by app
+    prevRoute: state.nav.prevRoute
   };
 }
 
 
-export default connect(mapStateToProps, actions)(PageBar);
-
-
- // 
-
-      // <AppBar title={this.props.title}
-      //         onTouchTap={this.handleTouchTap.bind(this)}
-      //         showMenuIconButton={this.props.leftIcon}
-      //         style={{backgroundColor: myColors[this.props.color]
-      //                 }} />
+export default connect(mapStateToProps, {requestRoute})(PageBar);

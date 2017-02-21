@@ -3,7 +3,6 @@ import PageBar from 'components/PageBar';
 import * as actions from 'actions';
 import {connect} from 'react-redux';
 import MyWalkList from 'components/Walks/MyWalkList';
-import {browserHistory} from 'react-router';
 
 class MyWalks extends Component {
   constructor(props){
@@ -12,7 +11,7 @@ class MyWalks extends Component {
 
   componentDidMount() {
     //fetch mywalks 
-    this.props.getMyWalks(browserHistory); 
+    this.props.getMyWalks(); 
   }
 
   handleTouchTap(e) {
@@ -21,7 +20,7 @@ class MyWalks extends Component {
   render() {
     return (
       <div className="PAGE MYWALKS" key="mywalks">
-        <PageBar title="My Walks" leftIcon="hamburger" backTo="/home" />
+        <PageBar title="My Walks" leftIcon="hamburger" backTo="home" />
         <div className="CONTENT center-children">
            <MyWalkList />
         </div>

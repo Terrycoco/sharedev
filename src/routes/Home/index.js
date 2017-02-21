@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PageBar from 'components/PageBar';
-import * as actions from 'actions';
-import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import Link from 'navigation/Link';
 
 require('./home.scss');
 
@@ -14,12 +12,12 @@ class Home extends Component {
          <PageBar title="ShareWalks" />
          <nav className="CONTENT center-children">
           <ul className="INNERPAGE main-menu">
-             <li key={'search'}><Link to="/search"><span>Find A Walk</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
-             <li key={'create'}><Link to="/create"><span>Create A Walk</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
-             <li key={'mywalks'}><Link to="/mywalks"><span>My Walks</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
-             <li key={'about'}><Link to="/about"><span>About ShareWalks</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
+             <li ><Link key="search" to="search" fromDir="right"><span>Find A Walk</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
+             <li ><Link key="create" to="create" fromDir="right"><span>Create A Walk</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
+             <li ><Link key="mywalks" to="mywalks" fromDir="right"><span>My Walks</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
+             <li ><Link key="about" to="about" fromDir="right"><span>About ShareWalks</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
              
-           <li key={'test'}><Link to="/test"><span>Test</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
+           <li ><Link key="test" to="test" fromDir="right"><span>Test</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
           </ul>
           </nav>
    
@@ -28,4 +26,4 @@ class Home extends Component {
   }
 }
 
-export default connect(null, actions)(Home);
+export default Home;

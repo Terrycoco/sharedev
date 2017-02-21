@@ -17,6 +17,7 @@ export default function(InputComponent, objProps) {
     }
 
     componentWillMount() {
+      console.log('got to slidein');
       this.props.checkConn();
     }
 

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import * as actions from 'actions/authActions';
+import * as actions from 'actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import PageBar from 'components/PageBar';
 import ErrorBox from 'components/Auth/ErrorBox';
-import {Link} from 'react-router';
+import Link from 'navigation/Link';
 import {theme} from 'styles/theme';
 
 
@@ -34,10 +34,6 @@ class Signup extends Component {
     this.validate = this.validate.bind(this);
   }
 
-  //grab router from context
-  static contextTypes = {
-    router: React.PropTypes.object
-  }
 
   componentWillMount() {
     this.props.clearError();
@@ -69,7 +65,7 @@ class Signup extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    this.props.signupUser(values, this.context.router, this.props.toRoute);
+    this.props.signupUser(values, this.props.toRoute);
   }
   
   validate(name) {
@@ -100,7 +96,7 @@ class Signup extends Component {
   }
 
   doCancel() {
-    this.context.router.push('/');
+    this.props.requestRoute('home');
   }
 
   render() {

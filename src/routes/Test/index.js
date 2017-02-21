@@ -17,7 +17,7 @@ class Test extends Component {
   render() {
     return (
       <div className="PAGE CREATE" >
-        <PageBar title="Testing" leftIcon="hamburger" backTo="/L" />
+        <PageBar title="Testing" leftIcon="hamburger" backTo="home" />
         <div className="CONTENT">
         <button onClick={this.handleClick}>Route</button>
         </div>

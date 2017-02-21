@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import SlideIn from 'components/Transitions/SlideIn';
 import create0 from 'components/Forms/Create/0';
 import create1 from 'components/Forms/Create/1';
-import { browserHistory } from 'react-router';
+
 
 
 const pages = [
@@ -28,16 +28,15 @@ class Create extends Component {
  
     //first page is allowed in all cases
     //to go further - user must be authenticated
-    console.log('got to goIf props: ', props);
     if (props.pageIdx == 0) {
       this.setState({component: SlideIn(create0, {fromDir: props.fromDir})});
     } else {
       //other pages
       if (!props.authenticated) {
         //come back here
-        props.authRoute('/create');
+        props.authRoute('create');
         //now redirect
-        browserHistory.push('/signin');
+        this.props.requestRoute('signin','left');
       } else {
         this.setState({component: SlideIn(pages[props.pageIdx], {fromDir: props.fromDir})});
       }
@@ -46,7 +45,6 @@ class Create extends Component {
   }
 
   componentWillMount() {
-
     this.goIfAuthorized(this.props);
   }
 
@@ -61,7 +59,7 @@ class Create extends Component {
   render() {
     return (
       <div className="PAGE CREATE" >
-        <PageBar title="Create a Walk" leftIcon="hamburger" backTo="/" />
+        <PageBar title="Create a Walk" leftIcon="hamburger" backTo="home" />
         <div className="CONTENT">
            <this.state.component />
         </div>

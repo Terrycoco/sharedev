@@ -4,9 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
-import { Router, browserHistory } from 'react-router/es';
-import routes from 'routes/routes';
-
+import App from 'routes/App';
 
 //needed for onTouchTap (material-ui)
 require('react-tap-event-plugin')();
@@ -42,7 +40,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store} >
-     <Router history={browserHistory} routes={routes} />
+     <App />
    </Provider> 
 , document.getElementById('root')
 );

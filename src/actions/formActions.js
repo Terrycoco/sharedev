@@ -3,6 +3,7 @@ const f = require('actions/types').form;
 import {getApi} from 'utils/environment';
 const API_URL = getApi();
 import axios from 'axios';
+import {requestRoute} from 'actions/navActions';
 
 //categories
 export function getCommon() {
@@ -54,10 +55,10 @@ export function goWithAuth(pageIdx, fromDir, params) {
   return function(dispatch, getState) {
     //is user authenticated?
     if (!getState().auth.authenticated) {
-      router.push('/signin');
+      dispatch(requestRoute('/signin','left'));
       return null;
     } else {
-      router.push(this.getState().toRoute);
+      dispatch(requestRoute(this.getState().toRoute, 'right'));
       return null;
     }
   }

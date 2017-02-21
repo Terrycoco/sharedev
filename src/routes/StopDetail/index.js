@@ -8,7 +8,7 @@ import Subheader from 'material-ui/Subheader';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
-import {browserHistory} from 'react-router';
+
 
 require('./summary.scss');
 
@@ -21,7 +21,7 @@ class StopDetail extends Component {
   }
 
   goToStops() {
-    this.props.getWalkStops(this.props.walk.id, browserHistory);
+    this.props.getWalkStops(this.props.walk.id);
   }
 
  
@@ -30,7 +30,7 @@ class StopDetail extends Component {
 
     return (
       <div className="PAGE" key="summary">
-        <PageBar title="Walk Summary" leftIcon="goLeft" backTo="/resultsL" />
+        <PageBar title="Walk Summary" leftIcon="goLeft" backTo="results" />
         <div className="CONTENT">
 
           <div className="stop-content">

@@ -24,10 +24,7 @@ class StopItem extends Component {
     this.goToStop = this.goToStop.bind(this);
     this.getStopTitle = this.getStopTitle.bind(this);
   }
-  //grab router from context
-  static contextTypes = {
-    router: React.PropTypes.object
-  }
+
   goToStop(stopId) {
     //here we want to save this stop as currentStopId
     //bring up more detail

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Divider from 'material-ui/Divider';
-import * as actions from 'actions/walkActions';
+import * as actions from 'actions';
 import {connect} from 'react-redux';
 
 
@@ -12,12 +12,9 @@ class WalkItem extends Component {
     super(props);
     this.goToWalk = this.goToWalk.bind(this);
   }
-  //grab router from context
-  static contextTypes = {
-    router: React.PropTypes.object
-  }
+
   goToWalk(walkId) {
-    this.props.getWalkSummary(this.props.walk.id, this.context.router, this.props.backTo);
+    this.props.getWalkSummary(this.props.walk.id);
   }
   render() {
     return (

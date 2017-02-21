@@ -6,11 +6,11 @@ const INITIAL_STATE = {
   offline: false,  //assume online,
   welcomed: false,
   prevPath: ''
+
 };
 
 
 export default function(state=INITIAL_STATE, action) {
-  console.log('action: ', action.type);
   let newstate;
   switch(action.type) {
     case a.UPDATE_CONN:

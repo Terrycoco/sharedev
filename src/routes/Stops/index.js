@@ -15,10 +15,6 @@ class Stops extends Component {
     this.flip = this.flip.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-  //grab router from context
-  static contextTypes = {
-    router: React.PropTypes.object
-  }
 
   flip() {
      this.setState({isFlipped: !this.state.isFlipped});
@@ -27,7 +23,7 @@ class Stops extends Component {
   handleClick(e) {
     e.preventDefault();
     let walkId = this._name.value;
-    this.props.getWalkStops(walkId, this.context.router); //opens stops after
+    this.props.getWalkStops(walkId ); //opens stops after
   }
   
   render() {

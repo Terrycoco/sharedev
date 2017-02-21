@@ -7,6 +7,7 @@ import axios from 'utils/auth/axios_headers';
 import {geom2Box, latLng2Box} from 'utils/geo';
 import{getApi} from 'utils/environment';
 import { walksToGeoJson } from 'utils/geojson';
+import {requestRoute} from 'actions/navActions';
 
 
 const API_URL = getApi();
@@ -49,7 +50,7 @@ function setBox(box) {
   };
 }
 
-export function searchWalks(params, router) {
+export function searchWalks(params) {
   return function(dispatch, getState) {
     dispatch(setParams(params));  //sets city & cat params
 
@@ -73,7 +74,7 @@ export function searchWalks(params, router) {
      .then((response) => {
         let payload = response.data;
         dispatch(saveWalks(payload));
-        router.push('/results');
+        dispatch(requestRoute('results', 'right'));
      })
      .catch((err) => {
         console.log(err);
@@ -82,12 +83,12 @@ export function searchWalks(params, router) {
 }
 
 
-export function getMyWalks(router) {
+export function getMyWalks() {
   return function(dispatch, getState) {
    //must be authenticated
    if (!getState().auth.authenticated) {
-    dispatch(authRoute('/mywalks'));
-    router.push('/signin');
+    dispatch(authRoute('mywalks'));
+    dispatch(requestRoute('signin', 'left'));
     return;
    }
    //make request 
@@ -122,12 +123,12 @@ function saveMyWalks(data) {
   };
 }
 
-export function addToMyWalks(walkId, router) {
+export function addToMyWalks(walkId) {
   return function(dispatch, getState) {
     //must be authenticated
    if (!getState().auth.authenticated) {
-    dispatch(authRoute('/summary'));
-    router.push('/signin');
+    dispatch(authRoute('summary'));
+    dispatch(requestRoute('signin', 'left'));
     return;
    }
    //make request 
@@ -144,12 +145,12 @@ export function addToMyWalks(walkId, router) {
   }
 }
 
-export function removeFromMyWalks(walkId, router) {
+export function removeFromMyWalks(walkId) {
   return function(dispatch, getState) {
     //must be authenticated
    if (!getState().auth.authenticated) {
-    dispatch(authRoute('/summary'));
-    router.push('/signin');
+    dispatch(authRoute('summary'));
+    dispatch(requestRoute('signin', 'left'));
     return;
    }
    //make request 
@@ -166,7 +167,7 @@ export function removeFromMyWalks(walkId, router) {
   }
 }
 
-export function getWalkSummary(walkId, router, backTo) {
+export function getWalkSummary(walkId) {
  return function(dispatch, getState) {
   //check if there?
   //TODO: may want to store this for offline?
@@ -177,16 +178,16 @@ export function getWalkSummary(walkId, router, backTo) {
     .then(response => {
       //change route from geoJson to normal object
     
-      let walk = Object.assign({}, response.data);
+      let walk = response.data;
       dispatch(saveWalk(walk));
-      router.push(`/summary`);
+      dispatch(requestRoute('summary','right'));
     })
     .catch((err) => {
         console.log(err);
     })
   } else {
     //already in store just go show
-    router.push(`/summary`);
+    dispatch(requestRoute('summary','right'));
   }
  }
 }
@@ -204,7 +205,6 @@ export function getWalkStops(walkId){
   //TODO: may want to store this for offline?
   //if not already fetched
   if (getState().search.selectedWalk.stops.length == 0) {
-    console.log('gothere');
     const requestURL = API_URL + `/points/${walkId}`;
     axios.get(requestURL)
     .then(response => {

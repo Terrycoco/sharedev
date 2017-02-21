@@ -38,3 +38,10 @@ export const form = {
   CREATE_GO_NEXT: 'CREATE_GO_NEXT',
   SAVE_PAGE_IDX: 'SAVE_PAGE_IDX'
 };
+
+export const nav= {
+  CHANGE_ROUTE: 'CHANGE_ROUTE',
+  GO_BACK: 'GO_BACK',
+  REQUEST_ROUTE: 'REQUEST_ROUTE',
+  ROUTE_LOADED: 'ROUTE_LOADED'
+};
