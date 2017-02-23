@@ -1,6 +1,13 @@
-webpackJsonp([9,21],{
+webpackJsonp([7,21],{
 
-/***/ 403:
+/***/ 506:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 515:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,17 +23,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _PageBar = __webpack_require__(60);
+var _PageBar = __webpack_require__(115);
 
 var _PageBar2 = _interopRequireDefault(_PageBar);
-
-var _actions = __webpack_require__(62);
-
-var actions = _interopRequireWildcard(_actions);
-
-var _reactRedux = __webpack_require__(27);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,48 +35,70 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Test = function (_Component) {
-  _inherits(Test, _Component);
+__webpack_require__(506);
 
-  function Test(props) {
-    _classCallCheck(this, Test);
+var Coming = function (_Component) {
+  _inherits(Coming, _Component);
 
-    var _this = _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).call(this, props));
+  function Coming(props) {
+    _classCallCheck(this, Coming);
 
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (Coming.__proto__ || Object.getPrototypeOf(Coming)).call(this, props));
   }
 
-  _createClass(Test, [{
-    key: 'handleClick',
-    value: function handleClick(e) {
+  _createClass(Coming, [{
+    key: 'handleTouchTap',
+    value: function handleTouchTap(e) {
       e.preventDefault();
-      this.props.getRoute(2);
     }
   }, {
     key: 'render',
     value: function render() {
+      var style = { zIndex: this.props.zindex };
       return _react2.default.createElement(
         'div',
-        { className: 'PAGE CREATE' },
-        _react2.default.createElement(_PageBar2.default, { title: 'Testing', leftIcon: 'hamburger', backTo: '/L' }),
+        { style: style, className: 'PAGE ABOUT', key: 'about' },
+        _react2.default.createElement(_PageBar2.default, { title: 'About', leftIcon: 'hamburger', backTo: 'home' }),
         _react2.default.createElement(
           'div',
-          { className: 'CONTENT' },
+          { className: 'CONTENT center-children' },
           _react2.default.createElement(
-            'button',
-            { onClick: this.handleClick },
-            'Route'
+            'div',
+            { className: 'INNERPAGE' },
+            _react2.default.createElement(
+              'span',
+              { className: 'header center-children' },
+              _react2.default.createElement(
+                'h4',
+                null,
+                'Coming Soon'
+              )
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Hi and thanks for visiting ShareWalks!'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'We are hard at work finishing this feature.  If you like what you see, we\'d love to hear from you!  ',
+              _react2.default.createElement(
+                'a',
+                { href: 'mailto:sharewalks1@gmail.com' },
+                'Send Feedback'
+              )
+            )
           )
         )
       );
     }
   }]);
 
-  return Test;
+  return Coming;
 }(_react.Component);
 
-exports.default = (0, _reactRedux.connect)(null, actions)(Test);
+exports.default = Coming;
 
 /***/ })
 

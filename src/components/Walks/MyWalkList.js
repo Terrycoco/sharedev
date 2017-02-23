@@ -13,7 +13,7 @@ class WalkList extends Component {
   renderItems() {
     let items;
     if (this.props.mywalks.length == 0 ) {
-        return <div className="noresults"><p>No Results Found</p></div>;
+        return <div className="noresults"><p>No Saved Walks</p></div>;
     }
     else {
       items = this.props.mywalks.map(walk => {

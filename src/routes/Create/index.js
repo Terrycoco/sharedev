@@ -61,7 +61,9 @@ class Create extends Component {
       <div className="PAGE CREATE" >
         <PageBar title="Create a Walk" leftIcon="hamburger" backTo="home" />
         <div className="CONTENT">
+          <div className="COLUMN center-children">
            <this.state.component />
+           </div>
         </div>
       </div>
     );

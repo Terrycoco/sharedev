@@ -1,13 +1,13 @@
-webpackJsonp([3],{
+webpackJsonp([5],{
 
-/***/ 217:
+/***/ 355:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 278:
+/***/ 444:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _Divider = __webpack_require__(285);
+var _Divider = __webpack_require__(445);
 
 var _Divider2 = _interopRequireDefault(_Divider);
 
@@ -28,7 +28,7 @@ exports.default = _Divider2.default;
 
 /***/ }),
 
-/***/ 285:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38,11 +38,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(13);
+var _extends2 = __webpack_require__(14);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _objectWithoutProperties2 = __webpack_require__(12);
+var _objectWithoutProperties2 = __webpack_require__(13);
 
 var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
@@ -104,7 +104,7 @@ exports.default = Divider;
 
 /***/ }),
 
-/***/ 315:
+/***/ 467:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -120,15 +120,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Divider = __webpack_require__(278);
+var _Divider = __webpack_require__(444);
 
 var _Divider2 = _interopRequireDefault(_Divider);
 
-var _walkActions = __webpack_require__(264);
+var _actions = __webpack_require__(48);
 
-var actions = _interopRequireWildcard(_walkActions);
+var actions = _interopRequireWildcard(_actions);
 
-var _reactRedux = __webpack_require__(27);
+var _reactRedux = __webpack_require__(45);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -140,7 +140,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(217);
+__webpack_require__(355);
 
 var WalkItem = function (_Component) {
   _inherits(WalkItem, _Component);
@@ -153,13 +153,11 @@ var WalkItem = function (_Component) {
     _this.goToWalk = _this.goToWalk.bind(_this);
     return _this;
   }
-  //grab router from context
-
 
   _createClass(WalkItem, [{
     key: 'goToWalk',
     value: function goToWalk(walkId) {
-      this.props.getWalkSummary(this.props.walk.id, this.context.router, this.props.backTo);
+      this.props.getWalkSummary(this.props.walk.id);
     }
   }, {
     key: 'render',
@@ -194,21 +192,18 @@ var WalkItem = function (_Component) {
   return WalkItem;
 }(_react.Component);
 
-WalkItem.contextTypes = {
-  router: _react2.default.PropTypes.object
-};
 exports.default = (0, _reactRedux.connect)(null, actions)(WalkItem);
 
 /***/ }),
 
-/***/ 316:
+/***/ 484:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 349:
+/***/ 502:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -224,21 +219,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(27);
+var _reactRedux = __webpack_require__(45);
 
-var _PageBar = __webpack_require__(60);
-
-var _PageBar2 = _interopRequireDefault(_PageBar);
-
-var _LeafletMap = __webpack_require__(384);
-
-var _LeafletMap2 = _interopRequireDefault(_LeafletMap);
-
-var _WalkList = __webpack_require__(387);
-
-var _WalkList2 = _interopRequireDefault(_WalkList);
-
-var _actions = __webpack_require__(62);
+var _actions = __webpack_require__(48);
 
 var actions = _interopRequireWildcard(_actions);
 
@@ -252,120 +235,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(390);
-
-var Results = function (_Component) {
-  _inherits(Results, _Component);
-
-  function Results(props) {
-    _classCallCheck(this, Results);
-
-    var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
-
-    _this.state = {
-      isFlipped: false
-    };
-    _this.flip = _this.flip.bind(_this);
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
-  }
-  //grab router from context
-
-
-  _createClass(Results, [{
-    key: 'flip',
-    value: function flip() {
-      this.setState({ isFlipped: !this.state.isFlipped });
-    }
-  }, {
-    key: 'handleClick',
-    value: function handleClick(e) {
-      e.preventDefault();
-      var walkId = this._name.value;
-      this.props.getWalkSummary(walkId, this.context.router);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'PAGE', key: 'results' },
-        _react2.default.createElement(_PageBar2.default, { title: 'Find A Walk', leftIcon: 'goLeft', backTo: '/search', fwdTo: this.state.isFlipped ? "List" : "Map", onFlip: this.flip }),
-        _react2.default.createElement(
-          'div',
-          { className: 'CONTENT center-children' },
-          _react2.default.createElement('input', { ref: function ref(input) {
-              return _this2._name = input;
-            }, id: 'walkId', className: 'hidden' }),
-          _react2.default.createElement('button', { id: 'goToSummary', onClick: this.handleClick, className: 'hidden' }),
-          _react2.default.createElement(
-            'div',
-            { className: this.state.isFlipped ? 'flip-container flip' : 'flip-container' },
-            _react2.default.createElement(
-              'div',
-              { className: 'flipper' },
-              _react2.default.createElement(
-                'div',
-                { className: 'front' },
-                _react2.default.createElement(_WalkList2.default, null)
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'back' },
-                _react2.default.createElement(_LeafletMap2.default, null)
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Results;
-}(_react.Component);
-
-Results.contextTypes = {
-  router: _react2.default.PropTypes.object
-};
-exports.default = (0, _reactRedux.connect)(null, actions)(Results);
-
-/***/ }),
-
-/***/ 384:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(27);
-
-var _actions = __webpack_require__(62);
-
-var actions = _interopRequireWildcard(_actions);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-__webpack_require__(316);
+__webpack_require__(484);
 
 var map = void 0,
     myLayer = void 0;
@@ -499,7 +369,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(LeafletMap)
 
 /***/ }),
 
-/***/ 387:
+/***/ 504:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -515,9 +385,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(27);
+var _reactRedux = __webpack_require__(45);
 
-var _WalkItem = __webpack_require__(315);
+var _WalkItem = __webpack_require__(467);
 
 var _WalkItem2 = _interopRequireDefault(_WalkItem);
 
@@ -529,7 +399,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(217);
+__webpack_require__(355);
 
 var WalkList = function (_Component) {
   _inherits(WalkList, _Component);
@@ -593,10 +463,134 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(WalkList);
 
 /***/ }),
 
-/***/ 390:
+/***/ 508:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 518:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(45);
+
+var _PageBar = __webpack_require__(115);
+
+var _PageBar2 = _interopRequireDefault(_PageBar);
+
+var _LeafletMap = __webpack_require__(502);
+
+var _LeafletMap2 = _interopRequireDefault(_LeafletMap);
+
+var _WalkList = __webpack_require__(504);
+
+var _WalkList2 = _interopRequireDefault(_WalkList);
+
+var _actions = __webpack_require__(48);
+
+var actions = _interopRequireWildcard(_actions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+__webpack_require__(508);
+
+var Results = function (_Component) {
+  _inherits(Results, _Component);
+
+  function Results(props) {
+    _classCallCheck(this, Results);
+
+    var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
+
+    _this.state = {
+      isFlipped: false
+    };
+    _this.flip = _this.flip.bind(_this);
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
+  }
+
+  _createClass(Results, [{
+    key: 'flip',
+    value: function flip() {
+      this.setState({ isFlipped: !this.state.isFlipped });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(e) {
+      e.preventDefault();
+      var walkId = this._name.value;
+      this.props.getWalkSummary(walkId);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'PAGE', key: 'results' },
+        _react2.default.createElement(_PageBar2.default, { title: 'Find A Walk', leftIcon: 'goLeft', backTo: 'search', fwdTo: this.state.isFlipped ? "List" : "Map", onFlip: this.flip }),
+        _react2.default.createElement(
+          'div',
+          { className: 'CONTENT center-children' },
+          _react2.default.createElement(
+            'div',
+            { className: 'INNERPAGE' },
+            _react2.default.createElement('input', { ref: function ref(input) {
+                return _this2._name = input;
+              }, id: 'walkId', className: 'hidden' }),
+            _react2.default.createElement('button', { id: 'goToSummary', onClick: this.handleClick, className: 'hidden' }),
+            _react2.default.createElement(
+              'div',
+              { className: this.state.isFlipped ? 'flip-container flip' : 'flip-container' },
+              _react2.default.createElement(
+                'div',
+                { className: 'flipper' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'front' },
+                  _react2.default.createElement(_WalkList2.default, null)
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'back' },
+                  _react2.default.createElement(_LeafletMap2.default, null)
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Results;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(null, actions)(Results);
 
 /***/ })
 

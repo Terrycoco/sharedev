@@ -1,31 +1,17 @@
 @import '../../styles/_colors';
 @import '../../styles/_spacing';
+@import '../../styles/_layout';
 
-//same as page but already positioned & put pic behind page
-.HOME {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(100%  - 0.1px); //elimates iOS bounce
-  z-index: 0;
-  overflow-y: hidden;
-  cursor: pointer;
-  background: url('/images/moccasins.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: bottom center;
-  background-size: cover; // this makes img full-screen (full-width & full-height)
-  overflow: hidden;
-}
 
 .main-menu {
-  max-height: 50vh;
+  min-height: 100vh;
+  position: relative;
+  max-width: 500px;
   overflow-y: hidden;
   margin: 0;
   padding: 0;
   z-index: 20;
-  max-width: 500px;
+  width: 100%;
   overflow-x: hidden;
 }
 
@@ -33,8 +19,7 @@
   list-style: none;
   line-height: $pagebar_height_sm;
   height:  $pagebar_height_sm;
-  min-width: 500px;
-  margin: 0 3px 3px 3px;
+  min-width: 100%;
   border-radius: 3px;
   background-color: rgba($light, .3);
 }
@@ -50,24 +35,23 @@ nav li span {
   align-items: center;
   color: $dark;
   padding-left: 10px;
+  text-decoration: none;
+  margin-bottom: 3px;
 }
-nav li span {
-    color: $dark;
-    text-decoration: none;
-    cursor: auto;
-}
+
 
 // > icon in link
 nav li span img {
   height: 1.2em;
-  // opacity: .4;
+  opacity: .4;
   transform: translate3d(-2px,0,0);  //move left
 }
 
 
 @media all and (min-width: 668px) {
-  .CONTENT {
-    margin-top: $pagebar_height_md;
+  .HOME .textbox {
+    max-height: 60vh;
+    overflow-y: auto;
   }
 
   .main-menu li {

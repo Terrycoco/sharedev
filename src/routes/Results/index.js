@@ -33,8 +33,8 @@ class Results extends Component {
     return (
       <div className="PAGE" key="results">
         <PageBar title="Find A Walk" leftIcon="goLeft" backTo="search" fwdTo={(this.state.isFlipped) ? "List" : "Map"} onFlip={this.flip} />
-        <div className="CONTENT center-children">
-
+        <div className="CONTENT">
+          <div className="COLUMN">
           <input ref={input => this._name = input} id="walkId" className="hidden"></input>
           <button id="goToSummary" onClick={this.handleClick} className="hidden"></button>
           <div className={(this.state.isFlipped) ? 'flip-container flip' : 'flip-container'}>
@@ -46,6 +46,7 @@ class Results extends Component {
                <LeafletMap />
               </div>
               </div>
+            </div>
             </div>
           </div>
         </div>

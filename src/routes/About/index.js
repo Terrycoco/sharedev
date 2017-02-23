@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageBar from 'components/PageBar';
-import {connect} from 'react-redux';
+
 
 
 require('./about.scss');
@@ -19,13 +19,18 @@ class About extends Component {
       <div style={style} className="PAGE ABOUT" key="about">
         <PageBar title="About" leftIcon="hamburger" backTo="home" />
         <div className="CONTENT">
-          <p>Author: Terry Marr</p>
-          <p>Built Using: React, Redux, Leaflet, Node, Postgres</p>
-          <p>This project is under construction.  If you like what you see, write me at sharewalks1@gmail.com.</p>
+         <div className="COLUMN">
+          <div className="textbox">
+           <p>Author: Terry Marr</p>
+           <p>Built Using: React, Redux, Leaflet, Node, Postgres</p>
+           <p>This project is under construction.  If you like what you see, we'd love to hear from you!</p>
+           <p>  <a href= "mailto:sharewalks1@gmail.com">Contact Us</a></p>
         </div>
+        </div>
+      </div>
       </div>
     );
   }
 }
 
-export default connect(null, actions)(About);
+export default About;

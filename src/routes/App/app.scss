@@ -1,4 +1,5 @@
 // app-wide styles
+@import '../../styles/_layout';
 @import '../../styles/_colors';
 @import '../../styles/_spacing';
 @import '../../styles/_typography';
@@ -57,41 +58,14 @@ body {
           align-content: stretch;
   background: $light; }
 
-.APP {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.PAGE {
-  position: absolute;
-  top: 0;
-  left: 0; 
-  width: 100%;
-  height: calc(100%  - 0.1px); //elimates iOS bounce?
-  overflow: hidden;
-  cursor: pointer;
-  background-color: $light;
-  opacity: 1;
-  z-index: 1000;
-}
-
-.CONTENT {
-  position: absolute;
-  top: $pagebar_height_sm;
-  height: calc(100%  - #{$pagebar_height_sm}); //elimates iOS bounce
-  width: 100vw;
-  overflow-y: auto;
-  color: $dark;
-}
+// .APP {
+//   height: 100%;
+//   width: 100%;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+// }
 
 
-@media all and (min-width: 668px) {
-  .CONTENT {
-    top: $pagebar_height_md;
-    height: calc(100%  - #{$pagebar_height_md}); //elimates iOS bounce
-  }
 
-}
+

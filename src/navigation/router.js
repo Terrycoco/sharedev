@@ -67,6 +67,11 @@ export function getComponent(route, fromDir) {
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+    case 'coming':
+     return System.import('routes/Coming')
+          .then(module => {
+              return SlideIn(module.default, {fromDir: dir});
+          });
     default: 
       return System.import('routes/Home')
           .then(module => {

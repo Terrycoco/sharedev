@@ -21,8 +21,10 @@ class MyWalks extends Component {
     return (
       <div className="PAGE MYWALKS" key="mywalks">
         <PageBar title="My Walks" leftIcon="hamburger" backTo="home" />
-        <div className="CONTENT center-children">
+        <div className="CONTENT ">
+         <div className="COLUMN center-children">
            <MyWalkList />
+        </div>
         </div>
       </div>
     );

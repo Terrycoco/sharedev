@@ -1,6 +1,6 @@
-webpackJsonp([21,9],{
+webpackJsonp([9],{
 
-/***/ 403:
+/***/ 521:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,15 +16,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _PageBar = __webpack_require__(60);
+var _PageBar = __webpack_require__(115);
 
 var _PageBar2 = _interopRequireDefault(_PageBar);
 
-var _actions = __webpack_require__(62);
+var _actions = __webpack_require__(48);
 
 var actions = _interopRequireWildcard(_actions);
 
-var _reactRedux = __webpack_require__(27);
+var _reactRedux = __webpack_require__(45);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -60,7 +60,7 @@ var Test = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'PAGE CREATE' },
-        _react2.default.createElement(_PageBar2.default, { title: 'Testing', leftIcon: 'hamburger', backTo: '/L' }),
+        _react2.default.createElement(_PageBar2.default, { title: 'Testing', leftIcon: 'hamburger', backTo: 'home' }),
         _react2.default.createElement(
           'div',
           { className: 'CONTENT' },
@@ -81,4 +81,4 @@ exports.default = (0, _reactRedux.connect)(null, actions)(Test);
 
 /***/ })
 
-},[403]);
+});

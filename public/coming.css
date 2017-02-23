@@ -1,3 +1,9 @@
+hr.accent {
+  border-top: 2px solid #fd8258; }
+
+hr.primary {
+  border-top: 2px solid #5C821A; }
+
 .center-children {
   display: flex;
   justify-content: center; }
@@ -35,44 +41,3 @@
 
 .header > h4 {
   line-height: 2rem; }
-
-hr.accent {
-  border-top: 2px solid #fd8258; }
-
-hr.primary {
-  border-top: 2px solid #5C821A; }
-
-.walklist {
-  background: white;
-  min-height: 90vh; }
-
-.walk-card {
-  padding: 1.5rem;
-  max-width: 500px; }
-
-.walk-title {
-  font-weight: bold;
-  font-size: 1em;
-  line-height: 1.5;
-  color: #5C821A; }
-
-.walk-city {
-  font-size: .8em;
-  line-height: 1.4;
-  font-style: italic;
-  color: #264412;
-  margin: 2px 0; }
-
-.walk-start {
-  font-size: .8em;
-  color: #0F1B07;
-  line-height: 1.35; }
-
-.listdescr {
-  white-space: pre-line;
-  white-space: pre-wrap;
-  font-size: 1.2em; }
-
-.noresults {
-  min-height: 90vh;
-  padding: 3em; }

@@ -19,3 +19,15 @@ hr.accent {
 hr.primary {
   border-top: 2px solid $primary;
 }
+
+.CONTENT {
+  color: $dark;
+}
+
+a, a:link {
+  color: $accent;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $primary;
+}

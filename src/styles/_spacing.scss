@@ -1,6 +1,7 @@
 $pagebar_height_sm: 2.5em;
 $pagebar_height_md: 3.5em;
-
+$content_height_sm: calc(100%  - #{$pagebar_height_sm});
+$content_height_md: calc(100%  - #{$pagebar_height_md});
 
 .center-children {
   display: flex;
@@ -26,9 +27,25 @@ $pagebar_height_md: 3.5em;
   align-items: center;
 }
 
-.INNERPAGE {
+.textbox {
+  white-space: pre-wrap;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 1rem;
+  padding-bottom: 2rem !important;
+  min-width: 300px;
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  y-overflow: scroll;
+  justify-content: flex-start;
+}
+
+.textbox p {
+  line-height: 1.5;
+  margin-bottom: 1em;
+  padding-left: 2px;
+}
+
+.header >  h4 {
+  line-height: 2rem;
 }

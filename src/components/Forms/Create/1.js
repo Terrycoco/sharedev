@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect } from 'react-redux';
-import * as actions from 'actions/formActions';
+import * as actions from 'actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+
 
 require('../forms.scss');
 
@@ -108,14 +109,15 @@ class Create1 extends Component {
     this.setState({cat_idx: value + 1, cat_id: cat.id, descr: cat.descr});
   }
 
-
   goNext() {
-    let params = {
-      city: this.state.city,
-      cat_idx: this.state.cat_idx, //idx
-      cat_id: this.state.cat_id};
-    this.props.createGoNext(2, "right", params);
+    this.props.requestRoute('coming', 'right');
+    // let params = {
+    //   city: this.state.city,
+    //   cat_idx: this.state.cat_idx, //idx
+    //   cat_id: this.state.cat_id};
+    // this.props.createGoNext(2, "right", params);
   }
+
   goBack() {
     let params = {
       city: this.state.city,

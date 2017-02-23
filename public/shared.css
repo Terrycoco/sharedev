@@ -24,9 +24,23 @@ hr.primary {
   align-items: center; }
 
 .INNERPAGE {
+  white-space: pre-wrap;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+  margin-top: 1rem;
+  margin-bottom: 2rem !important;
+  min-width: 300px;
   max-width: 600px;
+  overflow-y: scroll;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  justify-content: flex-start; }
+
+.header {
+  align-items: center; }
+
+.header > h4 {
+  line-height: 2rem; }
 
 .PageBar {
   position: fixed;

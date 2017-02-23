@@ -1,12 +1,7 @@
 @import '../../styles/_colors';
 @import '../../styles/_spacing';
 
-.summary-content {
-  white-space: pre-wrap;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-  padding-bottom: 2rem !important;
-}
+
 
 .byline {
   font-size: .8em;
@@ -21,7 +16,6 @@
 }
 
 #walk-title {
-  margin-top: 1.5rem;
   color: $primary;
   line-height: 1.45;
 }
@@ -54,6 +48,7 @@ hr.primary {
   color: $primary;
   font-size: .9em;
   text-decoration: none;
+  line-height: 1.2;
 }
 
 .checkbox-group {
