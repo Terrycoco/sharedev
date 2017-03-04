@@ -1,5 +1,5 @@
 var a = require('actions/types').geo;
-var s = require('actions/types').search;
+var s = require('actions/types').walk;
 
 const INITIAL_STATE = {
   avail: null,

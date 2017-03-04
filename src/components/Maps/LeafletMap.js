@@ -110,7 +110,7 @@ class LeafletMap extends Component {
 function mapStateToProps(state) {
   return {
     here: state.geo.here,
-    features: state.search.walks.features
+    features: state.walks.walks.features
   };
 
 }

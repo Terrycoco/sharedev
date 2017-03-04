@@ -1,0 +1,34 @@
+@import '../../styles/_spacing';
+
+#walking-content {
+  position: absolute;
+  top: $pagebar_height_sm;
+  left: 0;
+  width: 100%;
+  min-height: $content_height_sm;
+  overflow-y: auto;
+}
+
+
+//------------WALKING MAP
+@media screen and (orientation: landscape) {
+  //map must have units for leaflet
+  #walkingmap {
+    position: absolute;
+    top: 0;
+    width: 100vw; 
+    height: $content_height_sm;
+    overflow: hidden;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  #walkingmap {
+    position: absolute;
+    top: 0;
+    height: $content_height_sm; //minus tab for directions?
+    width: 100vw;
+    overflow: hidden;
+  }
+
+}

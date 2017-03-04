@@ -16,9 +16,10 @@ class StopList extends Component {
         return <div className="noresults"><p>No Stops Yet</p></div>;
     }
     else {
-      items = this.props.stops.map(stop => {
+      items = this.props.stops.map((stop, idx) => {
           return <StopItem key={'walkstop' + stop.id}
-                       stop={stop}
+                           stop={stop}
+                           idx={idx}
              />
       });
     }
@@ -37,7 +38,7 @@ class StopList extends Component {
 
 function mapStateToProps(state) {
   return {
-    stops: state.search.selectedWalk.stops
+    stops: state.walks.selectedWalk.stops
   };
 }
 

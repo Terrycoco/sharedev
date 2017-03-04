@@ -1,7 +1,14 @@
 $pagebar_height_sm: 2.5em;
 $pagebar_height_md: 3.5em;
-$content_height_sm: calc(100%  - #{$pagebar_height_sm});
-$content_height_md: calc(100%  - #{$pagebar_height_md});
+$content_height_sm: calc(100vh  - #{$pagebar_height_sm});
+$content_height_md: calc(100vh - #{$pagebar_height_md});
+
+
+$drawer_closed: 2rem;
+$drawer_closed_top: calc(100vh - #{$drawer_closed});
+$drawer_open: 200px;
+$drawer_open_top: calc(100vh - #{$drawer_open});
+$drawer_open_content: calc(#{$drawer_open} - #{$drawer_closed});
 
 .center-children {
   display: flex;
@@ -41,11 +48,13 @@ $content_height_md: calc(100%  - #{$pagebar_height_md});
 }
 
 .textbox p {
+  margin-top: .75em;
   line-height: 1.5;
-  margin-bottom: 1em;
-  padding-left: 2px;
+  margin-bottom: .75em;
 }
 
-.header >  h4 {
-  line-height: 2rem;
+.header {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
+

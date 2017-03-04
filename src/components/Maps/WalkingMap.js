@@ -1,15 +1,30 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from 'actions';
-
+import {myColors} from 'styles/theme';
 
 var LabeledMarker = require('leaflet-labeled-circle');
-
+require('./lib/L.Icon.Pulse.js');
+require('./lib/L.Icon.Pulse.scss');
 require('./maps.scss');
 
-let map, myLayer;
 
-let markerOptions = {
+
+let map, hereLayer;
+
+const stopCir = {
+  color: '#128ba1',
+  fillColor: '#128ba1',
+  fillOpacity: 1,
+};
+
+const pulsingIcon = L.icon.pulse({
+  iconSize: [12,12], 
+  color: myColors.orange,
+  heartbeat: 3
+});
+
+const markerOptions = {
   // all L.CircleMarker options + following: 
   textStyle: {
     color: '#fff',
@@ -22,111 +37,109 @@ let markerOptions = {
 class WalkingMap extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedWalkId: null
-    };
-   this.updateRoute = this.updateRoute.bind(this);
+    this.updateRoute = this.updateRoute.bind(this);
+    this.updateMarkers = this.updateMarkers.bind(this);
+    this.updateStops = this.updateStops.bind(this);
   }
 
   componentDidMount() {
-
+     //what to do when user is not near start?
      //init map 
-     map = L.map('map').fitWorld();
-     map.options.maxZoom = 20;
-     
+     // map = L.map('map', {doubleClickZoom: false}).locate({setView: true, maxZoom: 20});
+     //  function onLocationFound(e) {
+     //  let hereMarker = L.marker(e.latlng, {icon: pulsingIcon}).addTo(map);
+     // }
+
+     //  map.on('locationfound', onLocationFound);
+
+     let lat = this.props.selectedWalk.lat;
+     let lng = this.props.selectedWalk.lng;
+
+     map = L.map('walkingmap').setView([lat, lng], 15);
+     hereLayer = new L.LayerGroup().addTo(map); //layer for current stop marker
+
      //add tile layer
      var KartoLayer = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
 
-    //  //add markers
-    //  let stops = [];
-    //  this.props.stops.map((stop, idx) => {
-    //   switch (stop.sort) {
-    //     case 0:
-    //       break;
-    //     default:
-    //       //headsup! in geoJson the lng comes first!!
-    //       var feature = {
-    //         "type": "Feature",
-    //         "properties": {
-    //           "text": stop.sort.toString(),
-    //           "labelPosition": [stop.lng, stop.lat]
-    //         },
-    //         "geometry": {
-    //           "type": "Point",
-    //           "coordinates": [stop.lng, stop.lat]
-    //         }
-    //       };
-    //       //in leaflet lat comes first fml
-    //       var marker = new LabeledMarker(
-    //         L.latLng(stop.lat, stop.lng), 
-    //         feature, {
-    //           markerOptions: { 
-    //             color: '#050'
-    //           }
-    //         });
-    //         stops.push(marker);
-    //   } //end switch
 
-
-    // });  //end stop. map
-     
-    //  var group = new L.featureGroup(stops).addTo(map);
-    //  this.updateRoute();
-
+     this.updateRoute();
+     this.updateStops();
+     this.updateMarkers();
 
    } //end componentDidMount
     
-
+    componentDidUpdate() {
+        this.updateMarkers();
+    }
+    updateMarkers() {
+       hereLayer.clearLayers();
+       let hereMarker = L.marker(this.props.manCoords, {icon: pulsingIcon}).addTo(hereLayer);
+       map.panTo([this.props.manCoords.lat, this.props.manCoords.lng]);
+    }
+    updateStops() {
+     if (this.props.stops.length > 0) {
+      const stops = this.props.stops;
+      for (var i = 0, len = stops.length; i < len; i++) {
+        L.circle(new L.LatLng(stops[i].lat, stops[i].lng), 12, stopCir).addTo(map);
+      } // end for
+    } //end if
+     } //end update
     updateRoute() {
        if (this.props.route.length > 0) {
-         const route = this.props.route;
-          //convert route data to Leaflet objects (in data lng is first)
-         for (var i = 0, latlngs = [], len = route.length; i < len; i++) {
-           latlngs.push(new L.LatLng(route[i][1], route[i][0]));
+         const legs = this.props.route;
+         let latlngs = [];
+          //convert route data to Leaflet objects 
+         for (var i = 0, len = legs.length; i < len; i++) {
+           for (var m = 0, mlen = legs[i].maneuvers.length; m < mlen; m++) {
+              latlngs.push(new L.LatLng(legs[i].maneuvers[m].startPoint.lat, legs[i].maneuvers[m].startPoint.lng));
+           }
          }
-
+   
          //make leaflet dashed polyline out of them
-         var path = L.polyline(latlngs, {
-            color: '#050',
+         let line = L.polyline(latlngs, {
+            color: '#128ba1',
             weight: 3,
             opacity: .7,
             dashArray: '10,7',
             lineJoin: 'round'
          });
-
-         //fit onto map
          map.fitBounds(L.latLngBounds(latlngs));
-         //add start and end markers
-         // map.addLayer(L.marker(latlngs[0])); 
-         // map.addLayer(L.marker(latlngs[len - 1]));
+         line.addTo(map);
 
-         map.addLayer(path);
+
     }
   }
 
 
   componentWillUnmount() {
-    myLayer = null;
+    hereLayer = null;
     map = null;
   }
 
   render() {
     return (
       <div>
+     
 
-        <div id="map" className="map-container" >
+        <div id="walkingmap"  >
         </div>
-      </div>
+        </div>
     );
   }
 }
 
 function mapStateToProps(state) {
+  let manIdx = state.walks.selectedWalk.selectedManeuverIdx;
+  let manCoords = state.walks.selectedWalk.route[state.walks.selectedWalk.selectedStopIdx].maneuvers[manIdx].startPoint;
   return {
-    route: state.search.selectedWalk.route.coordinates,
-    stops: state.search.selectedWalk.stops
+    selectedWalk: state.walks.selectedWalk,
+    route: state.walks.selectedWalk.route, 
+    stops: state.walks.selectedWalk.stops,
+    currentStopIdx: state.walks.selectedWalk.selectedStopIdx,
+    manIdx: manIdx,
+    manCoords: manCoords
   };
 
 }

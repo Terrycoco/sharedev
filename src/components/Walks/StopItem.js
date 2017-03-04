@@ -6,29 +6,33 @@ import {theme, myColors} from 'styles/theme';
 require('./walks.scss');
 
 const styles = {
+  selectedCard: {
+   background: theme.secondaryColor
+  },
+  card: {
+    background: 'white'
+  },
   title: {
    fontWeight: "bold",
-   color: theme.primary1Color
-  }, 
-  subtitle: {
-   fontWeight: "bold",
-   fontSize: ".8rem",
-   color: theme.textColor,
-   width: "90%"
+   color: theme.primary1Color,
+   width: "100%",
+   paddingBottom: 0,
   }
 };
 
 class StopItem extends Component {
   constructor(props) {
     super(props);
-    this.goToStop = this.goToStop.bind(this);
     this.getStopTitle = this.getStopTitle.bind(this);
+    this.getStopHandler = this.getStopHandler.bind(this);
   }
 
-  goToStop(stopId) {
-    //here we want to save this stop as currentStopId
-    //bring up more detail
-    //highlight on map?
+  getStopHandler(stopIdx) {
+    let saveStop = this.props.saveStopIdx;
+    let handleAccept = function(event) {
+      saveStop(stopIdx);
+    }
+    return handleAccept
   }
 
   getStopTitle(num) {
@@ -39,24 +43,28 @@ class StopItem extends Component {
   }
 
   render() {
+    let cardstyle = (this.props.idx == this.props.selectedStopIdx) ? styles.selectedCard : styles.card;
+
     return (
-     <Card >
+     <Card onClick={this.getStopHandler(this.props.idx)} style={cardstyle}>
        <CardHeader
          title={this.getStopTitle(this.props.stop.sort)}
-         subtitle={this.props.stop.pt_title}
          actAsExpander={false}
          showExpandableButton={false}
          titleStyle={styles.title}
-         subtitleStyle={styles.subtitle}
          />
-         <CardText expandable={true} className="listdescr">
-         {this.props.stop.pt_descr}
+         <CardText className="listdescr" >
+         {this.props.stop.pt_title}
          </CardText>
      </Card>
     );
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    selectedStopIdx: state.walks.selectedWalk.selectedStopIdx
+  };
+}
 
-
-export default connect(null, actions)(StopItem);
+export default connect(mapStateToProps, actions)(StopItem);

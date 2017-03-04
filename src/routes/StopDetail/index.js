@@ -10,52 +10,32 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 
 
-require('./summary.scss');
+require('./stop.scss');
 
 
 class StopDetail extends Component {
   constructor(props){
     super(props);
-    this.renderAttributes = this.renderAttributes.bind(this);
-    this.goToStops = this.goToStops.bind(this);
   }
-
-  goToStops() {
-    this.props.getWalkStops(this.props.walk.id);
-  }
-
- 
 
   render() {
-
     return (
-      <div className="PAGE" key="summary">
-        <PageBar title="Walk Summary" leftIcon="goLeft" backTo="results" />
-        <div className="CONTENT">
 
-          <div className="stop-content">
-
-            <h4 id="stop-title">{this.props.walk.title}</h4>
-            <p className="byline">Brought to you by <span className="username">{this.props.walk.username}</span></p>
+          <div className="FORM">
+            <h4 id="stop-title">{this.props.stop.pt_title}</h4>
             <hr className="primary"/> 
-            <p className="walkdescr">{this.props.walk.descr}</p>
-            <hr className="primary"/> 
-
-
-            <div className="even-children">
-             <RaisedButton id="summary_savebtn" label="Save To MyWalks" secondary={true} />
-             <RaisedButton label="See Stops" secondary={true} onClick={this.goToStops} />
-            </div>
-         </div>
-        </div>
-      </div>
+            <p className="textbox">{this.props.stop.pt_descr}</p>
+            <hr className="primary"/>
+          </div>
+ 
+  
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    stop: state.search.selectedWalk.id
+    stop: state.walks.selectedWalk.stops[state.walks.selectedWalk.selectedStopIdx]
   };
 }
 

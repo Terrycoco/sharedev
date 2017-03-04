@@ -18,7 +18,7 @@ class Test extends Component {
   render() {
     return (
     <div className="PAGE">
-      <PageBar title="Testing" />
+      <PageBar title="Testing" leftIcon="hamburger" backTo="home" />
       <div className="CONTENT">
         <div className="COLUMN">
         <div className="textbox">

@@ -1,4 +1,4 @@
-const s = require('actions/types').search;
+const s = require('actions/types').walk;
 const f = require('actions/types').form;
 
 import {authRoute} from 'actions/authActions';
@@ -63,7 +63,7 @@ export function searchWalks(params) {
     locparams = {loc, box};
     dispatch(setHere(locparams));  //resets the box
    } else {
-    locparams = {box: getState().search.params.box};
+    locparams = {box: getState().walks.params.box};
    }
 
    const tofly = Object.assign({}, locparams, params);
@@ -172,7 +172,7 @@ export function getWalkSummary(walkId) {
   //check if there?
   //TODO: may want to store this for offline?
   //if not already fetched
-  if (getState().search.selectedWalk.id != walkId) {
+  if (getState().walks.selectedWalk.id != walkId) {
     const requestURL = API_URL + `/walk/${walkId}`;
     axios.get(requestURL)
     .then(response => {
@@ -204,7 +204,7 @@ export function getWalkStops(walkId){
 //check if there?
   //TODO: may want to store this for offline?
   //if not already fetched
-  if (getState().search.selectedWalk.stops.length == 0) {
+  if (getState().walks.selectedWalk.stops.length == 0) {
     const requestURL = API_URL + `/points/${walkId}`;
     axios.get(requestURL)
     .then(response => {
@@ -232,13 +232,30 @@ export function getRoute(walkId) {
     const requestURL = API_URL + `/route/${walkId}`;
     axios.get(requestURL)
     .then(response => {
-      dispatch(saveRoute(response.data.route.legs));
+      let legs = [];
+      response.data.route.route.legs.map(leg => {
+        let thisleg = {index: leg.index, 
+                       distance: leg.distance,
+                       maneuvers: []};
+
+          leg.maneuvers.map(man => {
+            let thisman = { index: man.index,
+                        startPoint: man.startPoint,
+                        narrative: man.narrative};
+            return thisleg.maneuvers.push(thisman);
+          }); //end man map
+
+      return legs.push(thisleg);
+      }); //end leg map
+
+
+      dispatch(saveRoute(legs));
     })
     .catch((err) => {
       console.log(err);
     })
-  }
-}
+  } //end func
+} // end call
 
 function saveRoute(payload) {
   return {
@@ -250,6 +267,13 @@ function saveRoute(payload) {
 export function saveStopIdx(idx) {
   return {
     type: s.SAVE_STOP_IDX,
+    payload: idx
+  };
+}
+
+export function setCurrentManeuver(idx) {
+  return {
+    type: s.CURRENT_MANEUVER,
     payload: idx
   };
 }

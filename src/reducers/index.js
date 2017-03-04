@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import appReducer from 'reducers/appReducer';
 import navReducer from 'reducers/navReducer';
-import searchReducer from 'reducers/searchReducer';
+import walkReducer from 'reducers/walkReducer';
 import geoReducer from 'reducers/geoReducer';
 import authReducer from 'reducers/authReducer';
 import formReducer from 'reducers/formReducer';
@@ -9,7 +9,7 @@ import formReducer from 'reducers/formReducer';
 const rootReducer = combineReducers({
   app: appReducer,
   nav: navReducer,
-  search: searchReducer,
+  walks: walkReducer,
   geo: geoReducer,
   auth: authReducer,
   forms: formReducer

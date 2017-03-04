@@ -33,7 +33,7 @@ class PageBar extends Component {
       <div className="PageBar">
         <span className="fade left" onClick={this.goBack}>{onLeft}</span>  
         <span className="title fade">{this.props.title}</span>
-        <span onClick={this.props.onFlip} className="fade right">{onRight}</span>     
+        <span onClick={this.props.onFwd} className="fade right">{onRight}</span>     
       </div>
     );
   }

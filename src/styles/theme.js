@@ -1,28 +1,12 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 export const myColors = {
-
-
   deep: '#0F1B07',
   light: '#ffffff',
   green: '#5C821A',
   brightgreen: '#C6D166',
-  orange: '#fd8258'
-
-    // prussianBlue: '#083C5D',
-  // skyBlue: '#328CC1',
-  // goldLeaf: '#D9B310',
-  // black: '#1D2731',
-
-  // yellow: '#F7EF6A',
-  // vermillion: '#93C178',
-  // blue: '#465C8B',
-  // sky: '#DFDCE3',
-
-  // thunder: "#505160",
-  // waterfall: "#68829E",
-  // moss: "#AEBD38",
-  // meadow: "#598234",
+  orange: '#fd8258',
+  ltblue: '#128ba1'
 };
 
 export const theme = {
@@ -59,7 +43,7 @@ export default getMuiTheme({
    },
    raisedButton: {
     color: myColors.orange,
-    //   textColor: palette.textColor,
+    textColor: myColors.light,
     //   primaryColor: palette.primary1Color,
     //   primaryTextColor: palette.alternateTextColor,
     //   secondaryColor: palette.accent1Color,

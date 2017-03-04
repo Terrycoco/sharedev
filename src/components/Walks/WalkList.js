@@ -41,7 +41,7 @@ class WalkList extends Component {
 
 function mapStateToProps(state) {
   return {
-    walks: state.search.walks.features
+    walks: state.walks.walks.features
   };
 }
 

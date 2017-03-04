@@ -1,29 +1,27 @@
 @import './_spacing.scss';
-@import './_colors.scss';
+
 
 .APP {
   position: relative;
-  height: 100vh;
   z-index: 0;
+  min-height: 100vh;
 }
-
-
 
 
 //this contains PageBar and Content
 .PAGE {
-  height: 100vh;
+  min-height: 100vh;
   overflow-y: auto;
   position: relative;
-  z-index: 5;
-  overflow: hidden;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
-//added on home just for image
+//instead of page just for image
 .HOME {
-  height: 100%;
+  max-height: 100vh;
   overflow-y: hidden;
   position: relative;
-  z-index: 5;
   width: 100%;
   background: url('/images/moccasins.jpg') !important;
   background-repeat: no-repeat !important;
@@ -43,13 +41,12 @@
     // }
 
     .CONTENT {
-      position: relative;
+      position: absolute;
       top: $pagebar_height_sm;
       left: 0;
-      width: 100vw;
-      height: $content_height_sm;
+      width: 100%;
+      min-height: $content_height_sm;
       overflow-y: auto;
-      z-index: 10;
 
       //flex
       display: -webkit-flex;
@@ -63,47 +60,56 @@
       justify-content: space-around;
 
       //vert align
-      -webkit-align-items: flex-start;
-      align-items: flex-start;
+      -webkit-align-items: stretch;
+      align-items: stretch;
 
-      -webkit-align-content: flex-start;
-      align-content: flex-start;
+      -webkit-align-content: stretch;
+      align-content: stretch;
+
     }
+
 
 
 
         //child of content --will wrap on small screens
         .COLUMN {
-          position: relative;
           max-width: 600px;
           min-width: 300px;
-          flex: 1 0 60%;
+          flex-basis: 100%;
           z-index: 20;
           background: transparent;
-          display: flex;
-          justify-content: center;
         }
 
 
 
 
 @media all and (min-width: 668px) {
-
-  .PAGEBAR {
-      height: $pagebar_height_md; //2em
-  }
-
   .CONTENT {
-    top: $pagebar_height_md;
-    left: 0;
-    width: 100vw;
-  }
-  .COLUMN {
-    max-width: 600px;
-    flex: 1 0 50%;
-    min-height: $content_height_md;
-    z-index: 20;
-    background: transparent;
+      top: $pagebar_height_md;
+      min-height: $content_height_md;
+      width: 100%;
   }
 
+
+
+  .COLUMN {
+    flex-basis: 50%;
+  }
 }
+
+//---------WALKING MAP  -----
+@media screen and (orientation:landscape)
+{
+   .half-page 
+   {
+      width: 50vw;
+      height: $content_height_sm;
+      overflow-y: hidden;
+   }
+   .page-60 {
+    width: 60vw;
+    height: $content_height_sm;
+    overflow-y: hidden;
+   }
+}
+

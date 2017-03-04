@@ -1,4 +1,5 @@
-
+@import '../../styles/_layout';
+@import '../../styles/_spacing';
 
 .leaflet-container {
   width: 100vw;
@@ -29,10 +30,15 @@
 
 //-----------SNAKE MAP ---
 #snakemap {
-  height: 50%;
+  height: 300px;
+  width: 100%;
 }
 
+//--WALKING MAP ----
 
+#walkingmap {
+  
+}
 //-----STOP MAP  -------
 // .leaflet-div-icon {
 //   background: transparent;

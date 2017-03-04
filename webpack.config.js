@@ -23,7 +23,8 @@ const routes = {
   signup: sourcePath + '/components/Auth/Signup',
   stops: sourcePath + '/routes/Stops',
   test: sourcePath + '/routes/Test',
-  coming: sourcePath + '/routes/Coming'
+  coming: sourcePath + '/routes/Coming',
+  walking: sourcePath + '/routes/Walking'
 };
 
 // Okay, this may be confusing at first glance but go through it step-by-step
@@ -49,6 +50,7 @@ module.exports = env => {
       signin: routes.signin,
       signup: routes.signup,
       stops: routes.stops,
+      walking: routes.walking,
       test: routes.test,
       coming: routes.coming
     },
@@ -89,6 +91,13 @@ module.exports = env => {
         loader: [
           'babel-loader'
         ],
+      },
+      {
+        test: /\.(jpg|png)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 25000,
+        },
       },
       
       { 

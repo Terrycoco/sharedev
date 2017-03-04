@@ -12,7 +12,7 @@ export const geo = {
   GEO_ERROR: 'GEO_ERROR'
 };
 
-export const search = {
+export const walk = {
   SET_BOX: 'SET_BOX',
   SAVE_PARAMS: 'SAVE_PARAMS',
   SAVE_WALKS: 'SAVE_WALKS',
@@ -20,7 +20,8 @@ export const search = {
   SAVE_WALK: 'SAVE_WALK',
   SAVE_ROUTE: 'SAVE_ROUTE',
   SAVE_STOPS: 'SAVE_STOPS',
-  SAVE_STOP_IDX: 'SAVE_STOP_IDX'
+  SAVE_STOP_IDX: 'SAVE_STOP_IDX',
+  CURRENT_MANEUVER: 'CURRENT_MANEUVER'
 };
 
 export const auth = {

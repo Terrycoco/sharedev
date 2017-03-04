@@ -160,8 +160,8 @@ class SearchForm extends Component {
 function mapStateToProps(state) {
   return {
     cats: state.forms.shared.categories,
-    cat_idx: state.search.params.cat_idx,
-    city: state.search.params.city,
+    cat_idx: state.walks.params.cat_idx,
+    city: state.walks.params.city,
     geo: state.geo
   };
 }

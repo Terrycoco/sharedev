@@ -20,7 +20,8 @@
   text-decoration: none; }
 
 #snakemap {
-  height: 50%; }
+  height: 300px;
+  width: 100%; }
 .center-children {
   display: flex;
   justify-content: center; }
@@ -40,24 +41,26 @@
 .vertical-center {
   align-items: center; }
 
-.INNERPAGE {
+.textbox {
   white-space: pre-wrap;
-  margin-left: 1rem !important;
-  margin-right: 1rem !important;
-  margin-top: 1rem;
-  margin-bottom: 2rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 1rem;
+  padding-bottom: 2rem !important;
   min-width: 300px;
   max-width: 600px;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; }
 
-.header {
-  align-items: center; }
+.textbox p {
+  margin-top: .75em;
+  line-height: 1.5;
+  margin-bottom: .75em; }
 
-.header > h4 {
-  line-height: 2rem; }
+.header {
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
 
 hr.accent {
   border-top: 2px solid #fd8258; }
@@ -65,9 +68,19 @@ hr.accent {
 hr.primary {
   border-top: 2px solid #5C821A; }
 
+.CONTENT {
+  color: #0F1B07; }
+
+a, a:link {
+  color: #fd8258; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #5C821A; }
+
 .walklist {
   background: white;
-  min-height: 90vh; }
+  min-height: 90vh;
+  width: 100%; }
 
 .walk-card {
   padding: 1.5rem;

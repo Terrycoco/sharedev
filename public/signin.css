@@ -4,6 +4,15 @@ hr.accent {
 hr.primary {
   border-top: 2px solid #5C821A; }
 
+.CONTENT {
+  color: #0F1B07; }
+
+a, a:link {
+  color: #fd8258; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #5C821A; }
+
 .center-children {
   display: flex;
   justify-content: center; }
@@ -23,45 +32,33 @@ hr.primary {
 .vertical-center {
   align-items: center; }
 
-.INNERPAGE {
+.textbox {
   white-space: pre-wrap;
-  margin-left: 1rem !important;
-  margin-right: 1rem !important;
-  margin-top: 1rem;
-  margin-bottom: 2rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 1rem;
+  padding-bottom: 2rem !important;
   min-width: 300px;
   max-width: 600px;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; }
 
-.header {
-  align-items: center; }
+.textbox p {
+  margin-top: .75em;
+  line-height: 1.5;
+  margin-bottom: .75em; }
 
-.header > h4 {
-  line-height: 2rem; }
+.header {
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
 
 .FORM {
-  max-width: 500px;
-  max-height: 95%;
-  min-height: 90%;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: 1em;
-  margin-right: 1em;
-  display: -webkit-box;
-  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;
-  /* TWEENER - IE 10 */
-  display: -webkit-flex;
-  /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;
-  /* NEW, Spec - Firefox, Chrome, Opera */
-  flex-direction: column;
-  justify-content: space-between;
-  overflow-y: auto;
-  align-items: center; }
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  overflow-y: auto; }
 
 .descr {
   font-size: .8em;
@@ -71,11 +68,7 @@ hr.primary {
   color: #fd8258; }
 
 .form-text {
-  -webkit-flex: 6;
-  /* Safari 6.1+. iOS 7.1+, BB10 */
-  -ms-flex: 6;
-  /* IE 10 */
-  flex: 6; }
+  margin-top: 2em; }
 
 .form-text p {
   line-height: 1.5;
@@ -106,6 +99,15 @@ hr.accent {
 
 hr.primary {
   border-top: 2px solid #5C821A; }
+
+.CONTENT {
+  color: #0F1B07; }
+
+a, a:link {
+  color: #fd8258; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #5C821A; }
 
 .linkDiv {
   margin-top: 2rem;

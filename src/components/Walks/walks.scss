@@ -1,5 +1,6 @@
 @import '../../styles/_spacing';
 @import '../../styles/_colors';
+@import '../../styles/_layout';
 
 .walklist {
   background: white;
@@ -36,6 +37,7 @@
   white-space: pre-line;
   white-space: pre-wrap;
   font-size: 1.2em;
+  padding: 0;
 }
 
 

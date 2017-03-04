@@ -1,15 +1,49 @@
 import React, {Component} from 'react';
 require ('utils/map/polyline.snakeanim');
 require('./maps.scss');
-import {connect} from 'react-redux';
 
+import {connect} from 'react-redux';
+import {getRoute} from 'actions/walkActions';
 
 let map;
+let circles = {};
+let currentLayer;
+
+const greenIcon = L.icon({
+  iconUrl: require('./marker-icon-green.png'),
+  iconSize:     [25, 41], // size of the icon
+  // shadowSize:   [50, 64], // size of the shadow
+  iconAnchor:   [12.5, 41], // point of the icon which will correspond to marker's location
+  // shadowAnchor: [4, 62],  // the same for the shadow
+  // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+const redCir = {
+  color: 'red',
+  fillColor: 'red',
+  fillOpacity: 1,
+};
+
+const stopCir = {
+  color: '#128ba1',
+  fillColor: '#128ba1',
+  fillOpacity: 1,
+};
+
+const greenCir = {
+  color: 'green',
+  fillColor: 'green',
+  fillOpacity: 1,
+};
+
+
 
 class SnakeMap extends Component {
    constructor(props) {
     super(props);
     this.updateRoute = this.updateRoute.bind(this);
+    this.updateStops = this.updateStops.bind(this);
+    this.highlightCurrentStop = this.highlightCurrentStop.bind(this);
    }
 
    componentDidMount() {
@@ -20,53 +54,95 @@ class SnakeMap extends Component {
      var KartoLayer = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
-     
+
+     currentLayer = new L.LayerGroup().addTo(map); //layer for current stop marker
+
      this.updateRoute();
+     this.updateStops();
+     this.highlightCurrentStop();
     }
 
+
     componentDidUpdate() {
-      this.updateRoute();
-     }
+     
+     this.updateRoute();
+     this.updateStops();
+     this.highlightCurrentStop();
+    }
 
     componentWillUnmount() {
       map = null;
     }
 
+    updateStops() {
+     if (this.props.stops.length > 0) {
+      const stops = this.props.stops;
+      for (var i = 0, len = stops.length; i < len; i++) {
+        switch (stops[i].sort) {
+          case 0:
+            L.circle(new L.LatLng(stops[i].lat, stops[i].lng), 12, greenCir).addTo(map);
+            break;
+          case stops.length - 1:
+            L.circle(new L.LatLng(stops[i].lat, stops[i].lng), 12, redCir).addTo(map);
+            break;
+          default:
+            L.circle(new L.LatLng(stops[i].lat, stops[i].lng), 12, stopCir).addTo(map);
+        }
+      } // end for
+ 
+
+
+
+    } //end if
+     
+     } //end update
+
+     highlightCurrentStop() {
+      if (this.props.stops.length > 0) {
+        currentLayer.clearLayers();
+        let stop = this.props.stops[this.props.selectedStopIdx];
+        let marker = L.marker([stop.lat, stop.lng], {icon: greenIcon}).addTo(currentLayer);
+        map.panTo([stop.lat, stop.lng]);
+     }
+    }
+
      updateRoute() {
        if (this.props.route.length > 0) {
-         const route = this.props.route;
-          //convert route data to Leaflet objects (in geojson data lng is first)
-         for (var i = 0, latlngs = [], len = route.length; i < len; i++) {
-           latlngs.push(new L.LatLng(route[i][1], route[i][0]));
+         const legs = this.props.route;
+         let latlngs = [];
+          //convert route data to Leaflet objects 
+         for (var i = 0, len = legs.length; i < len; i++) {
+           for (var m = 0, mlen = legs[i].maneuvers.length; m < mlen; m++) {
+              latlngs.push(new L.LatLng(legs[i].maneuvers[m].startPoint.lat, legs[i].maneuvers[m].startPoint.lng));
+           }
          }
 
          //make leaflet polyline out of them
-         var path = L.polyline(latlngs);
-
-         //fit onto map
+         let line = L.polyline(latlngs);
          map.fitBounds(L.latLngBounds(latlngs));
-         //add start and end markers
-         map.addLayer(L.marker(latlngs[0])); 
-         map.addLayer(L.marker(latlngs[len - 1]));
+         line.addTo(map);
 
-         map.addLayer(path);
+
          
-         function snake() {
-           path.snakeIn();
-         }
+         // function snake() {
+         //   path.snakeIn();
+         // }
 
-         path.on('snakestart snake snakeend', function(ev) {
-           if (ev.type == 'snakeend') {
+         // line.on('snakestart snake snakeend', function(ev) {
+         //   if (ev.type == 'snakeend') {
+         //      snake(); //start over
+         //   }
+         // });
 
-              snake(); //start over
-           }
-         });
+         // snake();
 
-         snake();
+
      }
    }
+
+
    render() {
-    console.log('this.props.route.length:', this.props.route.length);
+
     return (
        <div id="snakemap"></div>
     );
@@ -75,11 +151,42 @@ class SnakeMap extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('snake props: ', state);
   return {
-    walkId: state.search.selectedWalk.id,
-    route: state.search.selectedWalk.route.coordinates
+    walkId: state.walks.selectedWalk.id,
+    route: state.walks.selectedWalk.route, 
+    stops: state.walks.selectedWalk.stops,
+    selectedStopIdx: state.walks.selectedWalk.selectedStopIdx
   };
 }
 
 
 export default connect(mapStateToProps)(SnakeMap);
+
+
+// const circleOptions = {
+//   radius: 5,
+//   // stroke  //Boolean true  Whether to draw stroke along the path. Set it to false to disable borders on polygons or circles.
+//   // color //String  '#03f'  Stroke color.
+//   // weight  //Number  5 Stroke width in pixels.
+//   // opacity //Number  0.5 Stroke opacity.
+//   fill: true  //Boolean depends Whether to fill the path with color. Set it to false to disable filling on polygons or circles.
+//   // fillColor //string  same as color Fill color.
+//   // fillOpacity //Number  0.2 Fill opacity.
+//   // fillRule  //String  'evenodd' A string that defines how the inside of a shape is determined.
+//   // dashArray //String  null  A string that defines the stroke dash pattern. Doesn't work on canvas-powered layers (e.g. Android 2).
+//   // lineCap //String  null  A string that defines shape to be used at the end of the stroke.
+//   // lineJoin  //String  null  A string that defines shape to be used at the corners of the stroke.
+//   // clickable //Boolean true  If false, the vector will not emit mouse events and will act as a part of the underlying map.
+//   // pointerEvents //String  null  Sets the pointer-events attribute on the path if SVG backend is used.
+//   // className //string  ''  Custom class name set on an element.
+// };
+
+
+
+
+         //  var popup = L.popup()
+         //    .setLatLng([stop.lat, stop.lng])
+         //    .setContent(stop.pt_title)
+         //    .openOn(map);
+         // }

@@ -52,7 +52,7 @@ class Stops extends Component {
 
 function mapStateToProps(state) {
   return {
-   walkId: state.search.selectedWalk.walkId
+   walkId: state.walks.selectedWalk.walkId
  };
 }
 

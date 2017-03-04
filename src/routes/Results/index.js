@@ -32,7 +32,7 @@ class Results extends Component {
   render() {
     return (
       <div className="PAGE" key="results">
-        <PageBar title="Find A Walk" leftIcon="goLeft" backTo="search" fwdTo={(this.state.isFlipped) ? "List" : "Map"} onFlip={this.flip} />
+        <PageBar title="Find A Walk" leftIcon="goLeft" backTo="search" fwdTo={(this.state.isFlipped) ? "List" : "Map"} onFwd={this.flip} />
         <div className="CONTENT">
           <div className="COLUMN">
           <input ref={input => this._name = input} id="walkId" className="hidden"></input>

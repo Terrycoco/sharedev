@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PageBar from 'components/PageBar';
 import * as actions from 'actions';
-//import SnakeMap from 'components/Maps/SnakeMap';
+import SnakeMap from 'components/Maps/SnakeMap';
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
@@ -10,9 +10,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import StopList from 'components/Walks/StopList';
 import Checkbox from 'material-ui/Checkbox';
-import {theme} from 'styles/theme';
+import {myColors} from 'styles/theme';
 import Link from 'navigation/Link';
-
+import Drawer from 'material-ui/Drawer';
 
 require('./summary.scss');
 
@@ -28,8 +28,11 @@ const styles = {
     fontSize: "1em",
     fontWeight: "bold"
   },
-  card: {
+  drawer: {
+    top: '50vh',
+    height: '50%'
   }
+
 };
 
 
@@ -38,14 +41,17 @@ class Summary extends Component {
     super(props);
     this.renderAttributes = this.renderAttributes.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
-    this.handleDetails = this.handleDetails.bind(this);
+    this.startWalk = this.startWalk.bind(this);
     this.isSaved = this.isSaved.bind(this);
+    this.state = {open: false};
+    this.openDrawer = this.openDrawer.bind(this);
   }
   
 
   //run this as soon as mount to go ahead and get stops
   componentDidMount() {
     this.props.getWalkStops(this.props.walk.id);
+    this.props.getRoute(this.props.walk.id);
   }
 
   renderAttributes() {
@@ -55,8 +61,8 @@ class Summary extends Component {
     });
   }
 
-  handleDetails() {
-    this.props.requestRoute('coming', 'right');
+  startWalk() {
+    this.props.requestRoute('walking', 'right');
   }
 
 
@@ -72,50 +78,52 @@ class Summary extends Component {
     }
   }
 
+  openDrawer() {
+    this.setState({open: true});
+  }
+
   render() {
     
     return (
       <div className="PAGE" key="summary">
         <PageBar title="Walk Summary" leftIcon="goLeft" />
         <div className="CONTENT">
-          <div className="COLUMN">
-           <div className="FORM">
-              <h4 id="walk-title">{this.props.walk.title}</h4>
-              <p className="byline">Brought to you by <span className="username">{this.props.walk.creator}</span></p>
-              
-              <div className="btn-group space-between-children vertical-center" >
-               <RaisedButton label="Start Walk" primary={true} className="btn-primary" onClick={this.handleDetails}/>
-               <div className="checkbox-group">
-                  <Checkbox style={styles.checkbox} iconStyle={styles.box} onCheck={this.handleCheck} defaultChecked={this.isSaved()} />
-                  <p className="checkbox-label-link">My Walks</p>
-                </div>
-              </div>
-              <hr className="primary"/> 
-              <p className="walkdescr">{this.props.walk.descr}</p>
-              <hr className="primary"/>
-              <CardText>
-                <p className="summary-cat">{this.props.walk.category}</p>
-                {this.renderAttributes()}
-              </CardText>    
-           </div>
-           </div>
 
-            <div className="COLUMN">
-              <div className="FORM">
-              <hr className="primary"/>
-              <Card style={styles.card}>
-                 <CardHeader
-                   title={`${this.props.walk.stops.length -1} Stops`}
-                   actAsExpander={true}
-                   showExpandableButton={true}
-                   titleStyle={styles.cardTitle} />
-                <CardText expandable={true} className="listdescr">
-                  <StopList />
-                </CardText>
-              </Card>
-              <hr className="primary"/> 
-              </div>
-            </div>
+         <Drawer open={this.state.open} 
+                 openSecondary={true}
+                 width={250}
+                 swipeAreaWidth={20}
+                 containerStyle={styles.drawer}>
+
+              <CardText className="listdescr">
+                <StopList />
+              </CardText>
+
+         </Drawer>
+
+          <div className="COLUMN">
+             <div className="FORM">
+                <h4 id="walk-title">{this.props.walk.title}</h4>
+                <p className="byline">Brought to you by <span className="username">{this.props.walk.creator}</span></p>
+                
+                <div className="btn-group space-between-children vertical-center" >
+                 <RaisedButton label="Start Walk" className="btn-primary" onClick={this.startWalk}/>
+                 <div className="checkbox-group">
+                    <Checkbox style={styles.checkbox} iconStyle={styles.box} onCheck={this.handleCheck} defaultChecked={this.isSaved()} />
+                    <p className="checkbox-label-link">My Walks</p>
+                  </div>
+                </div>
+                <hr className="primary"/> 
+                <p className="walkdescr">{this.props.walk.descr}</p>
+                <hr className="primary"/>
+                <CardText>
+                  <p className="summary-cat">{this.props.walk.category}</p>
+                  {this.renderAttributes()}
+                </CardText> 
+                <hr className="primary"/>
+                <SnakeMap />  
+             </div>
+           </div>
         </div>
       </div>
     );
@@ -124,8 +132,8 @@ class Summary extends Component {
 
 function mapStateToProps(state) {
   return {
-    walk: state.search.selectedWalk,
-    myWalkIds: state.search.myWalkIds,
+    walk: state.walks.selectedWalk,
+    myWalkIds: state.walks.myWalkIds,
     username: state.auth.username
   };
 }
@@ -134,16 +142,31 @@ export default connect(mapStateToProps, actions)(Summary);
 
 /*TODO:
 save to my walks - checkbox linked to user's list DONE
-test this
+test this DONE
 
-handle showing checkbox on if already in
+check my walk should go to auth
+
+handle showing checkbox on if already in  DONE
 
 add interests section?
 why is it jumpy?
 if title is longer how will it look?
-snake map - have start green and stop red
+DONE snake map - have start green and stop red
 
 --make full size map & list side by side?
 
 
 */
+            // <div className="COLUMN">
+
+            //   <hr className="primary"/>
+            //   <div className="FORM">
+
+            //   <Card style={styles.card}>
+            //     <CardText className="listdescr">
+            //       <StopList />
+            //     </CardText>
+            //   </Card>
+
+            //   </div>
+            // </div>
