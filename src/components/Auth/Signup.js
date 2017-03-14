@@ -109,7 +109,7 @@ class Signup extends Component {
             <form >
                 <div className="msg">
                   <p>Sign up to ShareWalks to continue</p>
-                   <span className="linkDiv">Already a User? <Link to={{ pathname: "/signin"}}>Sign In Here</Link></span>
+                   <span className="linkDiv">Already a User? <Link to="signin" fromDir="left" key="signin">Sign In Here</Link></span>
                   </div>
              
                 <TextField

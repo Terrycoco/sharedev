@@ -3,12 +3,16 @@
   <head>
     <title>ShareWalks</title>
     <link rel="prefetch" href="/images/moccasins.jpg">
-   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
 
       <!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<script src="//use.edgefonts.net/lato.js"></script> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- go fullscreen on apple -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script src="//use.edgefonts.net/lato.js"></script> 
 
 <!-- <script src="https://use.fontawesome.com/c6c003a715.js"></script> -->
 <!-- GOOGLE FONTICONS -->
@@ -34,28 +38,17 @@
 <!-- d3 -->
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
-<!-- LEAFLET PLUGIN FOR ROUTING
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-<link rel="stylesheet" href="leaflet-routing-machine.css" />
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script src="leaflet-routing-machine.js"></script> -->
+<link rel="stylesheet" href="shared.css" />
 
-
-
-<!--SERVICE WORKER -->     
-<!-- <script>
-// Check for browser support of service worker
-if ('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js',{scope:'.'})
-.then(function(sw){console.log("SW registered!");},function(x){console.log("SW failed to register: " + x.message);});}
-</script> -->
   </head>
   <body>
     <div id="root"></div>
 
+    <%=htmlWebpackPlugin.files.webpackManifest%>
+    
   </body>
 
 
-  <script>
 
 
 </html>

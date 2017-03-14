@@ -43,10 +43,7 @@ class Summary extends Component {
     this.handleCheck = this.handleCheck.bind(this);
     this.startWalk = this.startWalk.bind(this);
     this.isSaved = this.isSaved.bind(this);
-    this.state = {open: false};
-    this.openDrawer = this.openDrawer.bind(this);
   }
-  
 
   //run this as soon as mount to go ahead and get stops
   componentDidMount() {
@@ -78,30 +75,15 @@ class Summary extends Component {
     }
   }
 
-  openDrawer() {
-    this.setState({open: true});
-  }
+
 
   render() {
     
     return (
-      <div className="PAGE" key="summary">
-        <PageBar title="Walk Summary" leftIcon="goLeft" />
-        <div className="CONTENT">
-
-         <Drawer open={this.state.open} 
-                 openSecondary={true}
-                 width={250}
-                 swipeAreaWidth={20}
-                 containerStyle={styles.drawer}>
-
-              <CardText className="listdescr">
-                <StopList />
-              </CardText>
-
-         </Drawer>
-
-          <div className="COLUMN">
+      <div className="PAGE" key="summary" >
+        <PageBar title="Walk Summary" iconLeft="goLeft" onLeft="prev" />
+        <div id="summarypage" className="CONTENT">
+          <div className="COLUMN-1">
              <div className="FORM">
                 <h4 id="walk-title">{this.props.walk.title}</h4>
                 <p className="byline">Brought to you by <span className="username">{this.props.walk.creator}</span></p>
@@ -170,3 +152,16 @@ DONE snake map - have start green and stop red
 
             //   </div>
             // </div>
+
+            
+         // <Drawer open={this.state.open} 
+         //         openSecondary={true}
+         //         width={250}
+         //         swipeAreaWidth={20}
+         //         containerStyle={styles.drawer}>
+
+         //      <CardText className="listdescr">
+         //        <StopList />
+         //      </CardText>
+
+         // </Drawer>

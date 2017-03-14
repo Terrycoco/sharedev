@@ -20,14 +20,16 @@
   }
 
 .flip-container, .front, .back {
-  position: absolute;
+  position: absolute; //to column
   top: 0;
   width: 100%;
-  height: $content_height_sm;
+  height: 100%;
   overflow-y: auto;
 }
 
 .flipper {
+  height: 100%;
+  width: 100%;
   -webkit-transition: 0.6s;
   -webkit-transform-style: preserve-3d;
 

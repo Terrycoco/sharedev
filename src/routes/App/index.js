@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from 'styles/theme';
-import PageBar from 'components/PageBar';
 import { connect } from 'react-redux';
-import {checkTokenAndLogin, routeLoaded}  from 'actions';
+import * as actions  from 'actions';
 import ConnIndicator from 'components/Snacks/ConnIndicator';
 import Welcome from 'components/Snacks/Welcome';
 import {getComponent} from 'navigation/router';
 import Loader from 'components/Loader';
 
+
+
 //app-wide style
 require('./app.scss');
-
 
 class App extends Component {
   constructor(props) {
@@ -19,13 +19,21 @@ class App extends Component {
     this.state = {component: null};
   }
 
+
+
   componentDidMount() {
+
+    //fetch home page if not already fetched and load
     getComponent('home', 'left')
       .then(comp => {
         this.setState({component: comp});
         this.props.routeLoaded();
       });
-    this.props.checkTokenAndLogin();  //also checks conn & loads myWalks
+
+      //checks conn token, logsin & loads myWalks into store
+      this.props.checkTokenAndLogin();
+      // noBounce.init({animate: true});
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,7 +49,7 @@ class App extends Component {
   render() {
     return ( 
       <MuiThemeProvider muiTheme={theme}>
-       <div className="APP">
+       <div className="APP" >
          {(this.state.component) ? <this.state.component /> : <Loader />}
          <ConnIndicator />
          <Welcome />
@@ -59,5 +67,5 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {checkTokenAndLogin, routeLoaded})(App);
+export default connect(mapStateToProps, actions)(App);
 

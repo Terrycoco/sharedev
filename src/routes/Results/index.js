@@ -31,10 +31,10 @@ class Results extends Component {
   
   render() {
     return (
-      <div className="PAGE" key="results">
-        <PageBar title="Find A Walk" leftIcon="goLeft" backTo="search" fwdTo={(this.state.isFlipped) ? "List" : "Map"} onFwd={this.flip} />
+      <div className="PAGE" key="results" >
+        <PageBar title="Find A Walk" iconLeft="goLeft" onLeft="search" textRight={(this.state.isFlipped) ? "List" : "Map"} onRight={this.flip} />
         <div className="CONTENT">
-          <div className="COLUMN">
+          <div className="COLUMN-1">
           <input ref={input => this._name = input} id="walkId" className="hidden"></input>
           <button id="goToSummary" onClick={this.handleClick} className="hidden"></button>
           <div className={(this.state.isFlipped) ? 'flip-container flip' : 'flip-container'}>

@@ -1,38 +1,65 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import PageBar from 'components/PageBar';
-import WalkingMap from 'components/Maps/WalkingMap';
+import WalkingMap from './WalkingMap';
 import Drawer from 'components/Drawer';
-import Directions from 'components/Directions';
-import * as actions from 'actions';
-import StopDetail from 'routes/StopDetail';
+import Directions from './Directions';
+import * as actions from 'actions/walkActions';
+import StopDetail from './StopDetail';
+import FadeIn from 'components/Transitions/FadeIn';
 
 require('./walking.scss');
+require('./directions.scss');
+require('./stop.scss');
 
 class Walking extends Component {
   constructor(props){
     super(props);
     this.state = {
-      togDrawer: false,
-      isFlipped: false
+      isFlipped: false //flip shows the map
     };
-    this.flip = this.flip.bind(this);
-    this.toggleDrawer = this.toggleDrawer.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.toNextStop = this.toNextStop.bind(this);
+    this.toNext = this.toNext.bind(this);
+    this.toPrev = this.toPrev.bind(this);
+    this.flip = this.flip.bind(this);
+    this.goToTop = this.goToTop.bind(this);
   }
+
+  componentDidUpdate() {
+    this.goToTop();
+  }
+
 
   flip() {
-     this.setState({isFlipped: !this.state.isFlipped});
+    this.setState({isFlipped: !this.state.isFlipped});
+    console.log('flip after set', this.state.isFlipped);
+    this.goToTop();
   }
 
-  toggleDrawer() {
-     this.setState({togDrawer: !this.state.togDrawer});
+  toNext() {
+    //called back from drawer directions
+    let nextStopIdx = this.props.selectedStopIdx + 1;
+    if (nextStopIdx <= this.props.stopCount - 1  ) {
+      this.props.saveStopIdx(nextStopIdx);
+   }
   }
 
-  toNextStop() {
-    //change selectedStopIdx
-    //flip
+  goToTop() {
+    console.log('flip goToTop', this.state.isFlipped);
+    if (!this.state.isFlipped) {
+      console.log('got here');
+      document.getElementById('toppage').scrollIntoView();
+    }
+  }
+
+  toPrev() {
+    //called back from drawer directions
+    let prevStopIdx = this.props.selectedStopIdx - 1;
+    if (prevStopIdx >= 0) {
+      this.props.saveStopIdx(prevStopIdx);
+      this.goToTop();
+    }
   }
 
   handleClick(e) {
@@ -43,32 +70,39 @@ class Walking extends Component {
   
   render() {
     return (
-      <div className="PAGE" key="results">
-        <PageBar title="Walk Route" leftIcon="goLeft" backTo="summary" fwdTo={(this.state.isFlipped ? "Stop" : "Map")} onFwd={this.flip}  />
-        <div id="walking-content">
-        <div className={(this.state.isFlipped) ? 'flip-container flip' : 'flip-container'}>
-            <div className="flipper">
-              <div className="front" >
-                <StopDetail />
+      <div className="PAGE" key="walking">
+        <PageBar title="Walking" iconLeft="goLeft" onLeft="summary" iconRight={(this.state.isFlipped) ? "info" : "Map"} onRight={this.flip} />
+        <div className="CONTENT">
+          <div className="COLUMN-1">
+           <div className={(this.state.isFlipped) ? 'flip-container flip' : 'flip-container'}>
+              <div className="flipper">
+                <div className="front" >
+                  <StopDetail isShowing={!this.state.isFlipped} />
+                </div>
+                 <div className="back" >
+                  <WalkingMap />
+                  <Directions onNextStopClick={this.toNextStop}  />
+                </div>
               </div>
-              <div className="back" >
-                <WalkingMap />
-              </div>
-            </div>
+            </div> 
+           
+            <div className="stop-btns">
+             <button className="btn-sm" onClick={this.toPrev}>Prev</button>
+             <button className="btn-sm" onClick={this.toNext}>Next</button>
+           </div>
+          </div>
         </div>
-        <Drawer toggleText="Next Stop :" toggleClass="toggle">
-            <Directions onNextStopClick={this.toNextStop}  />
-        </Drawer>
       </div>
-    </div>
     );
   }
 }
 
 function mapStateToProps(state) {
+   let selectedWalk = state.walks.selectedWalk;
   return {
-  
- };
+    stopCount: selectedWalk.stops.length,
+    selectedStopIdx: selectedWalk.selectedStopIdx
+  };
 }
 
 

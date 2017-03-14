@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SlideIn from 'components/Transitions/SlideIn';
-import * as actions from 'actions/authActions';
+import * as actions from 'actions';
 
 export default function(InputComponent, objProps) {
   class Authenticated extends Component {

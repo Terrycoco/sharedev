@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import SearchForm from 'components/Forms/SearchForm';
-import * as actions from 'actions';
+import * as actions from 'actions/geoActions';
 import PageBar from 'components/PageBar';
 
 
@@ -17,16 +17,18 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="PAGE SEARCH" key="search">
-        <PageBar title="Find A Walk" leftIcon="hamburger" backTo="home" />
+      <div className="PAGE" key="search" >
+        <PageBar title="Find A Walk" iconLeft="hamburger" onLeft="home" />
         <div className="CONTENT">
-          <div className="COLUMN">
-           <SearchForm />
+          <div className="COLUMN-1">
+             <SearchForm />
           </div>
         </div>
       </div>
     );
   }
 }
+
+
 
 export default connect(null, actions)(Search);

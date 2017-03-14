@@ -16,7 +16,7 @@ export default function(InputComponent) {
           transitionAppear={true}
           transitionAppearTimeout={650}
           transitionLeave={true}
-          transitionLeaveTimeout={1000}>
+          transitionLeaveTimeout={650}>
           <InputComponent {...props} />
        </ReactCSSTransitionGroup>
       );

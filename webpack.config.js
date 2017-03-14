@@ -2,57 +2,51 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const sourcePath = path.join(__dirname, './src');
-const publicPath = path.join(__dirname, './public');
+const publicPath = path.join(__dirname, './public')
+const distPath = path.join(__dirname, './public/dist/');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 //for the code shared amongst modules
 const extractCommons = new webpack.optimize.CommonsChunkPlugin({
-  name: 'shared',
-  filename: 'shared.js'
+  names: ['vendor', 'manifest'], //specify the common bundle's name
+  minChunks: function (module) {  //accept only vendor libraries 
+       // this assumes your vendor imports exist in the node_modules directory
+       return module.context && module.context.indexOf('node_modules') !== -1;
+    }
 });
 
-const routes = {
-  home: sourcePath + '/routes/Home',
-  search: sourcePath + '/routes/Search',
-  create: sourcePath + '/routes/Create',
-  results: sourcePath + '/routes/Results',
-  summary: sourcePath + '/routes/Summary',
-  mywalks: sourcePath + '/routes/MyWalks',
-  about: sourcePath + '/routes/About',
-  signin: sourcePath + '/components/Auth/Signin',
-  signup: sourcePath + '/components/Auth/Signup',
-  stops: sourcePath + '/routes/Stops',
-  test: sourcePath + '/routes/Test',
-  coming: sourcePath + '/routes/Coming',
-  walking: sourcePath + '/routes/Walking'
-};
+// const routes = {
+//   home: sourcePath + '/routes/Home',
+//   search: sourcePath + '/routes/Search',
+//   create: sourcePath + '/routes/Create',
+//   results: sourcePath + '/routes/Results',
+//   summary: sourcePath + '/routes/Summary',
+//   mywalks: sourcePath + '/routes/MyWalks',
+//   about: sourcePath + '/routes/About',
+//   signin: sourcePath + '/components/Auth/Signin',
+//   signup: sourcePath + '/components/Auth/Signup',
+//   stops: sourcePath + '/routes/Stops',
+//   test: sourcePath + '/routes/Test',
+//   coming: sourcePath + '/routes/Coming',
+//   walking: sourcePath + '/routes/Walking'
+// };
 
 // Okay, this may be confusing at first glance but go through it step-by-step
 module.exports = env => {
   const ifProd = plugin =>  env.prod ? plugin : undefined;
+  const ifDev = plugin => env.dev ? plugin : undefined;
   const removeEmpty = array => array.filter(p => !!p);
   const isProd = env.prod ? true : false;
-  const IS_PRODUCTION = env.prod ? true : false;
+
   return {
     /**
      * entry tells webpack where to start looking.
      * In this case we have both an app and vendor file.
      */
+    cache: false,
     entry: {
-      app: 'entry.js',
-      home: routes.home,
-      search: routes.search,
-      create: routes.create,
-      results: routes.results,
-      summary: routes.summary,
-      mywalks: routes.mywalks,
-      about: routes.about,
-      signin: routes.signin,
-      signup: routes.signup,
-      stops: routes.stops,
-      walking: routes.walking,
-      test: routes.test,
-      coming: routes.coming
+      app: sourcePath + '/entry.js',
+      vendor: ["react", "react-dom"]
     },
     /**
      * output tells webpack where to put the files he creates
@@ -63,11 +57,12 @@ module.exports = env => {
      *   the root of this prject.
      */
     output: {
-      filename: '[name].[hash].js',
-      path: publicPath
+      filename: '[name].js',  //don't use hash in dev
+      path: publicPath,  //where to store the bundled files
+      publicPath: '/'
     },
 
-     module: {
+    module: {
     rules: [
       {
         test: /\.html$/,
@@ -77,20 +72,13 @@ module.exports = env => {
           name: '[name].[ext]'
         }
       },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loader: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
+
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: [
           'babel-loader'
-        ],
+        ]
       },
       {
         test: /\.(jpg|png)$/,
@@ -100,7 +88,7 @@ module.exports = env => {
         },
       },
       
-      { 
+       {
         test: /(\.scss|\.css)$/,
         loader: ExtractTextPlugin.extract({fallback:'style-loader', loader: 'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?sourceMap'})
        }
@@ -115,17 +103,6 @@ module.exports = env => {
       routes:      path.resolve(__dirname, 'src', 'routes'),
       utils:       path.resolve(__dirname, 'src', 'utils'),
       styles:      path.resolve(__dirname, 'src', 'styles'),
-
-
-      //production versions of react and redux
-      // 'react$': path.join(__dirname, 'node_modules', 'react','dist',
-      //   (IS_PRODUCTION ? 'react.min.js' : 'react.js')),
-      // 'react-dom$': path.join(__dirname, 'node_modules', 'react-dom','dist',
-      //   (IS_PRODUCTION ? 'react-dom.min.js' : 'react-dom.js')),
-      // 'redux$': path.join(__dirname, 'node_modules', 'redux','dist',
-      //   (IS_PRODUCTION ? 'redux.min.js' : 'redux.js')),
-      // 'react-redux$': path.join(__dirname, 'node_modules', 'react-redux','dist',
-      //   (IS_PRODUCTION ? 'react-redux.min.js' : 'react-redux.js'))
     },
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
     modules: [
@@ -134,13 +111,13 @@ module.exports = env => {
     ]
   },
   devServer: {
-      contentBase: './public/',
+      contentBase: './public',
       historyApiFallback: true,
       headers: {"Access-Control-Allow-Origin": "*"},
       port: 3000,
-      compress: isProd,
-      inline: !isProd,
-      hot: !isProd,
+      compress: false,
+      inline: true,
+      hot: true,
       stats: {
         assets: true,
         children: false,
@@ -161,28 +138,22 @@ module.exports = env => {
       
       extractCommons,
 
-      //css files
-      new ExtractTextPlugin('[name].css'),
+          //css files
+      new ExtractTextPlugin('shared.css'),
+      new webpack.HotModuleReplacementPlugin(),
 
-
-      /**
-      * HtmlWebpackPlugin will make sure out JavaScript files are being called
-      * from within our index.html
-      */
+      // *
+      // * HtmlWebpackPlugin will make sure out JavaScript files are being called
+      // * from within our index.html
+      // //dynamically imported files will not be included
+      
       new HtmlWebpackPlugin({
         template: 'index.template.ejs',
-        filename: 'index.html',
         inject: 'body',
-      }),
+      })
+   
 
-    
 
-      // Only running DedupePlugin() and UglifyJsPlugin() in production
-      ifProd(new webpack.DefinePlugin({
-        "process.env": {
-          NODE_ENV: JSON.stringify("production")
-        }
-      }))
   ]) //end array of plugins
 }
 }

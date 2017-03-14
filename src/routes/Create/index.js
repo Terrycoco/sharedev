@@ -59,9 +59,9 @@ class Create extends Component {
   render() {
     return (
       <div className="PAGE CREATE" >
-        <PageBar title="Create a Walk" leftIcon="hamburger" backTo="home" />
+        <PageBar title="Create a Walk" iconLeft="hamburger" onLeft="home" />
         <div className="CONTENT">
-          <div className="COLUMN center-children">
+          <div className="COLUMN-1">
            <this.state.component />
            </div>
         </div>

@@ -25,24 +25,24 @@
   text-align: center;
 }
 
-.PageBar .left, .PageBar .right {
+.PageBar .Left, .PageBar .Right {
   flex: 1 0 15%;
   height: $pagebar_height_sm;
 }
 
-.PageBar .right {
+.PageBar .Right {
   font-size: .85em;
-  padding-right: 3px;
+  padding-right: 1em;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-.PageBar .left {
+.PageBar .Left {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 2px;
+  margin-left: 3px;
 }
 .PageBar img {
   max-height: 1.6em;

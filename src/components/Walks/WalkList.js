@@ -30,8 +30,7 @@ class WalkList extends Component {
 
   render() {
     return (
-      <div className="walklist">
-      
+      <div className="LIST">
        {this.renderItems()}       
       </div>
 

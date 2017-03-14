@@ -277,3 +277,21 @@ export function setCurrentManeuver(idx) {
     payload: idx
   };
 }
+
+export function toggleDrawer() {
+  return {
+    type: s.TOGGLE_DRAWER
+  };
+}
+
+export function closeDrawer() {
+  return {
+    type: s.CLOSE_DRAWER
+  };
+}
+
+export function openDrawer() {
+  return {
+    type: s.OPEN_DRAWER
+  };
+}

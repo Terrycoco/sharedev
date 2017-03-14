@@ -31,7 +31,9 @@
   }
 
   .drawer {
-    height: $content_height_sm;
+    min-height: $content_height_sm;
+    overflow-y: auto;
+    background: $light;
     position: fixed;
     width: 30vw;
     z-index: 10000;

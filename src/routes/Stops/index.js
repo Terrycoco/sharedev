@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PageBar from 'components/PageBar';
-import WalkingMap from 'components/Maps/WalkingMap';
+import WalkingMap from 'routes/Walking/WalkingMap';
 import StopList from 'components/Walks/StopList';
 import * as actions from 'actions';
 
@@ -29,7 +29,7 @@ class Stops extends Component {
   render() {
     return (
       <div className="PAGE" key="results">
-        <PageBar title="Walk Stops" leftIcon="goLeft" backTo="/summary" fwdTo={(this.state.isFlipped) ? "List" : "Map"} onFlip={this.flip} />
+        <PageBar title="Walk Stops" iconLeft="goLeft" onLeft="summary" textRight={(this.state.isFlipped) ? "List" : "Map"} onRight={this.flip} />
         <div className="CONTENT">
           <input ref={input => this._name = input} id="walkStopId" className="hidden"></input>
           <button id="goToStop" onClick={this.handleClick} className="hidden"></button>

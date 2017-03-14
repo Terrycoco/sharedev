@@ -7,78 +7,74 @@ import SlideIn from 'components/Transitions/SlideIn'; //slider HOC
 import requireAuth from 'components/Auth/requireAuth';  //auth HOC
 import Home from 'routes/Home'; //preimport
 
-// throws an error in the console if the page wasn't able to load
-function errorLoading(error) {
-  throw new Error(`Dynamic page loading failed: ${error}`);
-}
 
 
 export function getComponent(route, fromDir) {
   let dir = fromDir || "right";
   switch (route) {
     case 'home':
-      return System.import('routes/Home')
+      return import('routes/Home')
           .then(module => {
-              return SlideIn(Home, {fromDir: dir});
+              return SlideIn(module.default, {fromDir: dir});
           });
     case 'create':
-      return System.import('routes/Create')
+      return import('routes/Create')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     case 'search':
-      return System.import('routes/Search')
+      return import('routes/Search')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     case 'results':
-      return System.import('routes/Results')
+      return import('routes/Results')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     case 'summary':
-      return System.import('routes/Summary')
+      return import('routes/Summary')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
 
     case 'mywalks':
-      return System.import('routes/MyWalks')
+      return import('routes/MyWalks')
           .then(module => {
               return requireAuth(module.default, {fromDir: dir, toRoute: "mywalks"});
           });
     case 'signin':
-      return System.import('components/Auth/Signin')
+      return import('components/Auth/Signin')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     case 'signup':
-      return System.import('components/Auth/Signup')
+      return import('components/Auth/Signup')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     case 'about':
-      return System.import('routes/About')
+      return import('routes/About')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     case 'test':
-      return System.import('routes/Test')
+      return import('routes/Test')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     case 'walking':
-        return System.import('routes/Walking')
+        return import('routes/Walking')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     case 'coming':
-     return System.import('routes/Coming')
+     return import('routes/Coming')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
     default: 
-      return System.import('routes/Home')
+      return import('routes/Home')
           .then(module => {
               return SlideIn(Home, {fromDir: dir});
           });

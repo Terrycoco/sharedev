@@ -1,0 +1,59 @@
+@import '../../styles/_colors';
+@import '../../styles/_spacing';
+@import '../../styles/_forms';
+
+.walk-title {
+  color: $primary;
+  line-height: 1.2;
+}
+
+.stop-content {
+  white-space: pre-wrap;
+  margin-right: 2em;
+}
+
+// @media all and (orientation: landscape) {
+//   //make text a little bigger
+//   .stop-content{
+//     font-size: 18px;
+//     line-height: 1.6;
+//   }
+// }
+
+.kicker {
+  font-size: .8em;
+  color: $disabled;
+  font-style: italic;
+  margin-bottom: .2em;
+  margin-top: 2rem;
+}
+
+.byline .username {
+  color: $accent;
+  font-weight: bold;
+}
+
+
+
+hr.accent {
+  border-top: 2px solid $accent;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+hr.primary {
+  border-top: 2px solid $primary;
+  border-color: $primary;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stop-container {
+  margin-bottom: 4rem;
+}
+
+.front.flexcol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

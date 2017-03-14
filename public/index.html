@@ -3,12 +3,16 @@
   <head>
     <title>ShareWalks</title>
     <link rel="prefetch" href="/images/moccasins.jpg">
-   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
 
       <!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<script src="//use.edgefonts.net/lato.js"></script> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- go fullscreen on apple -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script src="//use.edgefonts.net/lato.js"></script> 
 
 <!-- <script src="https://use.fontawesome.com/c6c003a715.js"></script> -->
 <!-- GOOGLE FONTICONS -->
@@ -34,28 +38,161 @@
 <!-- d3 -->
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
-<!-- LEAFLET PLUGIN FOR ROUTING
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-<link rel="stylesheet" href="leaflet-routing-machine.css" />
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script src="leaflet-routing-machine.js"></script> -->
+<link rel="stylesheet" href="shared.css" />
 
-
-
-<!--SERVICE WORKER -->     
-<!-- <script>
-// Check for browser support of service worker
-if ('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js',{scope:'.'})
-.then(function(sw){console.log("SW registered!");},function(x){console.log("SW failed to register: " + x.message);});}
-</script> -->
-  <link href="shared.css" rel="stylesheet"><link href="summary.css" rel="stylesheet"><link href="app.css" rel="stylesheet"><link href="stops.css" rel="stylesheet"><link href="signin.css" rel="stylesheet"><link href="signup.css" rel="stylesheet"><link href="create.css" rel="stylesheet"><link href="search.css" rel="stylesheet"><link href="results.css" rel="stylesheet"><link href="mywalks.css" rel="stylesheet"><link href="test.css" rel="stylesheet"><link href="home.css" rel="stylesheet"><link href="coming.css" rel="stylesheet"><link href="about.css" rel="stylesheet"></head>
+  <link href="./shared.css" rel="stylesheet"></head>
   <body>
     <div id="root"></div>
 
-  <script type="text/javascript" src="shared.js"></script><script type="text/javascript" src="summary.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="app.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="stops.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="signin.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="signup.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="create.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="search.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="results.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="mywalks.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="test.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="home.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="coming.ace025fb3a51b3267c27.js"></script><script type="text/javascript" src="about.ace025fb3a51b3267c27.js"></script></body>
+    <script>/******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	var parentJsonpFunction = window["webpackJsonp"];
+/******/ 	window["webpackJsonp"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [], result;
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId])
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules, executeModules);
+/******/ 		while(resolves.length)
+/******/ 			resolves.shift()();
+/******/ 		if(executeModules) {
+/******/ 			for(i=0; i < executeModules.length; i++) {
+/******/ 				result = __webpack_require__(__webpack_require__.s = executeModules[i]);
+/******/ 			}
+/******/ 		}
+/******/ 		return result;
+/******/ 	};
+
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// objects to store loaded and loading chunks
+/******/ 	var installedChunks = {
+/******/ 		13: 0
+/******/ 	};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		if(installedChunks[chunkId] === 0)
+/******/ 			return Promise.resolve();
+
+/******/ 		// an Promise means "currently loading".
+/******/ 		if(installedChunks[chunkId]) {
+/******/ 			return installedChunks[chunkId][2];
+/******/ 		}
+/******/ 		// start chunk loading
+/******/ 		var head = document.getElementsByTagName('head')[0];
+/******/ 		var script = document.createElement('script');
+/******/ 		script.type = 'text/javascript';
+/******/ 		script.charset = 'utf-8';
+/******/ 		script.async = true;
+/******/ 		script.timeout = 120000;
+
+/******/ 		if (__webpack_require__.nc) {
+/******/ 			script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 		}
+/******/ 		script.src = __webpack_require__.p + "" + ({"11":"app","12":"vendor"}[chunkId]||chunkId) + "." + {"0":"9f1fd0246336b3c62c45","1":"f1bcbc9a02609fddf712","2":"574a9c6ac0b748f1a776","3":"c3cf7228cfe9c65c7a85","4":"1a27e1584c80f9e234ee","5":"1e96c80494af22546965","6":"155bddedc0aae1963873","7":"82b784544980e719fd78","8":"003180db9c71ba7b5985","9":"cf8e9c5d77e82d4e4299","10":"c0f326128732a56e0a03","11":"e5d8201e368506211a6c","12":"134d42434d5ee06f0e0f"}[chunkId] + ".js";
+/******/ 		var timeout = setTimeout(onScriptComplete, 120000);
+/******/ 		script.onerror = script.onload = onScriptComplete;
+/******/ 		function onScriptComplete() {
+/******/ 			// avoid mem leaks in IE.
+/******/ 			script.onerror = script.onload = null;
+/******/ 			clearTimeout(timeout);
+/******/ 			var chunk = installedChunks[chunkId];
+/******/ 			if(chunk !== 0) {
+/******/ 				if(chunk) chunk[1](new Error('Loading chunk ' + chunkId + ' failed.'));
+/******/ 				installedChunks[chunkId] = undefined;
+/******/ 			}
+/******/ 		};
+
+/******/ 		var promise = new Promise(function(resolve, reject) {
+/******/ 			installedChunks[chunkId] = [resolve, reject];
+/******/ 		});
+/******/ 		installedChunks[chunkId][2] = promise;
+
+/******/ 		head.appendChild(script);
+/******/ 		return promise;
+/******/ 	};
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "./";
+
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/ })
+/************************************************************************/
+/******/ ([]);</script>
+    
+  <script type="text/javascript" src="./vendor.134d42434d5ee06f0e0f.bundle.js"></script><script type="text/javascript" src="./app.e5d8201e368506211a6c.bundle.js"></script></body>
 
 
-  <script>
 
 
 </html>

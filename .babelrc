@@ -1,7 +1,10 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
-  "env": {
-    // only enable it when process.env.NODE_ENV is 'development' or undefined
+  "presets": ["es2015","stage-0", "react"],
+  "plugins": ["syntax-dynamic-import"],
+   "env": {
+    "production": {
+      "presets": ["babili"]
+    },
     "development": {
       "plugins": [["react-transform", {
         "transforms": [{

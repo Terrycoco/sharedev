@@ -1,0 +1,110 @@
+@import '../../styles/_colors';
+@import '../../styles/_spacing';
+@import '../../styles/_flex';
+@import '../../styles/_mixins';
+
+
+
+
+@media all and (orientation: landscape) {
+  .directions {
+    position: absolute; //to page
+    left: 70%;
+    top: 0;
+    overflow-y: auto;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    max-height: 100vh;
+    max-height: 100%;
+    min-height: 100%;
+    width: 30%;
+  }
+}
+
+@media all and (orientation: portrait) {
+  .directions {
+    position: absolute; //to page
+    left: 0;
+    top: 50%;
+    width: 100%;
+    overflow-y: auto;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    padding-bottom: 4rem;
+  }
+}
+
+.next-stop {
+  @include center-all;
+  @include flexcolumn;
+  background: $light;
+}
+
+.next-stop-button{
+  @include center-all;
+  @include flexcolumn;
+  padding: .5rem;
+  margin: .5rem;
+  border: 1px solid $primary;
+  border-radius: 3px;
+  background: $light;
+}
+
+.next-title {
+  @include center-all;
+  color: $primary;
+  font-size: .8em;
+  font-weight: bold;
+}
+.next-address {
+  @include center-all;
+  font-size: .8em;
+  font-weight: bold;
+  margin-top: .4rem;
+  color: $deep;
+ 
+}
+.maneuver-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow-y: scroll;
+}
+
+.maneuver-title {
+  font-size: .9em;
+  background: $primary;
+  color: $light;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.maneuver {
+  list-style-type: none;
+  font-size: .8em;
+  background: $light;
+  margin-right: .5rem;
+  margin-left: .5rem;
+  padding: .5em;
+}
+
+.current {
+  background: lighten($highlight, 15%);
+}
+
+//add large bottom margin
+.last {
+  padding-bottom: 4rem;
+}
+
+
+
+
+
+
+

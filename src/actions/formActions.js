@@ -55,7 +55,7 @@ export function goWithAuth(pageIdx, fromDir, params) {
   return function(dispatch, getState) {
     //is user authenticated?
     if (!getState().auth.authenticated) {
-      dispatch(requestRoute('/signin','left'));
+      dispatch(requestRoute('signin','left'));
       return null;
     } else {
       dispatch(requestRoute(this.getState().toRoute, 'right'));

@@ -33,8 +33,7 @@ class Signin extends Component {
     this.doCancel = this.doCancel.bind(this);
   }
 
-
-  componentWillMount() {
+  componentDidMount() {
     this.props.clearError();
   }
 
@@ -47,7 +46,7 @@ class Signin extends Component {
   }
 
   doCancel() {
-    this.props.requestRoute('home');
+    this.props.requestRoute('home', 'left');
   }
 
   handleChange(name, e) {
@@ -67,7 +66,7 @@ class Signin extends Component {
   render() {
     return (
       <div className="PAGE SEARCH" key="signin">
-         <PageBar title="Signin" leftIcon="hamburger" backTo="/" />
+         <PageBar title="Signin" iconLeft="hamburger" onLeft="home" />
 
          <div className="CONTENT center-children">
            <div className="FORM" id="signin-form">
@@ -121,4 +120,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {actions})(Signin);
+export default connect(mapStateToProps, actions)(Signin);

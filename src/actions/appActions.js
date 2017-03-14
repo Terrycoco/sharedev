@@ -24,6 +24,12 @@ export function welcomed() {
   };
 }
 
+export function showedRotate() {
+  return {
+    type: a.SHOWED_ROTATE
+  };
+}
+
 export function setPrevPath(prevPath) {
   return {
     type: a.PREV_PATH,

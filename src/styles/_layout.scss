@@ -1,28 +1,37 @@
 @import './_spacing.scss';
 
+html,
+body {
+  position: fixed;
+  overflow: hidden;
+}
+
 
 .APP {
-  position: relative;
-  z-index: 0;
-  min-height: 100vh;
-}
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+} 
+
 
 
 //this contains PageBar and Content
-.PAGE {
-  min-height: 100vh;
-  overflow-y: auto;
-  position: relative;
+//will scroll if extends beyond screen
+//height set responsively
+.HOME, .PAGE {
+  position: relative; //parent of pagebar & content
+  height: 100%;
+  height: 100vh;
   width: 100%;
-  top: 0;
-  left: 0;
+  width: 100vw;
+  overflow-y: hidden;  //shouldn't 
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
-//instead of page just for image
+
+// -- has image
 .HOME {
-  max-height: 100vh;
-  overflow-y: hidden;
-  position: relative;
-  width: 100%;
   background: url('/images/moccasins.jpg') !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
@@ -30,23 +39,19 @@
   background-size: cover !important; // this makes img full-screen (full-width & full-height)
 }
 
-    // .PAGEBAR {
-    //   background: green;
-    //   width: 100%;
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    //   height: $pagebar_height_sm; //2em
-    //   z-index: 10;
-    // }
-
+   
+//below the pagebar
+//absolute to the page
+//full height and width
+//is flex parent (row wrap)
     .CONTENT {
-      position: absolute;
+      position: absolute; //to page
+      height: $content_height_sm;
       top: $pagebar_height_sm;
       left: 0;
-      width: 100%;
-      min-height: $content_height_sm;
-      overflow-y: auto;
+      width: 100vw;
+      overflow-y: auto; 
+      -webkit-overflow-scrolling: touch;
 
       //flex
       display: -webkit-flex;
@@ -56,8 +61,8 @@
       flex-flow: row wrap;
 
       //horiz align
-      -webkit-justify-content: space-around;
-      justify-content: space-around;
+      -webkit-justify-content: center;
+      justify-content: center;
 
       //vert align
       -webkit-align-items: stretch;
@@ -65,51 +70,51 @@
 
       -webkit-align-content: stretch;
       align-content: stretch;
-
     }
 
-
-
-
-        //child of content --will wrap on small screens
-        .COLUMN {
-          max-width: 600px;
-          min-width: 300px;
+        //child of content
+        //each column is 1 flex unit
+        //children will be centered on screen
+        .COLUMN-1 {
+          flex: 1;
           flex-basis: 100%;
-          z-index: 20;
-          background: transparent;
+          overflow-x: hidden;
+
+          //as parent
+          display: -webkit-flex;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
         }
 
+         //form has lots of padding on sides for readability
+        .FORM {
+          flex: 1;
+          max-width: 500px;
+          height: 100vh;
+          overflow-y: auto;
 
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+
+         //list is full width across
+        .LIST {
+          flex: 1;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          max-width: 500px;
+          min-height: 90%;
+          width: 100%;
+        }
 
 
 @media all and (min-width: 668px) {
   .CONTENT {
       top: $pagebar_height_md;
       min-height: $content_height_md;
-      width: 100%;
   }
 
 
-
-  .COLUMN {
-    flex-basis: 50%;
-  }
-}
-
-//---------WALKING MAP  -----
-@media screen and (orientation:landscape)
-{
-   .half-page 
-   {
-      width: 50vw;
-      height: $content_height_sm;
-      overflow-y: hidden;
-   }
-   .page-60 {
-    width: 60vw;
-    height: $content_height_sm;
-    overflow-y: hidden;
-   }
 }
 

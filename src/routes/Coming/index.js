@@ -17,13 +17,15 @@ class Coming extends Component {
     let style = {zIndex: this.props.zindex};
     return (
       <div style={style} className="PAGE ABOUT" key="about">
-        <PageBar title="Coming Soon" leftIcon="hamburger" backTo="home" />
+        <PageBar title="Coming Soon" iconLeft="hamburger" onLeft="home" />
         <div className="CONTENT center-children">
+        <div className="FORM">
          <div className="textbox">
             <h4 className="header">Coming Soon</h4>
             <p>Hi and thanks for visiting ShareWalks!</p>
             <p>We are hard at work finishing this feature.  If you like what you see, we'd love to hear from you!</p>
             <p><a href= "mailto:sharewalks1@gmail.com">Send Feedback</a></p>
+        </div>
         </div>
         </div>
       </div>

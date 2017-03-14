@@ -32,11 +32,15 @@ const INITIAL_STATE = {
   selectedWalk: {
     id: null,
     geoJson: {},
-    route: [],  
+    route: [],  //always 1 less than stops
     attributes: [], 
     stops: [],
-    selectedStopIdx: 1,
+    selectedStopIdx:0,
     selectedManeuverIdx: 0
+  },
+
+  ui: {
+    drawerOpen: false
   }
 };
 
@@ -75,12 +79,21 @@ export default function(state=INITIAL_STATE, action) {
      newstate = Object.assign({}, state, {selectedWalk: newobj});
      break;
     case s.SAVE_STOP_IDX:
-      newobj = Object.assign({}, state.selectedWalk, {selectedStopIdx: action.payload});
+      newobj = Object.assign({}, state.selectedWalk, {selectedStopIdx: action.payload, selectedManeuverIdx: 0});
       newstate = Object.assign({}, state, {selectedWalk: newobj });
       break;
     case s.CURRENT_MANEUVER:
       newobj = Object.assign({}, state.selectedWalk, {selectedManeuverIdx: action.payload});
       newstate = Object.assign({}, state, {selectedWalk: newobj });
+      break;
+    case s.TOGGLE_DRAWER:
+       newstate = Object.assign({}, state, {ui: {drawerOpen: !state.ui.drawerOpen }});
+      break;
+    case s.CLOSE_DRAWER:
+       newstate = Object.assign({}, state, {ui: {drawerOpen: false }});
+      break;
+    case s.OPEN_DRAWER:
+       newstate = Object.assign({}, state, {ui: {drawerOpen: true }});
       break;
     //also listen when user logs in to parse out mywalks
     case a.AUTH_USER:

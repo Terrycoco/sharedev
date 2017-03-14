@@ -1,4 +1,5 @@
 // app-wide styles
+@import '~react-screen-orientation/src/index';
 @import '../../styles/_layout';
 @import '../../styles/_colors';
 @import '../../styles/_spacing';
@@ -15,9 +16,9 @@ div#preload{ display: none;}
   padding: 0; 
   }
 
+
+
 html, body {
-  height: 100%;
-  width: 100%;
   padding: 0;
   margin: 0;
   font-family: 'Lato', 'Verdana', 'Helvetica',  sans-serif;
@@ -27,10 +28,11 @@ html, body {
   color: $dark;
   background-color: $light;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
 
-html {
-  overflow: hidden; }
+}
+
+
 
 body {
   display: -webkit-box;
@@ -56,7 +58,7 @@ body {
   -webkit-align-content: stretch;
       -ms-flex-line-pack: stretch;
           align-content: stretch;
-}
+    }
 
 
 

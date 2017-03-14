@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -13,11 +14,11 @@ require('react-tap-event-plugin')();
 
 const store = createStore(
   reducers,
-  compose( 
+  compose(
     applyMiddleware(
       reduxThunk
     ),
-    window.devToolsExtension ? 
+    process.env.NODE_ENV == 'development' && window.devToolsExtension ? 
         window.devToolsExtension() : f => f
   )
 );
