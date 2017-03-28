@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   offline: false,  //assume online,
   welcomed: false,
   prevPath: '',
-  rotate: true
+
 };
 
 

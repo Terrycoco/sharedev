@@ -1,15 +1,14 @@
-//page bar
 @import '../../styles/_colors';
 @import '../../styles/_spacing';
 
 .PageBar {
-  position: fixed;
+  flex: 0 0 $pagebar_height_sm;  //child of PAGE
   top: 0;
   left: 0;
-  z-index: 9000;
   background-color: $primary;
   height: $pagebar_height_sm; //2em
   width: 100%;
+  width: 100vw;
   box-shadow: 1px 1px 1px #888;
   display: flex;
   flex-direction: row;
@@ -50,11 +49,12 @@
 
 
 
-@media all and (min-width: 668px) {
+@media all and (min-width: 769px) {
   .PageBar {
+    flex: 0 0 $pagebar_height_md;
     height: $pagebar_height_md; //3em
   }
   .PageBar .left, .PageBar .right {
-  height: $pagebar_height_md;
+     height: $pagebar_height_md;
   }
 }

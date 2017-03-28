@@ -1,5 +1,8 @@
 const n = require('actions/types').nav;
 
+
+
+
 export function requestRoute(route, dir) {
   return {
     type: n.REQUEST_ROUTE,
@@ -14,3 +17,8 @@ export function routeLoaded() {
   };
 }
 
+export function goBack() {
+  return {
+    type: n.GO_BACK
+  };
+}

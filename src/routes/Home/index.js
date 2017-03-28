@@ -2,21 +2,32 @@ import React, { Component } from 'react';
 import PageBar from 'components/PageBar';
 import Link from 'navigation/Link';
 import {isProd} from 'utils/environment';
-import {connect} from 'react-redux';
+
 
 require('./home.scss');
+
+let imgUrl = require('./moccasins_mini.jpg');
+let styles = {
+  root: {
+    width: '100%',
+    height: '100vh',
+    backgroundImage: 'url(' + imgUrl + ')',
+    backgroundSize: 'cover',
+    overflow: 'hidden',
+    backgroundPosition: 'bottom center'
+  }
+};
 
 class Home extends Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
     return (
-     <div className="HOME" >
-         <PageBar title="ShareWalks" />
-         <div className="CONTENT" >
+     <div className="PAGE" >
+        <PageBar title="ShareWalks" />
+         <div className="HOME" style={styles.root}>
             <nav className="COLUMN-1">
               <ul className="main-menu">
                  <li ><Link key="search" to="search" fromDir="right"><span>Find A Walk</span><img className="fade" src="/images/right_arrow.png"/></Link></li>
@@ -32,11 +43,4 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { 
-
-  };
-}
-
-
-export default connect(mapStateToProps)(Home);
+export default Home;

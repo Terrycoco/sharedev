@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from 'actions';
-
+import sizing from 'styles/sizing';
+import L from 'leaflet';
 
 require('./maps.scss');
 
@@ -16,6 +17,7 @@ class LeafletMap extends Component {
       selectedWalkId: null
     };
     this.updateLayers = this.updateLayers.bind(this);
+    this.sizeMap = this.sizeMap.bind(this);
   }
 
   componentDidMount() {
@@ -99,9 +101,18 @@ class LeafletMap extends Component {
     map = null;
   }
 
+  sizeMap() {
+    if (this.props.browser.lessThan.medium) {
+      return {width: this.props.browser.width, height: this.props.browser.height - sizing.header.sm};
+    } else {
+      return {width: this.props.browser.width * .49, height: this.props.browser.height - sizing.header.md};
+    }
+  }
+
   render() {
+    let style = this.sizeMap();
     return (
-        <div id="map" className="map-container" >
+        <div id="map" className="map-container" style={style} >
         </div>
     );
   }
@@ -110,7 +121,8 @@ class LeafletMap extends Component {
 function mapStateToProps(state) {
   return {
     here: state.geo.here,
-    features: state.walks.walks.features
+    features: state.walks.walks.features,
+    browser: state.browser
   };
 
 }

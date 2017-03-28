@@ -10,5 +10,5 @@ export function isProd() {
 }
 
 export function getApi() {
-  return isProd() ? config.production.api : config.development.api;
+  return (isProd()) ? config.production.api : config.development.api;
 }

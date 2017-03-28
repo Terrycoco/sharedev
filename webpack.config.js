@@ -15,21 +15,6 @@ const extractCommons = new webpack.optimize.CommonsChunkPlugin({
     }
 });
 
-// const routes = {
-//   home: sourcePath + '/routes/Home',
-//   search: sourcePath + '/routes/Search',
-//   create: sourcePath + '/routes/Create',
-//   results: sourcePath + '/routes/Results',
-//   summary: sourcePath + '/routes/Summary',
-//   mywalks: sourcePath + '/routes/MyWalks',
-//   about: sourcePath + '/routes/About',
-//   signin: sourcePath + '/components/Auth/Signin',
-//   signup: sourcePath + '/components/Auth/Signup',
-//   stops: sourcePath + '/routes/Stops',
-//   test: sourcePath + '/routes/Test',
-//   coming: sourcePath + '/routes/Coming',
-//   walking: sourcePath + '/routes/Walking'
-// };
 
 // Okay, this may be confusing at first glance but go through it step-by-step
 module.exports = env => {
@@ -46,7 +31,9 @@ module.exports = env => {
     cache: false,
     entry: {
       app: sourcePath + '/entry.js',
-      vendor: ["react", "react-dom"]
+      randr: ["react", "react-dom","redux", "react-redux", "redux-thunk"],
+      leaflet: ["leaflet"]
+
     },
     /**
      * output tells webpack where to put the files he creates
@@ -103,6 +90,7 @@ module.exports = env => {
       routes:      path.resolve(__dirname, 'src', 'routes'),
       utils:       path.resolve(__dirname, 'src', 'utils'),
       styles:      path.resolve(__dirname, 'src', 'styles'),
+      images:      path.resolve(__dirname, 'public', 'images')
     },
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
     modules: [
@@ -134,13 +122,14 @@ module.exports = env => {
       },
   },
 
+
     plugins: removeEmpty([ //array of plugins
       
       extractCommons,
 
           //css files
       new ExtractTextPlugin('shared.css'),
-      new webpack.HotModuleReplacementPlugin(),
+      // new webpack.HotModuleReplacementPlugin(),
 
       // *
       // * HtmlWebpackPlugin will make sure out JavaScript files are being called

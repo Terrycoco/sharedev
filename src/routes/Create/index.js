@@ -3,14 +3,16 @@ import PageBar from 'components/PageBar';
 import * as actions from 'actions';
 import {connect} from 'react-redux';
 import SlideIn from 'components/Transitions/SlideIn';
-import create0 from 'components/Forms/Create/0';
-import create1 from 'components/Forms/Create/1';
-
+import RaisedButton from 'material-ui/RaisedButton';
+import create0 from './Content/0';
+import create1 from './Content/1';
+import create2 from './Content/2';
 
 
 const pages = [
   create0, 
-  create1
+  create1,
+  create2
 ];
 
 
@@ -20,12 +22,14 @@ class Create extends Component {
   constructor(props, context){
     super(props, context);
     this.goIfAuthorized = this.goIfAuthorized.bind(this);
+    this.goNext = this.goNext.bind(this);
+    this.goBack = this.goBack.bind(this);
+    this.state = {
+      lastPage: 2
+    };
   }
 
-
-  
   goIfAuthorized(props) {
- 
     //first page is allowed in all cases
     //to go further - user must be authenticated
     if (props.pageIdx == 0) {
@@ -33,7 +37,7 @@ class Create extends Component {
     } else {
       //other pages
       if (!props.authenticated) {
-        //come back here
+        //then come back here
         props.authRoute('create');
         //now redirect
         this.props.requestRoute('signin','left');
@@ -48,11 +52,24 @@ class Create extends Component {
     this.goIfAuthorized(this.props);
   }
 
+
   componentWillUpdate(nextProps) {
     //only if pageIdx changes
     if (nextProps.pageIdx != this.props.pageIdx) {
        this.goIfAuthorized(nextProps);
      }
+  }
+
+  goNext() {
+    if (this.props.pageIdx == this.state.lastPage) {
+      this.props.requestRoute("coming", "right");
+    } else {
+      this.props.createGoNext(this.props.pageIdx + 1, "right");
+    }
+  }
+
+  goBack() {
+    this.props.createGoNext(this.props.pageIdx - 1, "left");
   }
  
   
@@ -63,7 +80,15 @@ class Create extends Component {
         <div className="CONTENT">
           <div className="COLUMN-1">
            <this.state.component />
-           </div>
+          </div>
+          {(this.props.pageIdx > 0 ? 
+          <div className="FIXED-FOOTER">
+            <div className="button-group">
+              <RaisedButton label="Back" secondary={true} onClick={this.goBack} />
+              <RaisedButton label="Next" secondary={true} onClick={this.goNext} />
+            </div>
+            </div> : null )}
+
         </div>
       </div>
     );

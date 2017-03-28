@@ -1,1 +1,44 @@
+@import './_colors';
+@import './_spacing';
+
+
+.form {
+  max-width: $form_max_width;
+}
+
+//search
+.descr {
+  font-size: .8em;
+  color: gray;
+}
+
+.descr em {
+  color: $accent;
+}
+
+
+//create
+.form-text {
+  margin-top: 2em;
+}
+
+.form-text p {
+  line-height: 1.5;
+  margin-bottom: 1em;
+  padding-left: 2px;
+}
+
+
+
+.button-group {
+  width: 100%;
+  max-width: $form_max_width;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 

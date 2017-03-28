@@ -11,7 +11,7 @@ import {theme} from 'styles/theme';
 
 
 require('./auth.scss');
-require('../Forms/forms.scss');
+require('styles/_forms.scss');
 
 const style = {
   errors: {

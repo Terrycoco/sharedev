@@ -35,12 +35,14 @@ const INITIAL_STATE = {
     route: [],  //always 1 less than stops
     attributes: [], 
     stops: [],
-    selectedStopIdx:0,
+    selectedStopIdx: 0,
+    lastStopIdx: null,
     selectedManeuverIdx: 0
   },
 
   ui: {
-    drawerOpen: false
+    drawerOpen: false,
+    isFlipped: false
   }
 };
 
@@ -71,7 +73,8 @@ export default function(state=INITIAL_STATE, action) {
      newstate = Object.assign({}, state, {selectedWalk: newobj});
      break;
     case s.SAVE_STOPS:
-     newobj = Object.assign({}, state.selectedWalk, {stops: action.payload});
+     let lastStop = action.payload.length - 1;
+     newobj = Object.assign({}, state.selectedWalk, {stops: action.payload, lastStopIdx: lastStop});
      newstate = Object.assign({}, state, {selectedWalk: newobj });
      break;
     case s.SAVE_ROUTE:
@@ -87,13 +90,16 @@ export default function(state=INITIAL_STATE, action) {
       newstate = Object.assign({}, state, {selectedWalk: newobj });
       break;
     case s.TOGGLE_DRAWER:
-       newstate = Object.assign({}, state, {ui: {drawerOpen: !state.ui.drawerOpen }});
+       newobj = Object.assign({}, state.ui, {drawerOpen: !state.ui.drawerOpen });
+       newstate = Object.assign({}, state, {ui: newobj });
       break;
     case s.CLOSE_DRAWER:
-       newstate = Object.assign({}, state, {ui: {drawerOpen: false }});
+       newobj = Object.assign({}, state.ui, {drawerOpen: false });
+       newstate = Object.assign({}, state, {ui: newobj});
       break;
     case s.OPEN_DRAWER:
-       newstate = Object.assign({}, state, {ui: {drawerOpen: true }});
+      newobj = Object.assign({}, state.ui, {drawerOpen: true });
+       newstate = Object.assign({}, state, {ui: newobj});
       break;
     //also listen when user logs in to parse out mywalks
     case a.AUTH_USER:

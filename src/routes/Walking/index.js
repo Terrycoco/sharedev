@@ -17,20 +17,24 @@ class Walking extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isFlipped: false //flip shows the map
+      isFlipped: false,
+      width: 314,
+      height: 300
     };
     this.handleClick = this.handleClick.bind(this);
     this.toNext = this.toNext.bind(this);
     this.toPrev = this.toPrev.bind(this);
     this.flip = this.flip.bind(this);
     this.goToTop = this.goToTop.bind(this);
+    this.responsiveDesign = this.responsiveDesign.bind(this);
+    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
   componentDidUpdate() {
     this.goToTop();
   }
 
-
+  
   flip() {
     this.setState({isFlipped: !this.state.isFlipped});
     console.log('flip after set', this.state.isFlipped);
@@ -38,17 +42,14 @@ class Walking extends Component {
   }
 
   toNext() {
-    //called back from drawer directions
     let nextStopIdx = this.props.selectedStopIdx + 1;
     if (nextStopIdx <= this.props.stopCount - 1  ) {
       this.props.saveStopIdx(nextStopIdx);
-   }
+    }
   }
 
   goToTop() {
-    console.log('flip goToTop', this.state.isFlipped);
     if (!this.state.isFlipped) {
-      console.log('got here');
       document.getElementById('toppage').scrollIntoView();
     }
   }
@@ -62,35 +63,70 @@ class Walking extends Component {
     }
   }
 
+  toggleDrawer() {
+    this.props.toggleDrawer();
+  }
+
   handleClick(e) {
     e.preventDefault();
     let walkId = this._name.value;
     this.props.getWalkStops(walkId ); //opens stops after
   }
+
+
+
+  responsiveDesign() {
+    if (this.props.browser.lessThan.medium) {
+      return [
+      <PageBar key="pagebar" title="Walking" iconLeft="hamburger" onLeft="home" iconRight={(this.state.isFlipped) ? "info" : "Map"} onRight={this.flip} />,
+      <div key="content" className="CONTENT-NOT-PARENT">  
+        <div className={(this.state.isFlipped) ? 'flip-container flip' : 'flip-container'}>
+            <div className="flipper">
+              <div className="front FLIP-CONTENT" >
+                  <div className="COLUMN-1">
+                    <StopDetail isShowing={!this.state.isFlipped} />
+                  </div>
+              </div>
+              <div className="back FLIP-CONTENT" >
+                  <div className="COLUMN-1" >
+                     <WalkingMap />
+                   </div>
+              </div>
+            </div>
+        </div>
+        </div>];
+     } else {
+       return [
+         <PageBar key="pagebar" title="Walking" iconLeft="hamburger" onLeft="home" />,
+          <div key="content" className="CONTENT"> 
+             <div key="1" className="COLUMN-1">
+                 <StopDetail isShowing={!this.state.isFlipped} />
+             </div>,
+             <div key="2" className="COLUMN-1">
+                 <WalkingMap />
+             </div>
+         </div>
+        ];
+     }
+    
+  }
   
   render() {
+    let prevClass = null;
+    let nextClass = null;
+    if (this.props.selectedStopIdx == 0 ) {
+      prevClass = "disabled";
+    } else if (this.props.selectedStopIdx == this.props.lastStopIdx) {
+      nextClass = "disabled";
+    }
     return (
       <div className="PAGE" key="walking">
-        <PageBar title="Walking" iconLeft="goLeft" onLeft="summary" iconRight={(this.state.isFlipped) ? "info" : "Map"} onRight={this.flip} />
-        <div className="CONTENT">
-          <div className="COLUMN-1">
-           <div className={(this.state.isFlipped) ? 'flip-container flip' : 'flip-container'}>
-              <div className="flipper">
-                <div className="front" >
-                  <StopDetail isShowing={!this.state.isFlipped} />
-                </div>
-                 <div className="back" >
-                  <WalkingMap />
-                  <Directions onNextStopClick={this.toNextStop}  />
-                </div>
-              </div>
-            </div> 
-           
-            <div className="stop-btns">
-             <button className="btn-sm" onClick={this.toPrev}>Prev</button>
-             <button className="btn-sm" onClick={this.toNext}>Next</button>
-           </div>
-          </div>
+        {this.responsiveDesign()}
+        <Drawer><Directions/></Drawer>
+        <div className="FIXED-FOOTER stop-btns">
+           <button className={"btn-sm " + prevClass} onClick={this.toPrev} disabled={(prevClass ? true : false)}>Prev</button>
+           <button className="btn-sm dir-btn" onClick={this.toggleDrawer} >Directions</button>
+           <button className={"btn-sm " + nextClass} onClick={this.toNext} disabled={(nextClass ? true : false)} >Next</button>
         </div>
       </div>
     );
@@ -101,7 +137,10 @@ function mapStateToProps(state) {
    let selectedWalk = state.walks.selectedWalk;
   return {
     stopCount: selectedWalk.stops.length,
-    selectedStopIdx: selectedWalk.selectedStopIdx
+    selectedStopIdx: selectedWalk.selectedStopIdx,
+    lastStopIdx: selectedWalk.lastStopIdx,
+    browser: state.browser,
+    drawerOpen: state.walks.ui.drawerOpen
   };
 }
 

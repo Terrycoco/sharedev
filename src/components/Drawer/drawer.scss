@@ -1,84 +1,30 @@
 @import '../../styles/_spacing';
 @import '../../styles/_colors';
 
-.toggle {
-  transition-property: all;
-  transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+.slider {
+  position: fixed;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+  bottom: $footer_height_sm;
+  z-index: 10000;
+  background: $secondary;
+  max-height: 0;            
+  overflow-y: hidden;
+  -webkit-transition: max-height 0.8s ease-in-out;
+  -moz-transition: max-height 0.8s ease-in-out;
+  -o-transition: max-height 0.8s ease-in-out;
+  transition: max-height 0.8s ease-in-out;
 }
 
-
-//SMALL LANDSCAPE --fix to right side
-@media screen and (orientation: landscape) {
-
-  .toggle {
-    padding:0px 0px 0px 0px;
-    text-align: center;
-    margin:0px;
-    min-height: 1em;
-    width: calc(#{$content_height_sm} - 5rem);
-    background: $primary;
-    color: $light;
-    z-index:15;
-    border-radius: 5px 5px 0px 0px;
-    -moz-transform:rotate(-90deg);
-    -ms-transform:rotate(-90deg);
-    -o-transform:rotate(-90deg);
-    -webkit-transform:rotate(-90deg);
-    transform-origin: bottom right;
-    position: fixed;
-    right: 0px;
-  }
-
-  .drawer {
-    min-height: $content_height_sm;
-    overflow-y: auto;
-    background: $light;
-    position: fixed;
-    width: 30vw;
-    z-index: 10000;
-    top: $pagebar_height_sm;
-    left: 100vw;
-    transition-property: all;
-    transition-duration: .5s;
-    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .drawer.open {
-    left: 70vw;
-  }
-  .drawer.open .toggle {
-    right: 30vw;
-  }
+.slider.closed {
+  max-height: 0;
+  overflow-y: hidden;
 }
 
-//SMALL PORTRAIT -- open and close on bottom
-@media screen and (orientation: portrait) {
-  .toggle {
-    border-radius: 5px 5px 0px 0px;
-    min-height: $drawer_closed;
-    padding: .5em;
-    background: $primary;
-    color: $light;
-  }
-  .drawer {
-    position: fixed;
-    z-index: 10000;
-    width: 100vw;
-    height: $drawer_closed;
-    overflow-y: hidden;
-    top: $drawer_closed_top;
-    left: 0;
-    transition-property: all;
-    transition-duration: .5s;
-    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-  }
-
-  .drawer.open {
-    height: $drawer_open;
-    top: $drawer_open_top;
-  }
-
+.slider.open {
+  max-height: 500px;
+  overflow-y: auto;
 }

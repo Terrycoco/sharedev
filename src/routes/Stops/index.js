@@ -29,7 +29,7 @@ class Stops extends Component {
   render() {
     return (
       <div className="PAGE" key="results">
-        <PageBar title="Walk Stops" iconLeft="goLeft" onLeft="summary" textRight={(this.state.isFlipped) ? "List" : "Map"} onRight={this.flip} />
+        <PageBar title="Walk Stops" iconLeft="goLeft" onLeft="summary" iconRight={(this.state.isFlipped) ? "List" : "Map"} onRight={this.flip} />
         <div className="CONTENT">
           <input ref={input => this._name = input} id="walkStopId" className="hidden"></input>
           <button id="goToStop" onClick={this.handleClick} className="hidden"></button>

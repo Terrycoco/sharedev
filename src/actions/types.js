@@ -41,7 +41,8 @@ export const auth = {
 export const form = {
   LOAD_COMMON: 'LOAD_COMMON',
   CREATE_GO_NEXT: 'CREATE_GO_NEXT',
-  SAVE_PAGE_IDX: 'SAVE_PAGE_IDX'
+  SAVE_PAGE_IDX: 'SAVE_PAGE_IDX',
+  SAVE_CREATE_PARAMS: 'SAVE_CREATE_PARAMS'
 };
 
 export const nav= {

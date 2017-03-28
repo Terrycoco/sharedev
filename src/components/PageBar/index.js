@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {requestRoute} from 'actions/navActions';
 
+
 require('./pagebar.scss');
 
 const icons = {
@@ -16,8 +17,39 @@ const icons = {
 class PageBar extends Component {
   constructor(props) {
     super(props);
-    this.renderSpan = this.renderSpan.bind(this);
+    this.state = {
+      innerLeft: " ",
+      innerRight: " "
+    };
     this.getHandler = this.getHandler.bind(this);
+    this.setInner = this.setInner.bind(this);
+  }
+
+
+
+  componentDidMount() {
+    this.setInner(this.props);
+  }
+
+  setInner(props) {
+    //sets state
+    if (props.iconLeft && icons[props.iconLeft]) {
+      this.setState({innerLeft: <img src={icons[props.iconLeft]} />});
+    //if text 
+    } else  {
+      this.setState({innerLeft: props.iconLeft});
+    }
+
+    if (props.iconRight && icons[props.iconRight]) {
+      this.setState({innerRight: <img src={icons[props.iconRight]} />});
+    //if text 
+    } else  {
+      this.setState({innerRight: props.iconRight});
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+   this.setInner(nextProps);
   }
 
   getHandler(side) {
@@ -26,7 +58,7 @@ class PageBar extends Component {
         //if passed in use it
         if (typeof passed === 'function') {
           return function(event) {
-            passed();
+            passed(); //flips
           }
         }
         else if (passed === 'prev') {
@@ -53,30 +85,13 @@ class PageBar extends Component {
 
   }
 
-  renderSpan(side) {
-    let inner;
-    //if icon called for show it
-    if (this.props['icon'+ side]) {
-      if (icons[this.props['icon'+ side]])
-         inner = <img className="fade" src={icons[this.props['icon' + side]]} />;
-      //not an icon use as text (needed for flipper sometimes)
-      else {
-         inner = this.props['icon'+ side];
-      }
-    //if text 
-    } else if (this.props['text' + side]) {
-      inner = this.props['text' + side];
-    }
-    return <span className={"fade " + side} onClick={this.getHandler(side)}>{inner}</span>;
-  }
-
 
   render() {
-       return (
+    return (
       <div className="PageBar">
-        {this.renderSpan('Left')}
-        <span className="title fade">{this.props.title}</span>
-        {this.renderSpan('Right')}
+        <span className="Left" onClick={this.getHandler("Left")}>{this.state.innerLeft}</span>
+        <span className="title">{this.props.title}</span>
+        <span className="Right" onClick={this.getHandler("Right")}>{this.state.innerRight}</span>
       </div>
     );
   }

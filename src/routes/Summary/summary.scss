@@ -1,9 +1,7 @@
 @import '../../styles/_colors';
 @import '../../styles/_spacing';
 
-#summarypage {
-  padding-top: 1rem;
-}
+
 
 .byline {
   font-size: .8em;
@@ -34,12 +32,6 @@ hr.accent {
   margin-bottom: 1rem;
 }
 
-hr.primary {
-  border-top: 2px solid $primary;
-  border-color: $primary;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
 
 .btn-group {
   margin-top: 1rem;

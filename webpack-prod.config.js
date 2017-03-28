@@ -7,6 +7,9 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano');
+
 // const routes = {
 //   home: sourcePath + '/routes/Home',
 //   search: sourcePath + '/routes/Search',
@@ -106,6 +109,7 @@ module.exports = env => {
       routes:      path.resolve(__dirname, 'src', 'routes'),
       utils:       path.resolve(__dirname, 'src', 'utils'),
       styles:      path.resolve(__dirname, 'src', 'styles'),
+      images:      path.resolve(__dirname, 'public', 'images')
     },
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
     modules: [
@@ -121,7 +125,25 @@ module.exports = env => {
       new ExtractTextPlugin({
           filename:  "shared.css",
           allChunks: true
-        }),
+      }),
+
+      new OptimizeCssAssetsPlugin({
+          cssProcessor: cssnano,
+          cssProcessorOptions: {
+            discardComments: { removeAll: true },
+            safe: true, // crucial in order not to break anything
+            autoprefixer: {
+              add: true,
+              browsers: [
+                'last 4 versions',
+                'android 4',
+                'opera 12',
+                'ie 9'
+              ]      
+            }
+          },
+          canPrint: true
+      }),
     
       // Take out process env checks
       new webpack.DefinePlugin({

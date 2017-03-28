@@ -20,6 +20,7 @@ class Directions extends Component {
     this.renderItems = this.renderItems.bind(this);
     this.getClickHandler = this.getClickHandler.bind(this);
     this.renderNextStop = this.renderNextStop.bind(this);
+    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
 
@@ -32,23 +33,31 @@ class Directions extends Component {
     return handler;
   }
   
+  toggleDrawer() {
+    this.props.toggleDrawer();
+  }
 
   renderNextStop() {
     //this is the end of the walk?
-    let addr = this.props.stops[this.props.selectedStopIdx + 1].address;
-    let title = this.props.stops[this.props.selectedStopIdx + 1].pt_title;
-    return [<div key="addr" className="next-stop">
-                <div className="next-stop-button">
-                  <div className="next-title">{title}</div>
-                  <div className="next-address">{addr}</div>
-                </div>
-            </div>,
-            ];
+    let nextStop = this.props.selectedStopIdx + 1;
+    if ( nextStop <= this.props.lastStopIdx) {
+      let addr = this.props.stops[nextStop].address;
+      let title = this.props.stops[nextStop].pt_title;
+      return [<div key="addr" className="next-stop">
+                  <div className="next-stop-button">
+                    <div className="next-title">{title}</div>
+                    <div className="next-address">{addr}</div>
+                  </div>
+              </div>
+              ];
+    } else {
+      return null;
+    }
   }
 
   renderItems() {
     let classname;
-    if (this.props.selectedStopIdx == this.props.route.length) {
+    if (this.props.selectedStopIdx == this.props.lastStopIdx) {
       //last stop no next stop
       return [<div key="addr" className="next-stop">
                     <div className="next-stop-button">
@@ -57,7 +66,7 @@ class Directions extends Component {
                     </div>
               </div>
                 ]; 
-    }
+    } 
 
     let maneuvers = this.props.route[this.props.selectedStopIdx].maneuvers;
 
@@ -72,7 +81,7 @@ class Directions extends Component {
       //last maneuver - you have arrived
       else if (idx == maneuvers.length - 1 ) {
         //do nothing right now
-        return <li key={man + man.index} className="maneuver last" onClick={this.getClickHandler(idx)} >You have arrived. Rotate device for Stop Info</li>;
+        return <li key={man + man.index} className="maneuver last" onClick={this.getClickHandler(idx)} >{man.narrative}</li>;
       }
       //other maneuver
       else {
@@ -85,28 +94,26 @@ class Directions extends Component {
   render() {
     return (
       <div className="fade directions" >
-         <div className="maneuver-title">Directions</div>
-          {this.renderNextStop()}
-         <ul className="maneuver-container">
-             {this.renderItems()}
-         </ul>
-
-      </div>
+          <div className="maneuver-title" onClick={this.toggleDrawer}>Directions To Next Stop</div>
+           {this.renderNextStop()}
+          <ul className="maneuver-container">
+              {this.renderItems()}
+          </ul>
+       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
+  const selectedWalk = state.walks.selectedWalk;
   return {
-    route: state.walks.selectedWalk.route,
-    stops: state.walks.selectedWalk.stops,
-    selectedStopIdx: state.walks.selectedWalk.selectedStopIdx,
-    selectedManeuverIdx: state.walks.selectedWalk.selectedManeuverIdx
+    route: selectedWalk.route,
+    stops: selectedWalk.stops,
+    selectedStopIdx: selectedWalk.selectedStopIdx,
+    lastStopIdx: selectedWalk.lastStopIdx,
+    selectedManeuverIdx: selectedWalk.selectedManeuverIdx
   };
 }
 
 export default connect(mapStateToProps, actions)(Directions);
 
-// <li key={man + man.index} className="last-stop">
-//                     <RaisedButton label="I'm Here!" style={styles.button} onClick={this.handleHere}/>
-//                </li>

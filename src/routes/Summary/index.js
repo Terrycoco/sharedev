@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PageBar from 'components/PageBar';
 import * as actions from 'actions';
-import SnakeMap from 'components/Maps/SnakeMap';
+import SnakeMap from './SnakeMap';
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
@@ -27,10 +27,6 @@ const styles = {
   cardTitle: {
     fontSize: "1em",
     fontWeight: "bold"
-  },
-  drawer: {
-    top: '50vh',
-    height: '50%'
   }
 
 };
@@ -43,6 +39,7 @@ class Summary extends Component {
     this.handleCheck = this.handleCheck.bind(this);
     this.startWalk = this.startWalk.bind(this);
     this.isSaved = this.isSaved.bind(this);
+    this.extraButton = this.extraButton.bind(this);
   }
 
   //run this as soon as mount to go ahead and get stops
@@ -75,14 +72,20 @@ class Summary extends Component {
     }
   }
 
-
+   extraButton() {
+    if (this.props.browser.lessThan.medium) {
+      return  (<div className="btn-group">
+                 <RaisedButton label="Start Walk" className="btn-primary" onClick={this.startWalk}/>
+              </div> );
+    }
+   }
 
   render() {
     
     return (
       <div className="PAGE" key="summary" >
-        <PageBar title="Walk Summary" iconLeft="goLeft" onLeft="prev" />
-        <div id="summarypage" className="CONTENT">
+        <PageBar title="Walk Summary" iconLeft="goLeft" onLeft="results" />
+        <div className="CONTENT">
           <div className="COLUMN-1">
              <div className="FORM">
                 <h4 id="walk-title">{this.props.walk.title}</h4>
@@ -98,16 +101,23 @@ class Summary extends Component {
                 <hr className="primary"/> 
                 <p className="walkdescr">{this.props.walk.descr}</p>
                 <hr className="primary"/>
-                <CardText>
-                  <p className="summary-cat">{this.props.walk.category}</p>
-                  {this.renderAttributes()}
-                </CardText> 
-                <hr className="primary"/>
-                <SnakeMap />  
+
              </div>
            </div>
-        </div>
+           <div className="COLUMN-1">
+             <div className="FORM">
+              <CardText>
+                <p className="summary-cat">{this.props.walk.category}</p>
+                  {this.renderAttributes()}
+              </CardText> 
+              <hr className="primary"/>
+              <SnakeMap />
+              <hr className="primary"/>
+               {this.extraButton()}
+            </div> 
+          </div>
       </div>
+    </div>
     );
   }
 }
@@ -116,7 +126,8 @@ function mapStateToProps(state) {
   return {
     walk: state.walks.selectedWalk,
     myWalkIds: state.walks.myWalkIds,
-    username: state.auth.username
+    username: state.auth.username,
+    browser: state.browser
   };
 }
 
@@ -135,7 +146,7 @@ why is it jumpy?
 if title is longer how will it look?
 DONE snake map - have start green and stop red
 
---make full size map & list side by side?
+--make full size map & list side by side? DONE
 
 
 */

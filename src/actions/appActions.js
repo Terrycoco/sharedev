@@ -10,8 +10,10 @@ export function updateConn(online) {
 
 
 export function checkConn() {
+  console.log('got to check Conn');
   return function(dispatch) {
     isOnline().then(online => {
+        console.log('online');
       dispatch(updateConn(online));
     });
   }

@@ -35,7 +35,6 @@ function loadCommon(payload) {
 }
 
 export function createGoNext(pageIdx, fromDir, params) {
-  console.log('got to createGoNext :', pageIdx, fromDir, params);
   let payload = {pageIdx: pageIdx};
   if (fromDir) {
     payload.fromDir = fromDir;
@@ -64,9 +63,17 @@ export function goWithAuth(pageIdx, fromDir, params) {
   }
 }
 
-function savePageIdx(pageIdx) {
+export function savePageIdx(pageIdx) {
   return {
     type: f.SAVE_PAGE_IDX,
     payload: pageIdx
+  };
+}
+
+export function saveFormState(form, formstate) {
+  let newobj = {...formstate};
+  return {
+    type: f.SAVE_CREATE_PARAMS,
+    payload: {form: form, params: newobj}
   };
 }

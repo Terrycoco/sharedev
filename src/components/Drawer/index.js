@@ -17,11 +17,9 @@ class Drawer extends Component {
 
  render() {
   return (
-    <div className={"drawer " + (this.props.drawerOpen ? "open" : "")}> 
-      <div className="toggle" onClick={this.togDrawer}>{this.props.toggleText}</div>
-       {this.props.children}
+    <div className={"slider " + (this.props.drawerOpen ? "open" : "closed")}> 
+     {this.props.children}
     </div>
-
   );
  }
 }

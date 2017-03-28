@@ -20,21 +20,28 @@ const INITIAL_STATE = {
     params: {
       city: "Current Location",
       cat_id: null,
-      cat_idx: null
+      cat_idx: null,
+      title: '',
+      walk_descr: '',
     }
   }
 }
 
 export default function(state=INITIAL_STATE, action) {
+  console.log('form reducer:', action.payload);
   let newstate, newobj, withParams;
-  console.log('action: ', action.type, 'payload: ', action.payload);
   switch(action.type) {
     case f.LOAD_COMMON:
       newobj = Object.assign({}, state.shared, {categories: action.payload});
       return Object.assign({}, state, {shared: newobj});
     case f.CREATE_GO_NEXT:
+    //saves whatever params are passed to create obj
       newobj = Object.assign({}, state.create, action.payload);
       return Object.assign({}, state, {create: newobj});
+    case f.SAVE_CREATE_PARAMS:
+      let params = Object.assign({}, state.create.params, action.payload.params);
+      let create = Object.assign({}, {pageIdx: state.create.pageIdx, fromDir: state.create.fromDir, params: params});
+      return Object.assign({}, state, {create: create});
    }
   return state;
 }

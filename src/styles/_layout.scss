@@ -1,4 +1,7 @@
 @import './_spacing.scss';
+@import './_flex.scss';
+@import './_colors.scss';
+
 
 html,
 body {
@@ -19,7 +22,7 @@ body {
 //this contains PageBar and Content
 //will scroll if extends beyond screen
 //height set responsively
-.HOME, .PAGE {
+.PAGE {
   position: relative; //parent of pagebar & content
   height: 100%;
   height: 100vh;
@@ -28,37 +31,38 @@ body {
   overflow-y: hidden;  //shouldn't 
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  @include flexcolumn;
 }
 
-// -- has image
-.HOME {
-  background: url('/images/moccasins.jpg') !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
-  background-position: bottom center !important;
-  background-size: cover !important; // this makes img full-screen (full-width & full-height)
-}
+    //IN PLACE OF CONTENT (note: also styles inline see: Home route)
+    .HOME {
+      position: absolute;
+      height: $content_height_sm;
+      top: $pagebar_height_sm;
+      width: 100%;
+      width: 100vw;
+      z-index: 2000;
+      @include flex;
+      justify-content: center;
+      align-items: stretch;
+    }
 
    
 //below the pagebar
-//absolute to the page
 //full height and width
 //is flex parent (row wrap)
+
     .CONTENT {
-      position: absolute; //to page
+      position: relative; //need this to position inner content
       height: $content_height_sm;
-      top: $pagebar_height_sm;
       left: 0;
+      width: 100%;
       width: 100vw;
       overflow-y: auto; 
       -webkit-overflow-scrolling: touch;
 
-      //flex
-      display: -webkit-flex;
-      display: flex;
-      //row
-      -webkit-flex-flow: row wrap;
-      flex-flow: row wrap;
+      //flex parent
+      @include flexrowwrap;
 
       //horiz align
       -webkit-justify-content: center;
@@ -70,51 +74,145 @@ body {
 
       -webkit-align-content: stretch;
       align-content: stretch;
+
+      background: $light;
+    }
+
+    .FLIP-CONTENT {
+      position: absolute; //to flipper
+      height: $content_height_sm;
+      top: 0;
+      left: 0;
+      width: 100%;
+      width: 100vw;
+      overflow-y: auto; 
+      -webkit-overflow-scrolling: touch;
+
+      //flex parent
+      @include flexrowwrap;
+
+      //horiz align
+      -webkit-justify-content: center;
+      justify-content: center;
+
+      //vert align
+      -webkit-align-items: stretch;
+      align-items: stretch;
+
+      -webkit-align-content: stretch;
+      align-content: stretch;
+
+      background: $light;
+    }
+
+    //content not a parent
+    .CONTENT-NOT-PARENT {
+      position: relative; //need this to position inner content
+      height: $content_height_sm;
+      width: 100%;
+      width: 100vw;
+      overflow-y: auto; 
+      -webkit-overflow-scrolling: touch;
+      background: $light;
     }
 
         //child of content
         //each column is 1 flex unit
+        //every column is complete width
+        //add inner div for margins etc
         //children will be centered on screen
         .COLUMN-1 {
-          flex: 1;
-          flex-basis: 100%;
+          box-sizing: border-box;
           overflow-x: hidden;
 
-          //as parent
-          display: -webkit-flex;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-        }
-
-         //form has lots of padding on sides for readability
-        .FORM {
-          flex: 1;
-          max-width: 500px;
-          height: 100vh;
-          overflow-y: auto;
-
-          padding-left: 2rem;
-          padding-right: 2rem;
-        }
-
-         //list is full width across
-        .LIST {
-          flex: 1;
-          padding-left: 1rem;
-          padding-right: 1rem;
-          max-width: 500px;
-          min-height: 90%;
-          width: 100%;
+          //columns are also parents
+          @include flexrowwrap;
+          @include justifycenter;
+          // background: red;
         }
 
 
-@media all and (min-width: 668px) {
+             //FORM and LIST are CHILDREN OF COLUMN
+             //form has lots of padding on sides for readability
+            .FORM {
+              box-sizing: border-box;
+              max-width: $form_max_width;  //readable
+              overflow-y: auto;
+
+              padding-left: 2rem;
+              padding-right: 2rem;
+              padding-top: 1rem;
+              // background: yellow;
+            }
+
+             //list is full width across
+            .LIST {
+              @include flexchild-1;
+              box-sizing: border-box;
+              padding-top: 1rem;
+              padding-left: 1rem;
+              padding-right: 1rem;
+              max-width: $form_max_width;  //readable
+            }
+           
+
+.FIXED-FOOTER {
+  box-sizing: border-box;
+  height: $footer_height_sm;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 2000;
+
+  //also a parent
+  @include flexrow;
+  @include flexcenter;
+}
+
+
+
+
+
+ //small
+ @media all and (max-width: 768px) {
+  .COLUMN-1 {
+    @include flexchild-1; // 1 1 100%;
+  }
+ }
+
+
+
+
+//medium large infinity
+@media all and (min-width: 769px) {
   .CONTENT {
-      top: $pagebar_height_md;
-      min-height: $content_height_md;
+    height: $content_height_md;
   }
 
+  .FLIP-CONTENT {
+    height: $content_height_md;
+  }
 
+  .COLUMN-1 {
+    @include flexchild-half;
+  }
+
+  .HOME {
+    height: $content_height_md;
+    top: $pagebar_height_md;
+  }
+
+  .FORM {
+   @include flexchild-half;
+  }
+
+  .LIST {
+    @include flexchild-half;
+  }
+
+  .FIXED-FOOTER {
+    height: $footer_height_md;
+  }
 }
 

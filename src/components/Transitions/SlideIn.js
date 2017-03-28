@@ -1,7 +1,7 @@
 import React, {Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {connect } from 'react-redux';
-import { checkConn } from 'actions/appActions';
+import * as actions from 'actions/appActions';
 
 require('./transitions.scss');
 
@@ -10,18 +10,19 @@ export default function(InputComponent, objProps) {
 
     constructor(props) {
       super(props);
-      //priority given to direction passed in, then store
+      //priority given to direction passed in
       this.state = {
-        fromDir: objProps.fromDir
+        fromDir: objProps.fromDir || "right"
       };
     }
 
-    componentWillMount() {
+    componentDidMount() {
       console.log('got to slidein');
       this.props.checkConn();
     }
 
     render() {
+        console.log('slide in Render called');
       let name = `pageSlider-${this.state.fromDir}`;
       return (
        <ReactCSSTransitionGroup 
@@ -39,11 +40,11 @@ export default function(InputComponent, objProps) {
     }
   }
 
-  function mapStateToProps(state) {
-    return {
-      fromDir: state.forms.create.fromDir
-    };
-  }
+  // function mapStateToProps(state) {
+  //   return {
+  //     fromDir: state.forms.create.fromDir
+  //   };
+  // }
 
-  return connect(mapStateToProps, { checkConn })(SlideIn);
+  return connect(null, actions)(SlideIn);
 }

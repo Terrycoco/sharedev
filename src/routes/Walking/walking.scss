@@ -1,52 +1,44 @@
 @import '../../styles/_flipper';
 @import '../../styles/_mixins';
 @import '../../styles/_flex';
-
+@import '../../styles/_colors';
+@import '../../styles/_spacing';
 
 //--WALKING MAP ----
-@media all and (orientation: landscape) {
-  #walkingmap {
-      position: absolute;  //to page
-      top: 0;
-      left: 0;
-      width: 70%;
-      height: 100%;
-      overflow: hidden;
-    }
-}
-@media all and (orientation: portrait) {
-  #walkingmap {
-      position: absolute;  //to page
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      overflow: hidden;
-    }
+#walkingmap {
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
+
 .stop-btns {
+  border-top: 3px solid rgba(3,3,3,.2);
+  background: $light;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  position: fixed;
-  bottom: 0;
-  padding-bottom: 1.5rem;
-  width: 100%;
-  background: $light;
-  height: 4rem;
-  padding: 1em;
-  margin-top: 1rem;
+  align-items: center;
+  padding: 1rem;
 }
 
 .btn-sm {
   @include button;
   background: $accent;
   color: $light;
-  flex-basis: 40%;
+  flex-basis: 20%;
   font-weight: normal;
   font-size: .8em;
   height: 2em;
+}
+
+.disabled {
+  background: rgba($accent, .5);
+}
+.dir-btn {
+ background: $highlight;
+ color: $deep;
+ flex-basis: 23%;
 }
 
 

@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { responsiveStoreEnhancer } from 'redux-responsive';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import App from 'routes/App';
@@ -10,17 +12,15 @@ import App from 'routes/App';
 //needed for onTouchTap (material-ui)
 require('react-tap-event-plugin')();
 
-
+const composeEnhancers = composeWithDevTools({});
 
 const store = createStore(
   reducers,
-  compose(
+  composeEnhancers(
+    responsiveStoreEnhancer,
     applyMiddleware(
       reduxThunk
-    ),
-    process.env.NODE_ENV == 'development' && window.devToolsExtension ? 
-        window.devToolsExtension() : f => f
-  )
+    ))
 );
 
 

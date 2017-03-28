@@ -11,15 +11,14 @@ $primary: $green;
 $secondary: $brightgreen;
 $accent: $orange;
 $disabled: $gray;
-$highlight: $brightgreen;
-
+$highlight: lighten($brightgreen, 15%);
 
 hr.accent {
   border-top: 2px solid $accent;
 }
 
 hr.primary {
-  border-top: 2px solid $primary;
+  border-top: 2px solid $gray;
 }
 
 .CONTENT {

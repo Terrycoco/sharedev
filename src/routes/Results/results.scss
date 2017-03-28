@@ -1,3 +1,9 @@
 @import '../../styles/_colors';
 @import '../../styles/_spacing';
 @import '../../styles/_flipper';
+@import '../../styles/_flex';
+
+.flex {
+  @include flexrow;
+  @include justifycenter;
+}

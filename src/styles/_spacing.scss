@@ -1,15 +1,14 @@
-$pagebar_height_sm: 2.5em;
-$pagebar_height_md: 3.5em;
+@import './_colors.scss';
+
+$pagebar_height_sm: 40px; //40px
+$pagebar_height_md: 56px;  //56px
 $content_height_sm: calc(100vh - #{$pagebar_height_sm});
 $content_height_md: calc(100vh - #{$pagebar_height_md});
 
+$footer_height_sm: 56px;  //56px
+$footer_height_md: 72px;  //72px
 
-$drawer_closed: 2rem;
-$drawer_closed_top: calc(100% - #{$drawer_closed});
-$drawer_open: 200px;
-$drawer_open_top: calc(100% - #{$drawer_open});
-$drawer_open_content: calc(#{$drawer_open} - #{$drawer_closed});
-
+$form_max_width: 500px;  //width for 1 column on wide screens (readability)
 
 
 .center-children {
@@ -47,8 +46,9 @@ $drawer_open_content: calc(#{$drawer_open} - #{$drawer_closed});
 
 .textbox p {
   margin-top: .75em;
-  line-height: 1.5;
+  line-height: 1.7;
   margin-bottom: .75em;
+  font-size: 1em;
 }
 
 .header {
@@ -67,3 +67,12 @@ $drawer_open_content: calc(#{$drawer_open} - #{$drawer_closed});
   width: 90%;
 }
 
+
+
+hr.primary {
+  border-top: 2px solid $accent;
+  border-color: $primary;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 1px 1px 1px #888;
+}

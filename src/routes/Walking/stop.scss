@@ -2,9 +2,21 @@
 @import '../../styles/_spacing';
 @import '../../styles/_forms';
 
-.walk-title {
-  color: $primary;
-  line-height: 1.2;
+
+.stop-container {
+  margin-bottom: 4rem;
+}
+  .kicker {
+    font-size: .8em;
+    color: $disabled;
+    font-style: italic;
+    margin-bottom: .2em;
+    margin-top: 2rem;
+  }
+
+  .walk-title {
+    color: $primary;
+    line-height: 1.2;
 }
 
 .stop-content {
@@ -12,21 +24,6 @@
   margin-right: 2em;
 }
 
-// @media all and (orientation: landscape) {
-//   //make text a little bigger
-//   .stop-content{
-//     font-size: 18px;
-//     line-height: 1.6;
-//   }
-// }
-
-.kicker {
-  font-size: .8em;
-  color: $disabled;
-  font-style: italic;
-  margin-bottom: .2em;
-  margin-top: 2rem;
-}
 
 .byline .username {
   color: $accent;
@@ -34,23 +31,6 @@
 }
 
 
-
-hr.accent {
-  border-top: 2px solid $accent;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-hr.primary {
-  border-top: 2px solid $primary;
-  border-color: $primary;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.stop-container {
-  margin-bottom: 4rem;
-}
 
 .front.flexcol {
   display: flex;

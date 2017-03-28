@@ -5,78 +5,90 @@
  */
 import SlideIn from 'components/Transitions/SlideIn'; //slider HOC
 import requireAuth from 'components/Auth/requireAuth';  //auth HOC
-import Home from 'routes/Home'; //preimport
-
 
 
 export function getComponent(route, fromDir) {
   let dir = fromDir || "right";
   switch (route) {
     case 'home':
-      return import('routes/Home')
+      return System.import('routes/Home')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
+          })
+          .catch(error => {
+            console.log('ERROR:', error);
           });
+      break;
     case 'create':
-      return import('routes/Create')
+      return System.import('routes/Create')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     case 'search':
-      return import('routes/Search')
+      return System.import('routes/Search')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     case 'results':
-      return import('routes/Results')
+      return System.import('routes/Results')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     case 'summary':
-      return import('routes/Summary')
+      return System.import('routes/Summary')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
-
+           break;
     case 'mywalks':
-      return import('routes/MyWalks')
+      return System.import('routes/MyWalks')
           .then(module => {
               return requireAuth(module.default, {fromDir: dir, toRoute: "mywalks"});
           });
+           break;
     case 'signin':
-      return import('components/Auth/Signin')
+      return System.import('components/Auth/Signin')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     case 'signup':
-      return import('components/Auth/Signup')
+      return System.import('components/Auth/Signup')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     case 'about':
-      return import('routes/About')
+      return System.import('routes/About')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     case 'test':
-      return import('routes/Test')
+      return System.import('routes/Test')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     case 'walking':
-        return import('routes/Walking')
+        return System.import('routes/Walking')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     case 'coming':
-     return import('routes/Coming')
+        return System.import('routes/Coming')
           .then(module => {
               return SlideIn(module.default, {fromDir: dir});
           });
+           break;
     default: 
-      return import('routes/Home')
+          return System.import('routes/Home')
           .then(module => {
-              return SlideIn(Home, {fromDir: dir});
+              return SlideIn(module.default, {fromDir: dir});
           });
   } //end switch
 }

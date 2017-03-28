@@ -295,3 +295,4 @@ export function openDrawer() {
     type: s.OPEN_DRAWER
   };
 }
+
